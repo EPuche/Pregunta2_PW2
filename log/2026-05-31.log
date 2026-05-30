@@ -1,0 +1,90 @@
+[00:02:57] [INFO] VikingoController::ver
+[00:02:57] [INFO] SQL: SELECT * FROM guerreros
+[00:02:57] [INFO] VikingoController::ver
+[00:02:57] [INFO] SQL: SELECT * FROM guerreros
+[00:05:07] [INFO] VikingoController::alta (form)
+[00:05:07] [INFO] VikingoController::ver
+[00:05:07] [INFO] SQL: SELECT * FROM guerreros
+[00:05:09] [INFO] VikingoController::ver
+[00:05:09] [INFO] SQL: SELECT * FROM guerreros
+[00:05:19] [INFO] VikingoController::editar - id=1
+[00:05:19] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:05:19] [INFO] VikingoController::ver
+[00:05:19] [INFO] SQL: SELECT * FROM guerreros
+[00:05:23] [INFO] VikingoController::ver
+[00:05:23] [INFO] SQL: SELECT * FROM guerreros
+[00:07:09] [INFO] VikingoController::ver
+[00:07:09] [INFO] SQL: SELECT * FROM guerreros
+[00:07:09] [INFO] VikingoController::ver
+[00:07:09] [INFO] SQL: SELECT * FROM guerreros
+[00:29:42] [INFO] VikingoController::ver
+[00:29:42] [INFO] SQL: SELECT * FROM guerreros
+[00:29:42] [INFO] VikingoController::ver
+[00:29:42] [INFO] SQL: SELECT * FROM guerreros
+[00:33:45] [INFO] VikingoController::ver
+[00:33:45] [INFO] SQL: SELECT * FROM guerreros
+[00:33:46] [INFO] VikingoController::ver
+[00:33:46] [INFO] SQL: SELECT * FROM guerreros
+[00:34:38] [INFO] VikingoController::ver
+[00:34:38] [INFO] SQL: SELECT * FROM guerreros
+[00:34:38] [INFO] VikingoController::ver
+[00:34:38] [INFO] SQL: SELECT * FROM guerreros
+[00:34:40] [INFO] VikingoController::editar - id=1
+[00:34:40] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:34:40] [INFO] VikingoController::ver
+[00:34:40] [INFO] SQL: SELECT * FROM guerreros
+[00:34:42] [INFO] VikingoController::ver
+[00:34:42] [INFO] SQL: SELECT * FROM guerreros
+[00:34:43] [INFO] VikingoController::alta (form)
+[00:34:43] [INFO] VikingoController::ver
+[00:34:43] [INFO] SQL: SELECT * FROM guerreros
+[00:34:44] [INFO] VikingoController::ver
+[00:34:44] [INFO] SQL: SELECT * FROM guerreros
+[00:35:12] [INFO] VikingoController::editar - id=1
+[00:35:12] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:35:12] [INFO] VikingoController::ver
+[00:35:12] [INFO] SQL: SELECT * FROM guerreros
+[00:35:17] [INFO] VikingoController::editar - id=1
+[00:35:17] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:35:17] [INFO] VikingoController::ver
+[00:35:17] [INFO] SQL: SELECT * FROM guerreros
+[00:35:23] [INFO] VikingoController::editar - id=1
+[00:35:23] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:35:23] [INFO] VikingoController::ver
+[00:35:23] [INFO] SQL: SELECT * FROM guerreros
+[00:35:24] [INFO] VikingoController::ver
+[00:35:24] [INFO] SQL: SELECT * FROM guerreros
+[00:35:24] [INFO] VikingoController::editar - id=1
+[00:35:24] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[00:35:25] [INFO] VikingoController::ver
+[00:35:25] [INFO] SQL: SELECT * FROM guerreros
+[00:35:26] [INFO] VikingoController::ver
+[00:35:26] [INFO] SQL: SELECT * FROM guerreros
+[00:35:26] [INFO] VikingoController::alta (form)
+[00:35:27] [INFO] VikingoController::ver
+[00:35:27] [INFO] SQL: SELECT * FROM guerreros
+[00:35:30] [INFO] VikingoController::alta (form)
+[00:35:30] [INFO] VikingoController::ver
+[00:35:30] [INFO] SQL: SELECT * FROM guerreros
+[00:43:01] [INFO] VikingoController::ver
+[00:43:01] [INFO] SQL: SELECT * FROM guerreros
+[01:14:53] [INFO] VikingoController::ver
+[01:14:53] [INFO] SQL: SELECT * FROM guerreros
+[01:14:53] [INFO] VikingoController::ver
+[01:14:53] [INFO] SQL: SELECT * FROM guerreros
+[01:15:06] [INFO] VikingoController::editar - id=1
+[01:15:06] [INFO] SQL: SELECT * FROM guerreros WHERE id = ? [1]
+[01:15:06] [INFO] VikingoController::ver
+[01:15:06] [INFO] SQL: SELECT * FROM guerreros
+[01:15:11] [INFO] VikingoController::ver
+[01:15:11] [INFO] SQL: SELECT * FROM guerreros
+[01:15:12] [INFO] VikingoController::alta (form)
+[01:15:12] [INFO] VikingoController::ver
+[01:15:12] [INFO] SQL: SELECT * FROM guerreros
+[01:17:30] [INFO] VikingoController::alta (form)
+[01:17:30] [INFO] VikingoController::ver
+[01:17:30] [INFO] SQL: SELECT * FROM guerreros
+[01:20:13] [INFO] VikingoController::ver
+[01:20:13] [INFO] SQL: SELECT * FROM guerreros
+[01:20:13] [INFO] VikingoController::ver
+[01:20:13] [INFO] SQL: SELECT * FROM guerreros
