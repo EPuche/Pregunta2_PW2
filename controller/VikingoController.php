@@ -16,7 +16,7 @@ class VikingoController
     public function ver()
     {
         Log::info("VikingoController::ver");
-        $this->renderer->render("verVikingoView", ['guerreros' => $this->model->getVikingos()]);
+        $this->renderer->render("verLobbyView", ['guerreros' => $this->model->getVikingos()]);
     }
 
     public function alta()

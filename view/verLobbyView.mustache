@@ -1,0 +1,117 @@
+{{>header}}
+<div class="dashboard">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <a href="/partida/crear" class="menu-btn">
+            Crear partida
+        </a>
+
+        <a href="/pregunta/crear" class="menu-btn">
+            Crear pregunta
+        </a>
+
+        <a href="/ranking" class="menu-btn">
+            Ver ranking
+        </a>
+    </aside>
+
+    <main class="main-content">
+
+        <!-- PERFIL -->
+        <section class="user-panel">
+
+            <div class="user-avatar">
+                IMG
+            </div>
+
+            <div class="user-info">
+                <h3>{{nombreUsuario}}</h3>
+                <p>Puntaje: {{puntaje}}</p>
+            </div>
+
+        </section>
+
+        <!-- DOS COLUMNAS -->
+        <section class="game-panels">
+
+            <!-- ACTIVAS -->
+            <div class="panel-box active-panel">
+
+                <h2>Partidas Activas</h2>
+
+                <div class="matches-list">
+
+                    {{#partidasActivas}}
+
+                        <div class="match-card">
+
+                            <div class="opponent-avatar">
+                                IMG
+                            </div>
+
+                            <div class="opponent-name">
+                                {{oponente}}
+                            </div>
+
+                            <div class="match-result">
+                                {{resultado}}
+                            </div>
+
+                        </div>
+
+                    {{/partidasActivas}}
+
+                    {{^partidasActivas}}
+                        <div class="empty-state">
+                            No hay partidas activas.
+                        </div>
+                    {{/partidasActivas}}
+
+                </div>
+
+            </div>
+
+            <!-- HISTORIAL -->
+            <div class="panel-box history-panel">
+
+                <h2>Historial</h2>
+
+                <div class="matches-list">
+
+                    {{#historial}}
+
+                        <div class="match-card">
+
+                            <div class="opponent-avatar">
+                                IMG
+                            </div>
+
+                            <div class="opponent-name">
+                                {{oponente}}
+                            </div>
+
+                            <div class="match-result">
+                                {{resultado}}
+                            </div>
+
+                        </div>
+
+                    {{/historial}}
+
+                    {{^historial}}
+                        <div class="empty-state">
+                            No hay partidas finalizadas.
+                        </div>
+                    {{/historial}}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+{{>footer}}
