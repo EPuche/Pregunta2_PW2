@@ -35,7 +35,8 @@ class Configurator {
 
     public function getRouter()
     {
-        return new Router($this, 'vikingo', 'ver');
+        return new Router($this, 'home', 'irAlHome');
+        //return new Router($this, 'vikingo', 'ver');
     }
 
     public function getOrDefault($controllerName, $defaultControllerName)
@@ -47,4 +48,20 @@ class Configurator {
         $defaultGetter = 'get' . ucfirst($defaultControllerName) . 'Controller';
         return $this->{$defaultGetter}();
     }
+    public function getHomeController()
+    {
+        return new HomeController($this->getRenderer());
+    }
+
+    public function getRegistroController() {
+        return new RegistroController($this->getRenderer());
+    }
+    public function getLoginController() {
+        return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
+    }
+    private function getUsuarioModel()
+    {
+        return new UsuarioModel($this->getDatabase());
+    }
+
 }
