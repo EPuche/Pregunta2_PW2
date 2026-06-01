@@ -56,6 +56,12 @@ class Configurator {
     public function getRegistroController() {
         return new RegistroController($this->getRenderer());
     }
-
+    public function getLoginController() {
+        return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
+    }
+    private function getUsuarioModel()
+    {
+        return new UsuarioModel($this->getDatabase());
+    }
 
 }
