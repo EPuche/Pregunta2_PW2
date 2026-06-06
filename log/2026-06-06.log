@@ -1,0 +1,8 @@
+[18:10:29] [INFO] UsuarioController::procesarAlta - nombreUsuario=dsa
+[18:10:29] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[18:13:01] [INFO] UsuarioController::procesarAlta - nombreUsuario=dsa
+[18:13:01] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
