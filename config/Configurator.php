@@ -8,9 +8,9 @@ class Configurator {
         $this->config = parse_ini_file("config/config.ini");
     }
 
-    public function getVikingoController()
+    public function getUsuarioController()
     {
-        return new VikingoController($this->getVikingoModel(), $this->getRenderer(), new Request());
+        return new UsuarioController($this->getUsuarioModel(), $this->getRenderer(), new Request());
     }
 
     private function getDatabase()
@@ -28,9 +28,9 @@ class Configurator {
         return new MustacheRenderer(__DIR__ . '/../view');
     }
 
-    private function getVikingoModel()
+    private function getUsuarioModel()
     {
-        return new VikingoModel($this->getDatabase());
+        return new UsuarioModel($this->getDatabase());
     }
 
     public function getRouter()
@@ -53,15 +53,9 @@ class Configurator {
         return new HomeController($this->getRenderer());
     }
 
-    public function getRegistroController() {
-        return new RegistroController($this->getRenderer());
-    }
     public function getLoginController() {
         return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
     }
-    private function getUsuarioModel()
-    {
-        return new UsuarioModel($this->getDatabase());
-    }
+
 
 }

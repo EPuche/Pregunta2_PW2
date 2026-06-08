@@ -23,6 +23,21 @@ SET time_zone = "+00:00";
 -- Base de datos: `preguntados_bd`
 --
 
+CREATE TABLE `usuario` (
+                           `id` int(11) NOT NULL AUTO_INCREMENT,
+                           `nombre_completo` varchar(100) NOT NULL,
+                           `anio_nacimiento` year NOT NULL,
+                           `sexo` enum('Masculino','Femenino','Otro') NOT NULL,
+                           `pais` varchar(100) NOT NULL,
+                           `ciudad` varchar(100) NOT NULL,
+                           `email` varchar(255) NOT NULL UNIQUE,
+                           `nombre_usuario` varchar(50) NOT NULL UNIQUE,
+                           `contrasena` varchar(255) NOT NULL,
+                           `foto_perfil` varchar(255) DEFAULT NULL,
+                           PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 -- --------------------------------------------------------
 
 --

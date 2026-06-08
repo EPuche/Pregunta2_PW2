@@ -1,59 +1,85 @@
 {{>header}}
 <div class="container">
-    <form action="/vikingo/procesarAlta" method="POST" style="display:flex; flex-wrap:wrap; gap:20px;">
+    <div style="text-align:center; margin-bottom:35px;">
+        <img src="/assets/logo.png" alt="Pregunta2" style="height:70px; margin-bottom:15px;">
 
+        <h2 style="font-size:28px;font-weight:600;color:#222323;margin:0;">
+            Crea tu cuenta
+        </h2>
+    </div>
+
+    <form action="/Pregunta2_PW2/index.php?controller=usuario&method=procesarRegistro" method="POST" enctype="multipart/form-data"
+          style="display:flex; flex-wrap:wrap; gap:20px;">
         <!-- COLUMNA FOTO -->
         <div style="flex:1 1 200px; display:flex; flex-direction:column; align-items:center; text-align:center;">
             <div style="width:120px; height:120px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; color:#222323; margin-bottom:8px;">
                 Foto
             </div>
+            <input type="file" name="foto_perfil" accept="image/*">
             <small style="color:#555;">Seleccionar imagen</small>
         </div>
 
         <!-- COLUMNA IZQUIERDA DATOS -->
         <div style="flex:1 1 250px; display:flex; flex-direction:column; gap:15px;">
             <div class="form-group">
-                <label for="nombre">Nombre del Guerrero</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ej: Ragnar" required>
+                <label for="nombre_completo">Nombre completo</label>
+                <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ej: Juan Pérez" required >
             </div>
 
             <div class="form-group">
-                <label for="apodo">Apodo (Si lo tiene)</label>
-                <input type="text" id="apodo" name="apodo" placeholder="Ej: Lothbrok">
+                <label for="anio_nacimiento">Año de nacimiento</label>
+                <input type="number" id="anio_nacimiento" name="anio_nacimiento" placeholder="Ej: 1990" required>
             </div>
 
             <div class="form-group">
-                <label for="clan">Clan / Asentamiento</label>
-                <input type="text" id="clan" name="clan" placeholder="Ej: Kattegat">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Prefiero no cargarlo">Prefiero no cargarlo</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="pais_ciudad">País y ciudad</label>
+                <div id="map" style="width:100%; height:150px; background:#eee;">Mapa</div>
+                <input type="hidden" id="pais" name="pais">
+                <input type="hidden" id="ciudad" name="ciudad">
             </div>
         </div>
 
         <!-- COLUMNA DERECHA DATOS -->
         <div style="flex:1 1 250px; display:flex; flex-direction:column; gap:15px;">
             <div class="form-group">
-                <label for="fuerza">Nivel de Fuerza (0 - 100)</label>
-                <input type="number" id="fuerza" name="fuerza" min="0" max="100" value="50">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
             </div>
 
             <div class="form-group">
-                <label for="edad">Año de Nacimiento</label>
-                <input type="date" id="edad" name="edad">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" required>
             </div>
 
             <div class="form-group">
-                <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo">
-                    <option value="">Seleccione...</option>
-                    <option value="M">Masculino</option>
-                    <option value="F">Femenino</option>
-                </select>
+                <label for="repetir_contrasena">Repetir contraseña</label>
+                <input type="password" id="repetir_contrasena" name="repetir_contrasena" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nombre_usuario">Nombre de usuario</label>
+                <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="Ej: Juan123" required>
             </div>
         </div>
-
+        {{#error_registro}}
+            <div style="background:#fff3cd; border-left:5px solid #ffc107; color:#856404; padding:12px; font-family:sans-serif; font-size:14px; border-radius:4px;">
+                {{error_registro}}
+            </div>
+        {{/error_registro}}
         <!-- BOTÓN Y LINK -->
         <div style="flex-basis:100%; margin-top:20px;">
             <button type="submit" class="btn-submit">Registrarme</button>
-            <a href="/vikingo" class="back-link">← Volver al Salón del Trono</a>
+            <a href="/" class="back-link">← Volver al inicio</a>
         </div>
 
     </form>

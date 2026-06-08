@@ -32,6 +32,12 @@
             min-height:100vh;
             color:var(--dark);
             padding:30px;
+
+            /* estilos loginView */
+            background-image:url('assets/img/imagen-fondo.png');
+            background-size:cover;
+            background-position:center;
+            background-repeat:no-repeat;
         }
 
         header{
@@ -107,11 +113,19 @@
 
             padding:40px;
 
-            border-radius:0 0 10px 10px;
+            border-radius:10px 10px 10px 10px;
 
             box-shadow:
                     0 0 25px rgba(255,255,255,.08),
                     0 10px 40px rgba(0,0,0,.45);
+
+            /* estilos loginView */
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            min-height:600px;
+            background: rgba(173,216,230,0.95); /* fondo azul con opacidad */
         }
 
         h2{
@@ -122,9 +136,11 @@
             color:var(--dark);
         }
 
-
+        /* botones combinados loginView + header */
         .btn-add,
-        .btn-submit{
+        .btn-submit,
+        .btn-login,
+        .btn-registro{
             display:inline-block;
 
             background:var(--orange);
@@ -148,16 +164,20 @@
             transition:.25s;
         }
 
-        .btn-submit{
+        .btn-submit,
+        .btn-login,
+        .btn-registro{
             width:100%;
         }
 
         .btn-add:hover,
-        .btn-submit:hover{
+        .btn-submit:hover,
+        .btn-login:hover,
+        .btn-registro:hover{
             transform:translateY(-2px);
             filter:brightness(.95);
+            box-shadow:0 0 10px rgba(0,0,0,.4);
         }
-
 
         .form-group{
             margin-bottom:18px;
@@ -209,7 +229,7 @@
             outline:2px solid var(--orange);
         }
 
-
+        /* resto de estilos del header original se mantiene */
         table{
             width:100%;
             border-collapse:collapse;
@@ -250,7 +270,6 @@
             background:#f7f7f7;
         }
 
-
         .actions a{
             text-decoration:none;
             padding:8px 12px;
@@ -278,7 +297,6 @@
         .delete:hover{
             opacity:.8;
         }
-
 
         .success{
             background:var(--green);
@@ -559,21 +577,21 @@
 </head>
 <body>
 
-<header>
-    <img src="assets/logo.png" alt="logo" class="logo">
+<!--<header>-->
+<!--    <img src="../assets/logo.png" alt="logo" class="logo">-->
 
-    <div class="user-menu">
-        <div class="user-button">
-            {{nombreUsuario}} ▼
-        </div>
+<!--    <div class="user-menu">-->
+<!--        <div class="user-button">-->
+<!--            {{nombre_Usuario}} ▼-->
+<!--        </div>-->
 
-        <div class="dropdown-menu">
-            <a href="/perfil">Mi perfil</a>
-            <a href="/estadisticas">Estadísticas</a>
-            <a href="/configuracion">Configuración</a>
-            <a href="/logout">Cerrar sesión</a>
-        </div>
-    </div>
-</header>
+<!--        <div class="dropdown-menu">-->
+<!--            <a href="/perfil">Mi perfil</a>-->
+<!--            <a href="/estadisticas">Estadísticas</a>-->
+<!--            <a href="/configuracion">Configuración</a>-->
+<!--            <a href="/logout">Cerrar sesión</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</header>-->
 
 
