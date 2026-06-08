@@ -58,6 +58,12 @@ class UsuarioController {
 
         Redirect::toIndex();
     }
+ public function verPerfil() {
+    session_start();
+    $id = $_SESSION["id"]; 
+    $usuario = $this->model->getUsuario($id); 
+    $this->renderer->render("verPerfilView", $usuario); 
 
 
+}
 }
