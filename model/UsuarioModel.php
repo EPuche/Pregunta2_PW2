@@ -97,4 +97,41 @@ class UsuarioModel
         Log::info("SQL: $sql [$id]");
         $this->database->execute($sql, [$id]);
     }
+
+    public function validarRegistro($email, $nombreUsuario, $contrasena, $repetirContrasena, $anioNacimiento) {
+        if (empty($email) || empty($nombreUsuario) || empty($contrasena)) {
+            return "Todos los campos obligatorios deben estar completos";
+        }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "Correo con formato invalido";
+        }
+        if ($contrasena !== $repetirContrasena) {
+            return "Las contraseñas no coinciden";
+        }
+        if (strlen($contrasena) < 8) {
+            return "La contraseña debe tener al menos 8 caracteres.";
+        }
+        if (!is_numeric($anioNacimiento)) {
+            return "El año de nacimiento debe ser un valor numérico.";
+        }
+
+        if ($this->existeCampo('nombre_usuario', $nombreUsuario)) {
+            return "El nombre de usuario ya se encuentra registrado";
+        }
+        if ($this->existeCampo('email', $email)) {
+            return "El correo electrónico ya se encuentra registrado";
+        }
+        return true;
+    }
+    private function existeCampo($columna, $valor) {
+        $sql = "SELECT id FROM usuario WHERE $columna = ?";
+        $resultado = $this->database->query($sql, [$valor]);
+        return !empty($resultado);
+    }
+
+
+
+
+
+
 }

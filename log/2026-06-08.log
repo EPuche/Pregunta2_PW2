@@ -1,0 +1,48 @@
+[18:28:24] [INFO] UsuarioController::procesarRegistro - Datos válidos para: a
+[18:28:24] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[18:31:00] [INFO] UsuarioController::procesarRegistro - Datos válidos para: admin
+[18:31:00] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[18:31:28] [INFO] UsuarioController::procesarRegistro - Datos válidos para: admin
+[18:31:28] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[18:38:54] [INFO] UsuarioController::procesarRegistro - Datos válidos para: aaa
+[18:38:54] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[18:39:32] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[18:41:22] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:27:45] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:27:54] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:39:15] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:40:58] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:41:30] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:42:31] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:43:27] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[19:44:02] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[20:12:45] [INFO] UsuarioController::procesarRegistro - Datos válidos para: AAA
+[20:12:45] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:13:13] [INFO] UsuarioController::procesarRegistro - Datos válidos para: AAA
+[20:13:13] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:14:11] [INFO] UsuarioController::procesarRegistro - Datos válidos para: valentina1
+[20:14:11] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:27:27] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[20:28:19] [INFO] UsuarioController::procesarRegistro - Datos válidos para: odiomivida
+[20:28:19] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:28:31] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden.
+[20:29:23] [WARNING] UsuarioController::procesarRegistro - Falló la validación: La contraseña debe tener al menos 8 caracteres.
+[20:32:22] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El formato del correo electrónico no es válido.
+[20:40:57] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El formato del correo electrónico no es válido.
+[21:13:08] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El correo electrónico ya se encuentra registrado

@@ -8,7 +8,8 @@
         </h2>
     </div>
 
-    <form action="/usuario/procesarRegistro" method="POST" enctype="multipart/form-data" style="display:flex; flex-wrap:wrap; gap:20px;">
+    <form action="/Pregunta2_PW2/index.php?controller=usuario&method=procesarRegistro" method="POST" enctype="multipart/form-data"
+          style="display:flex; flex-wrap:wrap; gap:20px;">
         <!-- COLUMNA FOTO -->
         <div style="flex:1 1 200px; display:flex; flex-direction:column; align-items:center; text-align:center;">
             <div style="width:120px; height:120px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; color:#222323; margin-bottom:8px;">
@@ -22,7 +23,7 @@
         <div style="flex:1 1 250px; display:flex; flex-direction:column; gap:15px;">
             <div class="form-group">
                 <label for="nombre_completo">Nombre completo</label>
-                <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ej: Juan Pérez" required>
+                <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ej: Juan Pérez" required >
             </div>
 
             <div class="form-group">
@@ -70,7 +71,11 @@
                 <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="Ej: Juan123" required>
             </div>
         </div>
-
+        {{#error_registro}}
+            <div style="background:#fff3cd; border-left:5px solid #ffc107; color:#856404; padding:12px; font-family:sans-serif; font-size:14px; border-radius:4px;">
+                {{error_registro}}
+            </div>
+        {{/error_registro}}
         <!-- BOTÓN Y LINK -->
         <div style="flex-basis:100%; margin-top:20px;">
             <button type="submit" class="btn-submit">Registrarme</button>

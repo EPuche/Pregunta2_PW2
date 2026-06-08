@@ -10,7 +10,15 @@ class UsuarioController {
     }
 
     public function irAlRegistro() {
-        $this->renderer->render("registroView"); //
+        // 1. Iniciamos un array de datos vacío para la plantilla
+        $datos = [];
+
+        // 2. Si existe un error en la sesión, se lo pasamos a Mustache
+        if (isset($_SESSION['error_registro'])) {
+            $datos['error_registro'] = $_SESSION['error_registro'];
+            unset($_SESSION['error_registro']);
+        }
+        $this->renderer->render("registroView", $datos);
     }
 
     public function procesarRegistro()
@@ -24,27 +32,28 @@ class UsuarioController {
         $nombreUsuario    = $this->request->post('nombre_usuario');
         $contrasena       = $this->request->post('contrasena');
         $repetirContrasena= $this->request->post('repetir_contrasena');
-        $fotoPerfil       = $this->request->post('foto_perfil'); // opcional
 
-        // Validaciones básicas
-        if ($contrasena !== $repetirContrasena) {
-            Log::warning("UsuarioController::procesarAlta - contraseñas no coinciden para usuario: $nombreUsuario");
-            Redirect::toIndex();
-            return;
+        $imagenPerfil = null;
+        $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
+        $fotoPerfil = $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
+
+        $validacion = $this->model->validarRegistro($email, $nombreUsuario, $contrasena, $repetirContrasena, $anioNacimiento);
+
+        if ($validacion !== true) {
+            if ($fotoPerfil && file_exists($carpetaDestino . $fotoPerfil)) {
+                unlink($carpetaDestino . $fotoPerfil);
+            }
+            Log::warning("UsuarioController::procesarRegistro - Falló la validación: $validacion");
+            $_SESSION['error_registro'] = $validacion;
+            header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
+            exit;
         }
 
-        if (!is_numeric($anioNacimiento)) {
-            Log::warning("UsuarioController::procesarAlta - año de nacimiento inválido: $anioNacimiento");
-            Redirect::toIndex();
-            return;
-        }
+        Log::info("UsuarioController::procesarRegistro - Datos válidos para: $nombreUsuario");
 
-        Log::info("UsuarioController::procesarAlta - nombreUsuario=$nombreUsuario");
-
-        // Para mayor seguridad, siempre guardar la contraseña hasheada
         $hashContrasena = password_hash($contrasena, PASSWORD_BCRYPT);
 
-        $this->model->alta(
+        $registro = $this->model->alta(
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
@@ -53,10 +62,45 @@ class UsuarioController {
             $email,
             $nombreUsuario,
             $hashContrasena,
-            $fotoPerfil
+            $imagenPerfil
         );
 
-        Redirect::toIndex();
+        if ($registro) {
+            header("Location: /Pregunta2_PW2/index.php?controller=login&method=irAlLogin");
+            exit;
+        } else {
+            $_SESSION['error_registro'] = "Hubo un problema. Intentalo mas tarde";
+            header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
+            exit;
+        }
+
+    }
+
+    private function subirFotoPerfil($param, $nombreUsuario, string $carpetaDestino)
+    {
+
+        if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+            $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
+
+            if (!file_exists($carpetaDestino)) {
+                mkdir($carpetaDestino, 0777, true);
+            }
+
+            $pathInfo = pathinfo($_FILES['foto_perfil']['name']);
+            $extension = $pathInfo['extension'];
+
+            $imagenPerfil = $nombreUsuario . '_' . time() . '.' . $extension;
+
+
+            $rutaCompletaDestino = $carpetaDestino . $imagenPerfil;
+
+            if (!move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaCompletaDestino)) {
+                Log::error("UsuarioController::procesarRegistro - No se pudo mover la foto al servidor.");
+                $_SESSION['error_registro'] = "Hubo un problema al guardar la foto de perfil.";
+                header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
+                exit;
+            }
+        }
     }
 
 
