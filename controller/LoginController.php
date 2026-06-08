@@ -15,16 +15,25 @@ class LoginController{
     public function autenticar(){
         $usuario= $this->request->post("usuario");
         $contrasenia= $this->request->post("contrasenia");
-        $user= $this->model->getUsuario($usuario);
 
-        if($user && password_verify($contrasenia,$user["contrasenia"])){
-            session_start();
-            $_SESSION["id"]=$user["id"];
-            $_SESSION["usuario"]=$user["usuario"];
-
-            Redirect::to("homeView");
+        if(empty($usuario) || empty($contrasenia)){
+            $this->renderer->render("loginView",[
+                "error" =>"campos vacios"
+            ]);
             return;
         }
-        Redirect::to("loginView");
+        $user= $this->model->getUsuario($usuario);
+
+        if(!$user || !password_verify($contrasenia,$user["contrasenia"])){
+            $this->renderer->render("loginView",[
+                "error" =>"usuario o contraseña incorrectos"
+            ]);
+            return;
+        }
+        session_start();
+        $_SESSION["id"]=$user["id"];
+        $_SESSION["usuario"]=$user["usuario"];
+
+        Redirect::to("verLobbyView");
     }
 }
