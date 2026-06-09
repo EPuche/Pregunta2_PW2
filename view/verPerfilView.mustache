@@ -1,0 +1,176 @@
+{{>header}}
+<div class="perfil-container">
+
+    <!-- HEADER PERFIL -->
+    <section class="perfil-header">
+        <img src="{{foto_perfil}}" alt="Foto de perfil" class="perfil-foto">
+        <div class="perfil-info">
+            <h2 class="perfil-nombre">{{nombre_completo}} ({{nombre_usuario}})</h2>
+            <p class="perfil-puntaje">Puntaje: {{puntaje}}</p>
+            <div class="qr-box">
+                <img src="{{qr_perfil}}" alt="QR Perfil">
+            </div>
+        </div>
+    </section>
+
+    <!-- DATOS PERSONALES -->
+    <section class="perfil-datos">
+        <h3>Datos personales</h3>
+        <ul>
+            <li>Año de nacimiento: {{anio_nacimiento}}</li>
+            <li>Sexo: {{sexo}}</li>
+            <li>Email: {{email}}</li>
+            <li>País: {{pais}}</li>
+            <li>Ciudad: {{ciudad}}</li>
+        </ul>
+        <div class="map-box">
+            <!-- Mapa embebido con dirección -->
+            <iframe 
+                src="https://www.google.com/maps?q={{direccion}}&output=embed" 
+                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- PARTIDAS -->
+    <section class="perfil-partidas">
+        <h3>Partidas realizadas</h3>
+        <div class="matches-list">
+            {{#historial}}
+                <div class="match-card">
+                    <span class="oponente">{{oponente}}</span>
+                    <span class="resultado">{{resultado}}</span>
+                </div>
+            {{/historial}}
+            {{^historial}}
+                <p>No hay partidas finalizadas.</p>
+            {{/historial}}
+        </div>
+    </section>
+
+    <!-- BOTÓN VOLVER -->
+    <div class="volver-home">
+        <a href="/Pregunta2_PW2/index.php?controller=home&method=verLobby" class="btn-volver">Volver al Home</a>
+    </div>
+
+</div>
+
+<style>
+    body {
+        background-image: url('assets/img/imagen-fondo.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Quicksand', sans-serif;
+        color: #fff;
+    }
+
+    .perfil-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: rgba(0,0,0,0.6);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 0 25px rgba(0,0,0,.5);
+    }
+
+    .perfil-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-bottom: 2px solid #FF9232;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+
+    .perfil-foto {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #FF9232;
+        object-fit: cover;
+    }
+
+    .perfil-nombre {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8em;
+        color: #FF9232;
+        margin: 0;
+    }
+
+    .perfil-puntaje {
+        font-size: 1.2em;
+        margin: 5px 0;
+    }
+
+    .qr-box img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .perfil-datos h3,
+    .perfil-partidas h3 {
+        font-family: 'Montserrat', sans-serif;
+        color: #FF9232;
+        margin-bottom: 10px;
+    }
+
+    .perfil-datos ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0;
+    }
+
+    .perfil-datos li {
+        margin-bottom: 5px;
+    }
+
+    .map-box {
+        margin-top: 10px;
+        border: 2px solid #FF9232;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .matches-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .match-card {
+        background: rgba(255,255,255,0.1);
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .oponente {
+        font-weight: bold;
+    }
+
+    .resultado {
+        color: #FF9232;
+    }
+
+    .volver-home {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn-volver {
+        background: #FF9232;
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+    }
+
+    .btn-volver:hover {
+        background: #e07b1f;
+    }
+</style>
+{{>footer}}
