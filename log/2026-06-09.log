@@ -1,0 +1,25 @@
+[20:44:10] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El correo electrónico ya se encuentra registrado
+[20:46:01] [INFO] UsuarioController::procesarRegistro - Datos válidos para: valen123
+[20:46:02] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:53:56] [INFO] UsuarioController::procesarRegistro - Datos válidos para: valen123
+[20:53:57] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:55:21] [INFO] UsuarioController::procesarRegistro - Datos válidos para: matemate
+[20:55:21] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:56:39] [INFO] UsuarioController::procesarRegistro - Datos válidos para: matemate
+[20:56:39] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[20:58:21] [INFO] UsuarioController::procesarRegistro - Datos válidos para: matemate
+[20:58:21] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+[21:01:09] [INFO] UsuarioController::procesarRegistro - Datos válidos para: 12345678
+[21:01:09] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)

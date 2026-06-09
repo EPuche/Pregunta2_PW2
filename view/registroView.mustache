@@ -42,10 +42,13 @@
             </div>
 
             <div class="form-group">
-                <label for="pais_ciudad">País y ciudad</label>
-                <div id="map" style="width:100%; height:150px; background:#eee;">Mapa</div>
-                <input type="hidden" id="pais" name="pais">
-                <input type="hidden" id="ciudad" name="ciudad">
+                <input type="hidden" id="latitud" name="latitud">
+                <input type="hidden" id="longitud" name="longitud">
+                <label >Ubicacion</label>
+                <div id="map" style="width:100%; height:300px; background:#eee;">
+
+                </div>
+
             </div>
         </div>
 
@@ -83,5 +86,10 @@
         </div>
 
     </form>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap" async defer></script>
+    <script src="/Pregunta2_PW2/assets/js/mapa-registro.js" defer></script>
+
+
 </div>
 {{>footer}}

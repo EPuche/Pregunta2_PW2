@@ -28,15 +28,15 @@ class UsuarioModel
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
-        $pais,
-        $ciudad,
         $email,
         $nombreUsuario,
         $contrasena,
-        $fotoPerfil = null
+        $fotoPerfil = null,
+        $longitud,
+        $latitud
     ) {
         $sql = "INSERT INTO usuario 
-                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Log::info("SQL: $sql");
@@ -45,12 +45,12 @@ class UsuarioModel
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
-            $pais,
-            $ciudad,
             $email,
             $nombreUsuario,
             $contrasena,
-            $fotoPerfil
+            $fotoPerfil,
+            $longitud,
+            $latitud
         ]);
     }
 
@@ -59,34 +59,36 @@ class UsuarioModel
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
-        $pais,
-        $ciudad,
         $email,
         $nombreUsuario,
-        $fotoPerfil = null
+        $fotoPerfil = null,
+        $longitud,
+        $latitud
     ) {
         $sql = "UPDATE usuario
                 SET nombre_completo = ?,
                     anio_nacimiento = ?,
                     sexo = ?,
-                    pais = ?,
-                    ciudad = ?,
                     email = ?,
                     nombre_usuario = ?,
-                    foto_perfil = ?
+                    foto_perfil = ?,
+                    longitud = ?,
+                    latitud = ?
+                
                 WHERE id = ?";
 
         Log::info("SQL: $sql");
+
 
         $this->database->execute($sql, [
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
-            $pais,
-            $ciudad,
             $email,
             $nombreUsuario,
             $fotoPerfil,
+            $longitud,
+            $latitud,
             $id
         ]);
     }
@@ -123,7 +125,8 @@ class UsuarioModel
         }
         return true;
     }
-    private function existeCampo($columna, $valor) {
+    private function existeCampo($columna, $valor): bool
+    {
         $sql = "SELECT id FROM usuario WHERE $columna = ?";
         $resultado = $this->database->query($sql, [$valor]);
         return !empty($resultado);
