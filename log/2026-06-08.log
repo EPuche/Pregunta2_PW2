@@ -46,3 +46,8 @@
 [20:32:22] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El formato del correo electrónico no es válido.
 [20:40:57] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El formato del correo electrónico no es válido.
 [21:13:08] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El correo electrónico ya se encuentra registrado
+[22:29:01] [WARNING] UsuarioController::procesarRegistro - Falló la validación: Las contraseñas no coinciden
+[22:30:24] [INFO] UsuarioController::procesarRegistro - Datos válidos para: valen2
+[22:30:24] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, pais, ciudad, email, nombre_usuario, contrasena, foto_perfil)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)

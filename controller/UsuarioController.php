@@ -26,12 +26,13 @@ class UsuarioController {
         $nombreCompleto   = $this->request->post('nombre_completo');
         $anioNacimiento   = $this->request->post('anio_nacimiento');
         $sexo             = $this->request->post('sexo');
-        $pais             = $this->request->post('pais');
-        $ciudad           = $this->request->post('ciudad');
         $email            = $this->request->post('email');
         $nombreUsuario    = $this->request->post('nombre_usuario');
         $contrasena       = $this->request->post('contrasena');
         $repetirContrasena= $this->request->post('repetir_contrasena');
+        $latitud = $_POST['latitud'] ?? null;
+        $longitud = $_POST['longitud'] ?? null;
+
 
         $imagenPerfil = null;
         $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
@@ -57,12 +58,12 @@ class UsuarioController {
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
-            $pais,
-            $ciudad,
             $email,
             $nombreUsuario,
             $hashContrasena,
-            $imagenPerfil
+            $imagenPerfil,
+            $longitud,
+            $latitud
         );
 
         if ($registro) {
