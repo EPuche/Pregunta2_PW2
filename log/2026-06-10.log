@@ -1,0 +1,23 @@
+[16:48:59] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [admin]
+[16:52:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [admin]
+[17:03:17] [INFO] UsuarioController::procesarRegistro - Datos válidos para: usuario1
+[17:03:17] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[17:09:29] [INFO] UsuarioController::procesarRegistro - Datos válidos para: usuario1
+[17:09:29] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[17:09:43] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:10:22] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:10:40] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:11:17] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:15:36] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:16:49] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:21:34] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:21:45] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:22:28] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:23:52] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:25:29] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:28:43] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]
+[17:29:41] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [usuario1]

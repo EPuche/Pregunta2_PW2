@@ -22,18 +22,17 @@ class LoginController{
             ]);
             return;
         }
-        $user= $this->model->getUsuario($usuario);
+        $user= $this->model->getUsuarioByName($usuario);
 
-        if(!$user || !password_verify($contrasenia,$user["contrasenia"])){
+        if($user==null || !password_verify($contrasenia,$user["contrasena"])){
             $this->renderer->render("loginView",[
                 "error" =>"usuario o contraseña incorrectos"
             ]);
             return;
         }
-        session_start();
         $_SESSION["id"]=$user["id"];
-        $_SESSION["usuario"]=$user["usuario"];
+        $_SESSION["usuario"]=$user["nombre_usuario"];
 
-        Redirect::to("verLobbyView");
+        Redirect::to("/Pregunta2_PW2/index.php?controller=home&method=irAlHome");
     }
 }

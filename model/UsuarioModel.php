@@ -23,6 +23,13 @@ class UsuarioModel
         $filas = $this->database->query($sql, [$id]);
         return !empty($filas) ? $filas[0] : null;
     }
+    public function getUsuarioByName($nombre_usuario)
+    {
+        $sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
+        Log::info("SQL: $sql [$nombre_usuario]");
+        $filas = $this->database->query($sql, [$nombre_usuario]);
+        return !empty($filas) ? $filas[0] : null;
+    }
 
     public function alta(
         $nombreCompleto,
