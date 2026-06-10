@@ -1,95 +1,93 @@
 {{>header}}
-<div class="container">
-    <div style="text-align:center; margin-bottom:35px;">
-        <img src="/assets/logo.png" alt="Pregunta2" style="height:70px; margin-bottom:15px;">
+<div class="container my-5 d-flex justify-content-center">
+    <div class="card-registro p-4 p-md-5 shadow">
 
-        <h2 style="font-size:28px;font-weight:600;color:#222323;margin:0;">
-            Crea tu cuenta
-        </h2>
-    </div>
-
-    <form action="/Pregunta2_PW2/index.php?controller=usuario&method=procesarRegistro" method="POST" enctype="multipart/form-data"
-          style="display:flex; flex-wrap:wrap; gap:20px;">
-        <!-- COLUMNA FOTO -->
-        <div style="flex:1 1 200px; display:flex; flex-direction:column; align-items:center; text-align:center;">
-            <div style="width:120px; height:120px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; font-size:16px; color:#222323; margin-bottom:8px;">
-                Foto
-            </div>
-            <input type="file" name="foto_perfil" accept="image/*">
-            <small style="color:#555;">Seleccionar imagen</small>
+        <div class="text-center mb-4">
+            <img src="/assets/img/logo home.png" alt="Pregunta2" class="img-fluid mb-2" style="height: 60px; object-fit: contain;">
+            <h2 class="title-registro">Crea tu cuenta</h2>
         </div>
 
-        <!-- COLUMNA IZQUIERDA DATOS -->
-        <div style="flex:1 1 250px; display:flex; flex-direction:column; gap:15px;">
-            <div class="form-group">
-                <label for="nombre_completo">Nombre completo</label>
-                <input type="text" id="nombre_completo" name="nombre_completo" placeholder="Ej: Juan Pérez" required >
-            </div>
+        <form action="/Pregunta2_PW2/index.php?controller=usuario&method=procesarRegistro" method="POST" enctype="multipart/form-data">
+            <div class="row g-4">
 
-            <div class="form-group">
-                <label for="anio_nacimiento">Año de nacimiento</label>
-                <input type="number" id="anio_nacimiento" name="anio_nacimiento" placeholder="Ej: 1990" required>
-            </div>
-
-            <div class="form-group">
-                <label for="sexo">Sexo</label>
-                <select id="sexo" name="sexo" required>
-                    <option value="">Seleccione...</option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                    <option value="Prefiero no cargarlo">Prefiero no cargarlo</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <input type="hidden" id="latitud" name="latitud">
-                <input type="hidden" id="longitud" name="longitud">
-                <label >Ubicacion</label>
-                <div id="map" style="width:100%; height:300px; background:#eee;">
-
+                <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center pt-2">
+                    <div class="user-avatar mb-3 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person fs-1 text-muted"></i> <span>Foto</span>
+                    </div>
+                    <div class="custom-file-upload w-100">
+                        <input type="file" name="foto_perfil" id="foto_perfil" accept="image/*" class="d-none">
+                        <label for="foto_perfil" class="btn-upload w-100 py-2 px-2 text-center text-truncate">Seleccionar imagen</label>
+                    </div>
                 </div>
 
+                <div class="col-12 col-md-4 d-flex flex-column gap-1">
+                    <div class="form-group-custom">
+                        <label for="nombre_completo" class="form-label">Nombre completo</label>
+                        <input type="text" id="nombre_completo" class="form-control" name="nombre_completo" placeholder="Ej: Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="anio_nacimiento" class="form-label">Año de nacimiento</label>
+                        <input type="number" id="anio_nacimiento" class="form-control" name="anio_nacimiento" placeholder="Ej: 1990" required>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="sexo" class="form-label">Sexo</label>
+                        <select id="sexo" class="form-select" name="sexo" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Prefiero no cargarlo">Prefiero no cargarlo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <input type="hidden" id="latitud" name="latitud">
+                        <input type="hidden" id="longitud" name="longitud">
+                        <label class="form-label">Ubicación</label>
+                        <div id="map" class="w-100 rounded border shadow-sm"></div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-5 d-flex flex-column gap-3">
+                    <div class="form-group-custom">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control" name="email" placeholder="ejemplo@correo.com" required>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="contrasena" class="form-label">Contraseña</label>
+                        <input type="password" id="contrasena" class="form-control" name="contrasena" required>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="repetir_contrasena" class="form-label">Repetir contraseña</label>
+                        <input type="password" id="repetir_contrasena" class="form-control" name="repetir_contrasena" required>
+                    </div>
+
+                    <div class="form-group-custom">
+                        <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
+                        <input type="text" id="nombre_usuario" class="form-control" name="nombre_usuario" placeholder="Ej: Juan123" required>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- COLUMNA DERECHA DATOS -->
-        <div style="flex:1 1 250px; display:flex; flex-direction:column; gap:15px;">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+            {{#error_registro}}
+                <div class="alert alert-danger mt-4 border-start border-4 border-danger shadow-sm" role="alert">
+                    {{error_registro}}
+                </div>
+            {{/error_registro}}
+
+            <div class="row mt-4 pt-2">
+                <div class="col-12 d-flex flex-column align-items-center">
+                    <button type="submit" class="btn-submit btn-lg shadow-sm w-100">Registrarme</button>
+                    <a href="/home/irAlHome" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="contrasena">Contraseña</label>
-                <input type="password" id="contrasena" name="contrasena" required>
-            </div>
-
-            <div class="form-group">
-                <label for="repetir_contrasena">Repetir contraseña</label>
-                <input type="password" id="repetir_contrasena" name="repetir_contrasena" required>
-            </div>
-
-            <div class="form-group">
-                <label for="nombre_usuario">Nombre de usuario</label>
-                <input type="text" id="nombre_usuario" name="nombre_usuario" placeholder="Ej: Juan123" required>
-            </div>
-        </div>
-        {{#error_registro}}
-            <div style="background:#fff3cd; border-left:5px solid #ffc107; color:#856404; padding:12px; font-family:sans-serif; font-size:14px; border-radius:4px;">
-                {{error_registro}}
-            </div>
-        {{/error_registro}}
-        <!-- BOTÓN Y LINK -->
-        <div style="flex-basis:100%; margin-top:20px;">
-            <button type="submit" class="btn-submit">Registrarme</button>
-            <a href="/" class="back-link">← Volver al inicio</a>
-        </div>
-
-    </form>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap" async defer></script>
-    <script src="/Pregunta2_PW2/assets/js/mapa-registro.js" defer></script>
-
-
+        </form>
+    </div>
 </div>
-{{>footer}}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap&loading=async&libraries=marker" defer></script>
+<script src="/Pregunta2_PW2/assets/js/mapa-registro.js" defer></script>
+<script src="/Pregunta2_PW2/assets/js/funcion-imagen-registro.js" defer></script>

@@ -36,14 +36,10 @@ class UsuarioController {
 
         $imagenPerfil = null;
         $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
-        $fotoPerfil = $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
 
         $validacion = $this->model->validarRegistro($email, $nombreUsuario, $contrasena, $repetirContrasena, $anioNacimiento);
 
         if ($validacion !== true) {
-            if ($fotoPerfil && file_exists($carpetaDestino . $fotoPerfil)) {
-                unlink($carpetaDestino . $fotoPerfil);
-            }
             Log::warning("UsuarioController::procesarRegistro - Falló la validación: $validacion");
             $_SESSION['error_registro'] = $validacion;
             header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
@@ -67,6 +63,7 @@ class UsuarioController {
         );
 
         if ($registro) {
+             $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
             header("Location: /Pregunta2_PW2/index.php?controller=login&method=irAlLogin");
             exit;
         } else {
