@@ -1,0 +1,122 @@
+
+/*:root{*/
+/*    --dark:#222323;*/
+/*    --orange:#FF9232;*/
+/*    --blue:#ADD8E6;*/
+/*    --white:#FFFFFF;*/
+/*}*/
+
+
+/* Contenedor tipo Tarjeta (Achicado y centrado) */
+.card-registro {
+    background-color: #d1ecf1; /* Celeste anterior/institucional del juego */
+    border-radius: 16px;
+    max-width: 900px; /* Evita que se desparrame en pantallas gigantes */
+    width: 100%;
+    font-family: inherit; /* Mantiene tu fuente anterior */
+}
+
+/* Título */
+.title-registro {
+    font-family: 'Montserrat';
+    color: #222323;
+    font-weight: 600;
+    font-size: 26px;
+}
+
+/* Etiquetas de los formularios */
+.form-label {
+    font-family: 'Poppins';
+    color: #222323;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+/* Inputs, Selects y Textareas obligatoriamente BLANCOS */
+.card-registro .form-control,
+.card-registro .form-select {
+    background-color: #ffffff !important;
+    color: #222323 !important;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* Efecto Focus para que se vea moderno al clickear */
+.card-registro .form-control:focus,
+.card-registro .form-select:focus {
+    outline: none;
+    border-color: #a5d8ff;
+    box-shadow: 0 0 0 3px rgba(165, 216, 255, 0.5);
+}
+
+/* Contenedor de la Foto de Perfil */
+.user-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px dashed #98d8e2;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Botón de subir archivo */
+.btn-upload {
+    font-family: 'Poppins';
+    background-color: #FF9232;
+    color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+/*.btn-upload:hover {*/
+/*    background-color: #f8f9fa;*/
+/*}*/
+
+/* Contenedor del Mapa */
+#map {
+    height: 180px; /* Reducido para compactar el formulario */
+    border: 1px solid #ced4da;
+    background-color: #ffffff;
+}
+
+/* Botón Principal de Registro */
+.btn-submit {
+
+    font-family: 'Poppins';
+    background-color: #FF9232;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    max-width: 320px;
+    transition: background-color 0.2s, transform 0.1s;
+
+}
+.btn-submit:hover {
+    background-color: #333434;
+    color: #ffffff;
+}
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+/* Link de volver */
+.back-link {
+    color: #555;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+.back-link:hover {
+    color: #222323;
+}
