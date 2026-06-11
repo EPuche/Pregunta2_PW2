@@ -15,6 +15,17 @@
       <phpcs_by_interpreter asDefaultInterpreter="true" interpreter_id="e571aef2-1a74-4ac0-81d8-449e2033cfee" timeout="30000" />
     </phpcs_settings>
   </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/mustache/bin" />
+      <path value="$PROJECT_DIR$/vendor/mustache/src" />
+      <path value="$PROJECT_DIR$/vendor/mustache/test" />
+      <path value="$PROJECT_DIR$/vendor/mustache/vendor" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
+      <path value="$PROJECT_DIR$/vendor/mustache/mustache" />
+    </include_path>
+  </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.5" />
   <component name="PhpStan">
     <PhpStan_settings>
@@ -23,6 +34,11 @@
   </component>
   <component name="PhpStanOptionsConfiguration">
     <option name="transferred" value="true" />
+  </component>
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+    </phpunit_settings>
   </component>
   <component name="Psalm">
     <Psalm_settings>

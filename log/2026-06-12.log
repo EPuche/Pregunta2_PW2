@@ -1,0 +1,22 @@
+[00:53:12] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[00:53:12] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[00:57:12] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[00:57:12] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[00:58:04] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El nombre de usuario ya se encuentra registrado
+[00:58:20] [WARNING] UsuarioController::procesarRegistro - Falló la validación: El nombre de usuario ya se encuentra registrado
+[00:58:51] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[00:58:51] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[01:08:08] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[01:08:08] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[01:10:56] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[01:10:56] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)

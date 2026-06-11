@@ -2,7 +2,8 @@
     "name": "pregunta2/pw2",
     "description": "Juego de preguntas y respuestas",
     "require": {
-        "mustache/mustache": "^2.14"
+        "mustache/mustache": "^2.14",
+        "phpmailer/phpmailer": "^7.1"
     },
     "autoload": {
         "psr-4": {

@@ -42,13 +42,15 @@ class UsuarioModel
         $longitud,
         $latitud
     ) {
+        $token = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
+
         $sql = "INSERT INTO usuario 
-                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
         Log::info("SQL: $sql");
 
-        return $this->database->execute($sql, [
+        $resultado = $this->database->execute($sql, [
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
@@ -57,8 +59,31 @@ class UsuarioModel
             $contrasena,
             $fotoPerfil,
             $longitud,
-            $latitud
+            $latitud,
+            $token
         ]);
+
+        if ($resultado) {
+            return $token;
+        }
+
+        return false;
+    }
+
+    public function confirmarCuenta($token)
+    {
+        $usuario = $this->database->query("SELECT id_usuario FROM usuario 
+                  WHERE token_verificacion = ? AND verificado = 0", [$token]
+        );
+
+        if (empty($usuario)) {
+            return false;
+        }
+
+        return $this->database->execute(
+            "UPDATE usuario SET verificado = 1,token_verificacion = NULL 
+               WHERE token_verificacion = ?", [$token]
+        );
     }
 
     public function editar(

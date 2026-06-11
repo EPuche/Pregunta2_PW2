@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS preguntados_bd;
 CREATE DATABASE IF NOT EXISTS preguntados_bd;
 USE preguntados_bd;
 -- phpMyAdmin SQL Dump
@@ -28,12 +29,14 @@ CREATE TABLE `usuario` (
                            `nombre_completo` varchar(100) NOT NULL,
                            `anio_nacimiento` year NOT NULL,
                            `sexo` enum('Masculino','Femenino','Otro') NOT NULL,
-                           `pais` varchar(100) NOT NULL,
-                           `ciudad` varchar(100) NOT NULL,
                            `email` varchar(255) NOT NULL UNIQUE,
                            `nombre_usuario` varchar(50) NOT NULL UNIQUE,
                            `contrasena` varchar(255) NOT NULL,
                            `foto_perfil` varchar(255) DEFAULT NULL,
+                           `longitud` decimal(10,7) DEFAULT NULL,
+                           `latitud` decimal(10,7) DEFAULT NULL,
+                           `token_verificacion` varchar(64) DEFAULT NULL,
+                           `verificado` tinyint(1) NOT NULL DEFAULT 0,
                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
