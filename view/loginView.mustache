@@ -83,26 +83,15 @@
 <div class="contenedor-principal">
 
     <div class="contenedor-login">
-        <a href="/home" class="text-decoration-none text-secondary">HOME</a>
+        <a href="/Pregunta2_PW2/index.php?controller=home&method=irAlHome" class="text-decoration-none text-secondary">HOME</a>
         {{#error}}
         <div class="alert alert-warning">
             {{error}}
         </div>
         {{/error}}
         <div class="contenedor-logo ms-4 mb-4">
-            <img src="/assets/logo.png" alt="Preguntados logo" class="img-fluid logo d-block mx-auto">
+            <img src="assets/logo.png" alt="Preguntados logo" class="img-fluid logo d-block mx-auto">
         </div>
-        {{#mensaje}}
-            <div class="alert alert-success">
-                {{mensaje}}
-            </div>
-        {{/mensaje}}
-
-        {{#error}}
-            <div class="alert alert-warning">
-                {{error}}
-            </div>
-        {{/error}}
         <form method="POST" action="/Pregunta2_PW2/index.php?controller=login&method=autenticar">
             <h2>Ingresa a tu cuenta</h2>
 
@@ -121,7 +110,7 @@
             <hr>
 
             <p>¿NUEVO EN PREGUNTA2?<br>
-                <a href="/usuario/irAlRegistro">ABRIR CUENTA</a>
+                <a href="/Pregunta2_PW2/index.php?controller=registro&method=irAlRegistro">ABRIR CUENTA</a>
             </p>
 
         </form>

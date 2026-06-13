@@ -9,21 +9,8 @@ class LoginController{
         $this->renderer = $renderer;
         $this->request  = $request;
     }
-    public function irAlLogin()
-    {
-        $data = [];
-
-        if (isset($_SESSION['mensaje'])) {
-            $data['mensaje'] = $_SESSION['mensaje'];
-            unset($_SESSION['mensaje']);
-        }
-
-        if (isset($_SESSION['error'])) {
-            $data['error'] = $_SESSION['error'];
-            unset($_SESSION['error']);
-        }
-
-        $this->renderer->render("loginView", $data);
+    public function irAlLogin(){
+        $this->renderer->render("loginView");
     }
     public function autenticar(){
         $usuario= $this->request->post("usuario");
@@ -46,6 +33,6 @@ class LoginController{
         $_SESSION["id"]=$user["id"];
         $_SESSION["usuario"]=$user["nombre_usuario"];
 
-        Redirect::to("/home/irAlHome");
+        Redirect::to("/Pregunta2_PW2/index.php?controller=home&method=irAlHome");
     }
 }

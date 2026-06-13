@@ -42,7 +42,7 @@ class UsuarioController {
         if ($validacion !== true) {
             Log::warning("UsuarioController::procesarRegistro - Falló la validación: $validacion");
             $_SESSION['error_registro'] = $validacion;
-            header("Location: /usuario/irAlRegistro");
+            header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
             exit;
         }
 
@@ -63,23 +63,12 @@ class UsuarioController {
         );
 
         if ($registro) {
-            $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
-
-            require_once __DIR__ . '/../helpers/Mail.php';
-            $mail = new Mail();
-            $mailEnviado = $mail->enviarConfirmacion($email, $registro); // $registro ahora es el token
-
-            if ($mailEnviado) {
-                $_SESSION['mensaje'] = "Registro exitoso. Revisa tu email para confirmar tu cuenta.";
-            } else {
-                $_SESSION['error_registro'] = "Registro exitoso, pero no se pudo enviar el correo de confirmación.";
-            }
-
-            header("Location:/login/irAlLogin");
+             $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
+            header("Location: /Pregunta2_PW2/index.php?controller=login&method=irAlLogin");
             exit;
         } else {
-            $_SESSION['error_registro'] = "Hubo un problema. Inténtalo más tarde";
-            header("Location:/usuario/irAlRegistro");
+            $_SESSION['error_registro'] = "Hubo un problema. Intentalo mas tarde";
+            header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
             exit;
         }
 
@@ -106,7 +95,7 @@ class UsuarioController {
             if (!move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaCompletaDestino)) {
                 Log::error("UsuarioController::procesarRegistro - No se pudo mover la foto al servidor.");
                 $_SESSION['error_registro'] = "Hubo un problema al guardar la foto de perfil.";
-                header("Location: usuario/irAlRegistro");
+                header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
                 exit;
             }
         }
@@ -119,25 +108,4 @@ class UsuarioController {
 
 
 }
-
-    public function confirmarCuenta()
-    {
-        $token = $_GET['token'] ?? null;
-
-        if (!$token) {
-            $_SESSION['error'] = "Token no recibido";
-            header("Location: /login");
-            exit;
-        }
-
-        if ($this->model->confirmarCuenta($token) > 0) {
-            $_SESSION['mensaje'] = 'Cuenta verificada correctamente';
-        } else {
-            $_SESSION['error'] = 'Token inválido o ya utilizado';
-        }
-
-        header("Location: /login/irAlLogin");
-        exit;
-    }
-
 }
