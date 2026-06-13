@@ -26,6 +26,8 @@ async function initMap() {
     });
 }
 function actualizarCoordenadas(lat, lng) {
+
     document.getElementById("latitud").value = lat;
     document.getElementById("longitud").value = lng;
 }
+window.initMap = initMap;

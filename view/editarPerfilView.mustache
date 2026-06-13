@@ -1,0 +1,100 @@
+{{>header}}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Editar Perfil</h2>
+
+        <form action="/Pregunta2_PW2/index.php?controller=usuario&method=guardarPerfil"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <input type="hidden" name="id" value="{{id}}">
+
+            <div class="text-center mb-4">
+                <img src="{{foto_perfil}}"
+                     class="rounded-circle border"
+                     width="150"
+                     height="150"
+                     style="object-fit:cover">
+
+                <div class="mt-3">
+                    <input type="file"
+                           name="foto_perfil"
+                           class="form-control">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label>Nombre completo</label>
+                    <input type="text"
+                           name="nombre_completo"
+                           value="{{nombre_completo}}"
+                           class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Nombre de usuario</label>
+                    <input type="text"
+                           name="nombre_usuario"
+                           value="{{nombre_usuario}}"
+                           class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Email</label>
+                    <input type="email"
+                           name="email"
+                           value="{{email}}"
+                           class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Año nacimiento</label>
+                    <input type="number"
+                           name="anio_nacimiento"
+                           value="{{anio_nacimiento}}"
+                           class="form-control">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Sexo</label>
+                    <select name="sexo" class="form-select">
+                        <option value="{{sexo}}">{{sexo}}</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Prefiero no cargarlo">Prefiero no cargarlo</option>
+                    </select>
+                </div>
+  
+               <div class="col-md-3 mb-3">
+                    <label>Nueva contraseña</label>
+                    <input type="password" name="contrasena" class="form-control">
+               </div>
+
+               <div class="col-md-3 mb-3">
+                    <label>Repetir contraseña</label>
+                    <input type="password" name="repetir_contrasena" class="form-control">
+                </div>
+</div>
+
+
+
+            <!-- Inputs ocultos para que el mapa los complete -->
+            <input type="hidden" id="latitud" name="latitud" value="{{latitud}}">
+            <input type="hidden" id="longitud" name="longitud" value="{{longitud}}">
+
+            <h4 class="mt-4 mb-3">Ubicación</h4>
+            <div id="map" style="height:400px;border-radius:10px;"></div>
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button type="submit" class="btn btn-warning">Guardar cambios</button>
+                <a href="/Pregunta2_PW2/index.php?controller=usuario&method=verPerfil"
+                   class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/assets/js/mapa-editar.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap&loading=async&libraries=places" defer></script>

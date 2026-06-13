@@ -1,15 +1,20 @@
 <?php
 
-class UsuarioController {
+class UsuarioController
+{
     private $renderer;
+    private $model;
+    private $request;
 
-    public function __construct($model, $renderer, $request) {
+    public function __construct($model, $renderer, $request)
+    {
         $this->model = $model;
         $this->renderer = $renderer;
         $this->request = $request;
     }
 
-    public function irAlRegistro() {
+    public function irAlRegistro()
+    {
         // 1. Iniciamos un array de datos vacío para la plantilla
         $datos = [];
 
@@ -29,11 +34,9 @@ class UsuarioController {
         $email            = $this->request->post('email');
         $nombreUsuario    = $this->request->post('nombre_usuario');
         $contrasena       = $this->request->post('contrasena');
-        $repetirContrasena= $this->request->post('repetir_contrasena');
+        $repetirContrasena = $this->request->post('repetir_contrasena');
         $latitud = $_POST['latitud'] ?? null;
         $longitud = $_POST['longitud'] ?? null;
-
-
         $imagenPerfil = null;
         $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
 
@@ -63,7 +66,7 @@ class UsuarioController {
         );
 
         if ($registro) {
-             $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
+            $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
             header("Location: /Pregunta2_PW2/index.php?controller=login&method=irAlLogin");
             exit;
         } else {
@@ -71,7 +74,6 @@ class UsuarioController {
             header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
             exit;
         }
-
     }
 
     private function subirFotoPerfil($param, $nombreUsuario, string $carpetaDestino)
@@ -98,14 +100,97 @@ class UsuarioController {
                 header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=irAlRegistro");
                 exit;
             }
+            $rutaFoto = '/assets/imgPerfiles/' . $imagenPerfil;
+
+            $this->model->actualizarFoto(
+                $nombreUsuario,
+                $rutaFoto
+            );
         }
     }
- public function verPerfil() {
-    session_start();
-    $id = $_SESSION["id"]; 
-    $usuario = $this->model->getUsuario($id); 
-    $this->renderer->render("verPerfilView", $usuario); 
 
 
-}
+
+
+    public function verPerfil()
+    {
+
+        $id = $_SESSION["id"];
+        $usuario = $this->model->getUsuario($id);
+        $this->renderer->render("verPerfilView", $usuario);
+    }
+
+    public function editarPerfil()
+    {
+        $id = $_SESSION["id"];
+
+        $usuario = $this->model->getUsuario($id);
+
+        $this->renderer->render("editarPerfilView", $usuario);
+    }
+    public function guardarPerfil()
+    {
+        $fotoPerfil = null;
+
+        $usuarioActual = $this->model->getUsuario($_POST["id"]);
+
+        if (
+            isset($_FILES['foto_perfil']) &&
+            $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK
+        ) {
+
+            $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
+
+            if (!file_exists($carpetaDestino)) {
+                mkdir($carpetaDestino, 0777, true);
+            }
+
+            $extension = pathinfo(
+                $_FILES['foto_perfil']['name'],
+                PATHINFO_EXTENSION
+            );
+
+            $nombreArchivo =
+                $_POST["nombre_usuario"] . "_" . time() . "." . $extension;
+
+            $rutaCompleta = $carpetaDestino . $nombreArchivo;
+
+            move_uploaded_file(
+                $_FILES['foto_perfil']['tmp_name'],
+                $rutaCompleta
+            );
+
+            $fotoPerfil = '/assets/imgPerfiles/' . $nombreArchivo;
+        } else {
+
+            $fotoPerfil = $usuarioActual["foto_perfil"];
+        }
+
+        $nuevaContrasena = $_POST["contrasena"] ?? null;
+        $repetirContrasena = $_POST["repetir_contrasena"] ?? null;
+
+        if ($nuevaContrasena && $nuevaContrasena === $repetirContrasena) {
+            $hashContrasena = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
+        } else {
+            $hashContrasena = $usuarioActual["contrasena"];
+        }
+
+        $this->model->editar(
+
+            $_POST["id"],
+            $_POST["nombre_completo"],
+            $_POST["anio_nacimiento"],
+            $_POST["sexo"],
+            $_POST["email"],
+            $_POST["nombre_usuario"],
+            $fotoPerfil,
+            $_POST["longitud"],
+            $_POST["latitud"],
+            $hashContrasena
+
+        );
+
+        header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=verPerfil");
+        exit;
+    }
 }
