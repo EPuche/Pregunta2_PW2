@@ -35,8 +35,6 @@ class UsuarioModel
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
-        $pais,
-        $ciudad,
         $email,
         $nombreUsuario,
         $contrasena,
@@ -46,8 +44,8 @@ class UsuarioModel
         
     ) {
         $sql = "INSERT INTO usuario 
-                (nombre_completo, anio_nacimiento, sexo,pais,ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Log::info("SQL: $sql");
 
@@ -55,8 +53,6 @@ class UsuarioModel
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
-            $pais,
-            $ciudad,
             $email,
             $nombreUsuario,
             $contrasena,
@@ -82,8 +78,6 @@ class UsuarioModel
     $nombreCompleto,
     $anioNacimiento,
     $sexo,
-    $pais,
-    $ciudad,
     $email,
     $nombreUsuario,
     $fotoPerfil = null,
@@ -95,8 +89,6 @@ class UsuarioModel
             SET nombre_completo = ?,
                 anio_nacimiento = ?,
                 sexo = ?,
-                pais = ?,
-                ciudad = ?,
                 email = ?,
                 nombre_usuario = ?,
                 foto_perfil = ?,
@@ -117,8 +109,6 @@ class UsuarioModel
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
-        $pais,
-        $ciudad,
         $email,
         $nombreUsuario,
         $fotoPerfil,

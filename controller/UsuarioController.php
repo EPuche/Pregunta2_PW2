@@ -37,10 +37,6 @@ class UsuarioController
         $repetirContrasena = $this->request->post('repetir_contrasena');
         $latitud = $_POST['latitud'] ?? null;
         $longitud = $_POST['longitud'] ?? null;
-        $pais = $_POST['pais'] ?? null;
-        $ciudad = $_POST['ciudad'] ?? null;
-
-
         $imagenPerfil = null;
         $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
 
@@ -61,8 +57,6 @@ class UsuarioController
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
-            $pais,
-            $ciudad,
             $email,
             $nombreUsuario,
             $hashContrasena,
@@ -187,8 +181,6 @@ class UsuarioController
             $_POST["nombre_completo"],
             $_POST["anio_nacimiento"],
             $_POST["sexo"],
-            $_POST["pais"],
-            $_POST["ciudad"],
             $_POST["email"],
             $_POST["nombre_usuario"],
             $fotoPerfil,
