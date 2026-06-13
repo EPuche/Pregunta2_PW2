@@ -35,16 +35,19 @@ class UsuarioModel
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
+        $pais,
+        $ciudad,
         $email,
         $nombreUsuario,
         $contrasena,
         $fotoPerfil = null,
         $longitud,
-        $latitud
+        $latitud,
+        
     ) {
         $sql = "INSERT INTO usuario 
-                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                (nombre_completo, anio_nacimiento, sexo,pais,ciudad, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         Log::info("SQL: $sql");
 
@@ -52,6 +55,8 @@ class UsuarioModel
             $nombreCompleto,
             $anioNacimiento,
             $sexo,
+            $pais,
+            $ciudad,
             $email,
             $nombreUsuario,
             $contrasena,
@@ -60,45 +65,69 @@ class UsuarioModel
             $latitud
         ]);
     }
+    public function actualizarFoto($nombreUsuario, $rutaFoto)
+    {
+        $sql = "UPDATE usuario
+            SET foto_perfil = ?
+            WHERE nombre_usuario = ?";
 
-    public function editar(
-        $id,
+        return $this->database->execute($sql, [
+            $rutaFoto,
+            $nombreUsuario
+        ]);
+    }
+
+  public function editar(
+    $id,
+    $nombreCompleto,
+    $anioNacimiento,
+    $sexo,
+    $pais,
+    $ciudad,
+    $email,
+    $nombreUsuario,
+    $fotoPerfil = null,
+    $longitud,
+    $latitud,
+    $contrasena = null 
+) {
+    $sql = "UPDATE usuario
+            SET nombre_completo = ?,
+                anio_nacimiento = ?,
+                sexo = ?,
+                pais = ?,
+                ciudad = ?,
+                email = ?,
+                nombre_usuario = ?,
+                foto_perfil = ?,
+                longitud = ?,
+                latitud = ?";
+
+
+    if ($contrasena) {
+        $sql .= ", contrasena = ?";
+    }
+
+    $sql .= " WHERE id = ?";
+
+    Log::info("SQL: $sql");
+
+    
+    $this->database->execute($sql, [
         $nombreCompleto,
         $anioNacimiento,
         $sexo,
+        $pais,
+        $ciudad,
         $email,
         $nombreUsuario,
-        $fotoPerfil = null,
+        $fotoPerfil,
         $longitud,
-        $latitud
-    ) {
-        $sql = "UPDATE usuario
-                SET nombre_completo = ?,
-                    anio_nacimiento = ?,
-                    sexo = ?,
-                    email = ?,
-                    nombre_usuario = ?,
-                    foto_perfil = ?,
-                    longitud = ?,
-                    latitud = ?
-                
-                WHERE id = ?";
-
-        Log::info("SQL: $sql");
-
-
-        $this->database->execute($sql, [
-            $nombreCompleto,
-            $anioNacimiento,
-            $sexo,
-            $email,
-            $nombreUsuario,
-            $fotoPerfil,
-            $longitud,
-            $latitud,
-            $id
-        ]);
-    }
+        $latitud,
+        ...($contrasena ? [$contrasena] : []),
+        $id
+    ]);
+}
 
     public function eliminar($id)
     {
@@ -107,7 +136,8 @@ class UsuarioModel
         $this->database->execute($sql, [$id]);
     }
 
-    public function validarRegistro($email, $nombreUsuario, $contrasena, $repetirContrasena, $anioNacimiento) {
+    public function validarRegistro($email, $nombreUsuario, $contrasena, $repetirContrasena, $anioNacimiento)
+    {
         if (empty($email) || empty($nombreUsuario) || empty($contrasena)) {
             return "Todos los campos obligatorios deben estar completos";
         }
@@ -138,10 +168,4 @@ class UsuarioModel
         $resultado = $this->database->query($sql, [$valor]);
         return !empty($resultado);
     }
-
-
-
-
-
-
 }
