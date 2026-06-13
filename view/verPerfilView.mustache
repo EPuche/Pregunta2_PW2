@@ -7,9 +7,13 @@
         <div class="perfil-info">
             <h2 class="perfil-nombre">{{nombre_completo}} ({{nombre_usuario}})</h2>
             <p class="perfil-puntaje">Puntaje: {{puntaje}}</p>
-            <div class="qr-box">
-                <img src="{{qr_perfil}}" alt="QR Perfil">
-            </div>
+        <div class="qr-box">
+         <h4 class="mt-4 mb-3">Mi QR</h4>
+         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http%3A%2F%2Flocalhost%2FPregunta2_PW2%2Findex.php%3Fcontroller%3Dusuario%26method%3DverPerfil%26id%3D{{id}}" 
+       alt="QR de mi perfil">
+       </div>
+       <button id="compartirQR" class="btn btn-warning mt-3">Compartir mi QR</button>
+
         </div>
     </section>
 
@@ -22,11 +26,12 @@
             <li>Email: {{email}}</li>
             <li>País: {{pais}}</li>
             <li>Ciudad: {{ciudad}}</li>
+            
         </ul>
         <div class="map-box">
             <!-- Mapa embebido con dirección -->
             <iframe 
-                src="https://www.google.com/maps?q={{direccion}}&output=embed" 
+                src="https://maps.google.com/maps?q={{latitud}},{{longitud}}&z=15&output=embed"
                 width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
             </iframe>
         </div>
@@ -48,16 +53,23 @@
         </div>
     </section>
 
-    <!-- BOTÓN VOLVER -->
-    <div class="volver-home">
-        <a href="/Pregunta2_PW2/index.php?controller=home&method=verLobby" class="btn-volver">Volver al Home</a>
+ 
+   <div class="text-center mt-3">
+    <a href="/home/irAlHome" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
+
+    <a href="/Pregunta2_PW2/index.php?controller=usuario&method=editarPerfil"
+       class="btn btn-warning">
+        Editar datos
+    </a>
+
     </div>
+    
 
 </div>
 
 <style>
     body {
-        background-image: url('assets/img/imagen-fondo.png');
+        background-image: url('../assets/img/imagen-fondo.png');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -173,4 +185,8 @@
         background: #e07b1f;
     }
 </style>
+<script src="/assets/js/qr-share.js"></script>
+<script>
+  initQrShare({{id}});
+</script>
 {{>footer}}
