@@ -1,0 +1,98 @@
+
+body {
+    background-color: #1e1e1e;
+    font-family: 'Poppins', sans-serif;
+}
+
+.lobby-container {
+    background-color: #1e1e1e;
+}
+
+
+.sidebar {
+    background-color: #141414;
+    border-right: 1px solid #2a2a2a;
+    min-height: 100vh;
+}
+
+/* botones bootstrap override suave */
+.sidebar .btn-warning {
+    background-color: #ff9232;
+    border: none;
+    color: #fff;
+}
+
+.sidebar .btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.sidebar .btn-outline-light {
+    border-color: #555;
+}
+
+
+
+.user-card {
+    background-color: #2a2a2a;
+    border: none;
+    color: #fff;
+}
+
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.user-info h4 {
+    color: #fff;
+}
+
+
+
+.history-card {
+    background-color: #242424;
+    border: none;
+    color: #fff;
+}
+
+.history-card .card-header {
+    background-color: #111 !important;
+    border-bottom: 1px solid #333;
+}
+
+/* item de partida */
+.match-card {
+    background-color: #2f2f2f !important;
+    color: #fff;
+    transition: 0.2s;
+}
+
+.match-card:hover {
+    background-color: #3a3a3a !important;
+}
+
+.opponent-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #666;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+.opponent-name {
+    font-weight: 500;
+}
+
+.match-result {
+    font-weight: bold;
+    color: #ff9232;
+}

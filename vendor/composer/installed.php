@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'pregunta2/pw2',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '7d5b158f94c1f6ea11f42ed18ed82b08923699b3',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'mustache/mustache' => array(
+            'pretty_version' => 'v2.14.2',
+            'version' => '2.14.2.0',
+            'reference' => 'e62b7c3849d22ec55f3ec425507bf7968193a6cb',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mustache/mustache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v7.1.1',
+            'version' => '7.1.1.0',
+            'reference' => '1bc1716a507a65e039d4ac9d9adebbbd0d346e15',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'pregunta2/pw2' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '7d5b158f94c1f6ea11f42ed18ed82b08923699b3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

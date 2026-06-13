@@ -1,0 +1,10 @@
+[17:57:14] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
+[17:57:14] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[17:57:33] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [epuche]
+[18:05:36] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [epuche]
+[18:05:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
+[18:17:07] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
+[18:22:41] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
+[18:23:20] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
