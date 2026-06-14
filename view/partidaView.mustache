@@ -1,0 +1,14 @@
+<h2>{{contenido}}</h2>
+
+<form action="/partida/verificarRespuesta" method="POST">
+    <input type="hidden" name="id_pregunta" value="{{id}}">
+    <ul>
+        {{#opciones}}
+            <li>
+                <button type="submit" name="opcion_elegida" value="{{id}}">
+                    {{contenido}}
+                </button>
+            </li>
+        {{/opciones}}
+    </ul>
+</form>

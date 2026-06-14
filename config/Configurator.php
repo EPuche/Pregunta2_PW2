@@ -33,6 +33,11 @@ class Configurator {
         return new UsuarioModel($this->getDatabase());
     }
 
+    private function getPreguntaModel()
+    {
+        return new PreguntaModel($this->getDatabase());
+    }
+
     public function getRouter()
     {
         return new Router($this, 'home', 'irAlHome');
@@ -52,9 +57,16 @@ class Configurator {
     {
         return new HomeController($this->getRenderer());
     }
+    public function getLobbyController()
+    {
+        return new LobbyController($this->getRenderer());
+    }
 
     public function getLoginController() {
         return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
+    }
+    public function getPartidaController() {
+        return new PartidaController($this->getPreguntaModel(), $this->getRenderer(), new Request());
     }
 
 

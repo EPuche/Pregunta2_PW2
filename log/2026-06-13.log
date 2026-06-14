@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [17:57:14] [INFO] UsuarioController::procesarRegistro - Datos válidos para: epuche
 [17:57:14] [INFO] SQL: INSERT INTO usuario 
             (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
@@ -8,3 +9,60 @@
 [18:17:07] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
 [18:22:41] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
 [18:23:20] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [5]
+=======
+[13:33:15] [INFO] UsuarioController::procesarRegistro - Datos válidos para: valentinita1234
+[13:33:16] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[13:37:05] [INFO] UsuarioController::procesarRegistro - Datos válidos para: holaholahola
+[13:37:05] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[14:22:41] [INFO] UsuarioController::procesarRegistro - Datos válidos para: culo
+[14:22:41] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[14:22:55] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[14:30:06] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[14:32:03] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[15:05:44] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[15:06:47] [INFO] UsuarioController::procesarRegistro - Datos válidos para: ola
+[15:06:47] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[15:09:45] [INFO] UsuarioController::procesarRegistro - Datos válidos para: 1234
+[15:09:45] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[15:10:30] [INFO] UsuarioController::procesarRegistro - Datos válidos para: 12345
+[15:10:30] [INFO] SQL: INSERT INTO usuario 
+                (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+[15:11:08] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[15:11:47] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[23:53:06] [INFO] SQL: SELECT contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[23:55:55] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[23:56:07] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[23:56:11] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[23:57:05] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+>>>>>>> 9cd22 (Se incorpora vista de la ruleta(html,css,js) y su controller partida.)
