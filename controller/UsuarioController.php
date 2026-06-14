@@ -66,6 +66,7 @@ class UsuarioController
         );
 
         if ($registro) {
+
             $this->subirFotoPerfil($_FILES['foto_perfil'] ?? null, $nombreUsuario, $carpetaDestino);
 
 
