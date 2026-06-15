@@ -1,0 +1,20 @@
+[00:02:21] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[00:12:19] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[18:53:51] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[18:55:33] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1

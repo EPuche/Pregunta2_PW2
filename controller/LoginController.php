@@ -46,5 +46,11 @@ class LoginController{
         $_SESSION["id"]=$user["id"];
         $_SESSION["usuario"]=$user["nombre_usuario"];
 
-        Redirect::to("/usuario/verLobby");    }
+
+
+
+        header("Location: /lobby/irAlLobby");
+        exit;
+    }
+
 }
