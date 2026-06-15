@@ -42,6 +42,7 @@ class PartidaController
         $data = [
             "id" => $pregunta['id'],
             "contenido" => $pregunta['contenido'],
+            "color" => $pregunta['color'],
             "opciones"  => $opciones
         ];
         $this->renderer->render("partidaView", $data);

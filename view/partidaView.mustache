@@ -1,14 +1,43 @@
-<h2>{{contenido}}</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titulo}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../assets/styles/partida/partida.css" >
 
-<form action="/partida/verificarRespuesta" method="POST">
+</head>
+<body>
+<div class="quiz-container">
+
+<form action="/partida/verificarRespuesta" method="POST" style="background-color:{{color}};">
+
+    <button type="button" class="btn btn-reportar" data-bs-toggle="modal" data-bs-target="#modalReporte">
+        <i class="bi-exclamation-triangle"></i>
+    </button>
+    <h2 class="pregunta">{{contenido}}</h2>
+
     <input type="hidden" name="id_pregunta" value="{{id}}">
-    <ul>
+
+    <div class="d-grid gap-3 opciones">
         {{#opciones}}
-            <li>
-                <button type="submit" name="opcion_elegida" value="{{id}}">
+
+                <button type="submit" name="opcion_elegida" value="{{id}}" class="btn btn-lg opcion-btn">
                     {{contenido}}
                 </button>
-            </li>
+
         {{/opciones}}
-    </ul>
+        </div>
+
 </form>
+
+</div>
+<!--modal-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
