@@ -1,20 +1,15 @@
 {{>header}}
-<body class="bg-light d-flex align-items-center justify-content-center min-vh-100 " >
-
 
 <div class="container text-center py-4 container-ruleta">
     <h1 class="fw-bold text-secondary mb-4 titulo-principal">Gira la ruleta!</h1>
     <div class="position-relative d-inline-block my-3">
-
         <div class="flecha"></div>
-
         <div class="ruleta-sombra">
             <canvas id="ruleta" width="300" height="300"></canvas>
             <button id="boton-girar-central" class="btn-girar-central shadow">
                 ¡GIRAR!
             </button>
         </div>
-
     </div>
     <div class="my-3 min-vh-5 container-categoria">
         <h2 id="texto-resultado" class="fw-bold text-primary animate-fade-in d-none texto-categoria">
@@ -24,12 +19,13 @@
     <div class="mt-4">
         <form id="form-ruleta" action="/partida/procesarRuleta" method="POST" class="d-none mt-3 animate-fade-in">
             <input type="hidden" id="input-categoria" name="categoria" value="">
-        <button id="boton-continuar" class="btn btn-lg btn-gradient px-5 py-3 fw-bold text-white shadow">
-            Continuar
-        </button>
+            <button id="boton-continuar" class="btn btn-lg btn-gradient px-5 py-3 fw-bold text-white shadow">
+                Continuar
+            </button>
         </form>
     </div>
 </div>
 
 <script src="../assets/js/ruleta/script.js"></script>
-</body>
+
+{{>footer}}
