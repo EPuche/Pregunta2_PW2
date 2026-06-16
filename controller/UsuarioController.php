@@ -125,13 +125,28 @@ class UsuarioController
 
 
 
-    public function verPerfil()
-    {
+public function verPerfil()
+{
+    $id = $_SESSION["id"];
+    $usuario = $this->model->getUsuario($id);
 
-        $id = $_SESSION["id"];
-        $usuario = $this->model->getUsuario($id);
-        $this->renderer->render("verPerfilView", $usuario);
-    }
+    $data = [
+        "nombreUsuario"   => $usuario["nombre_usuario"], 
+        "nombre_completo" => $usuario["nombre_completo"],
+        "nombre_usuario"  => $usuario["nombre_usuario"],
+        "puntaje"         => $usuario["puntaje"] ?? 0,
+        "anio_nacimiento" => $usuario["anio_nacimiento"],
+        "sexo"            => $usuario["sexo"],
+        "email"           => $usuario["email"],
+        "foto_perfil"     => $usuario["foto_perfil"],
+        "latitud"         => $usuario["latitud"],
+        "longitud"        => $usuario["longitud"],
+        "id"              => $usuario["id"],
+        "historial"       => $usuario["historial"] ?? []
+    ];
+
+    $this->renderer->render("verPerfilView", $data);
+}
 
     public function editarPerfil()
     {
@@ -227,7 +242,7 @@ class UsuarioController
         exit;
     }
 
-    public function verLobby()
+  /*  public function verLobby()
     {
         if (!isset($_SESSION["id"])) {
             header("Location: /login/irAlLogin");
@@ -243,7 +258,7 @@ class UsuarioController
             "historial" => []
         ];
 
-        $this->renderer->render("verLobbyView", $data);
-    }
+        $this->renderer->render("lobbyView", $data);
+    }*/
 
 }

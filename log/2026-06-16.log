@@ -1,0 +1,93 @@
+[16:23:52] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[16:25:50] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:13:28] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:14:01] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:14:49] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:22:21] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:23:28] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:23:51] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[18:30:52] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[18:37:42] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[18:56:42] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[19:01:13] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[19:03:17] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[19:21:54] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[19:21:54] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:21:54] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:21:54] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:29] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:29] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:39] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[19:22:39] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:39] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:41] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:41] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:43] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:43] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:49] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[19:22:49] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:49] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:50] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:50] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]

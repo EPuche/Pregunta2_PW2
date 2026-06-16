@@ -49,6 +49,38 @@ class PartidaController
     }
 
 
+    public function verificarRespuesta() {
+        if (isset($_POST['opcion_elegida'])) {
+            $idOpcionElegida = $_POST['opcion_elegida'];
+            $opciones = $_SESSION['opciones_actuales'];
+            $pregunta = $_SESSION['pregunta_actual'];
+
+            foreach ($opciones as &$opcion) {
+                $opcion['es_elegida'] = ($opcion['id'] == $idOpcionElegida);
+
+                $opcion['mostrar_correcta'] = ($opcion['es_correcta'] == 1);
+                $opcion['mostrar_incorrecta'] = ($opcion['es_elegida'] && $opcion['es_correcta'] == 0);
+            }
+
+            $data = [
+                "id" => $pregunta['id'],
+                "contenido" => $pregunta['contenido'],
+                "opciones"  => $opciones,
+                "ya_respondio" => true
+            ];
+
+            unset($_SESSION['pregunta_actual']);
+            unset($_SESSION['opciones_actuales']);
+            $this->renderer->render("partidaView", $data);
+        } else {
+            header("Location: /partida/crearPartida");
+            exit;
+        }
+    }
+
+
+
+
 
 
 }

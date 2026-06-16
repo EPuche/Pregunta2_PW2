@@ -18,3 +18,5 @@
                         WHERE categoria_id = ? 
                         ORDER BY RAND() 
                         LIMIT 1
+[19:32:36] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[19:34:03] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]

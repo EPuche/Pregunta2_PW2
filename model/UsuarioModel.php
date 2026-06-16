@@ -40,7 +40,7 @@ class UsuarioModel
         $contrasena,
         $fotoPerfil = null,
         $longitud,
-        $latitud,
+        $latitud
         
     ) {
         $token = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
@@ -183,4 +183,23 @@ class UsuarioModel
         $resultado = $this->database->query($sql, [$valor]);
         return !empty($resultado);
     }
+
+  /*  public function getPartidasActivas($usuarioId)
+{
+    
+    return [
+        ["oponente" => "Juan", "resultado" => "4-0"],
+        ["oponente" => "María", "resultado" => "3-2"]
+    ];
+}*/
+
+public function getHistorial($usuarioId)
+{
+    /*Prueba de como se veria */
+    return [
+        ["oponente" => "Pedro", "resultado" => "2-4","perdio" => true],
+        ["oponente" => "Lucía", "resultado" => "5-1","gano"=>true]
+    ];
+}
+
 }
