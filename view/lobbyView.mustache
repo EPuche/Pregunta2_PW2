@@ -1,27 +1,29 @@
 {{>header}}
 
+
+
 <div class="container-fluid lobby-container">
 
-    <div class="row min-vh-100">
+    <div class="row">
 
         <!-- SIDEBAR -->
-        <aside class="col-12 col-md-3 col-lg-2 sidebar">
 
-            <div class="d-flex flex-column gap-3 p-3">
+        <aside class="col-lg-2 sidebar">
 
-                <a href="/partida/crear" class="btn btn-warning fw-semibold">
+            <div class="d-flex flex-column gap-3 px-3">
+
+                <a href="/partida/crearPartida" class="btn lobby-btn">
                     Crear partida
                 </a>
 
-                <a href="/pregunta/crear" class="btn btn-warning fw-semibold">
+                <a href="/pregunta/crear" class="btn lobby-btn">
                     Crear pregunta
                 </a>
 
-                <a href="/ranking" class="btn btn-warning fw-semibold">
+                <a href="/ranking" class="btn lobby-btn">
                     Ver ranking
                 </a>
-
-                <a href="/usuario/verPerfil" class="btn btn-warning fw-semibold">
+                <a href="/usuario/verPerfil" class="btn lobby-btn">
                     Ver perfil
                 </a>
 
@@ -29,78 +31,150 @@
 
         </aside>
 
-        <!-- MAIN -->
-        <main class="col-12 col-md-9 col-lg-10 p-4 main-content">
+        <!-- CONTENIDO -->
 
-            <!-- PERFIL -->
-            <section class="card user-card mb-4">
+        <main class="col-lg-10 p-4">
 
-                <div class="card-body d-flex align-items-center gap-3">
+            <div class="row g-4">
 
-                    <div class="user-avatar">
-                        IMG
-                    </div>
+                <!-- PERFIL -->
 
-                    <div class="user-info">
-                        <h4 class="mb-0">{{nombreUsuario}}</h4>
-                        <small class="text-muted">Puntaje: {{puntaje}}</small>
-                    </div>
+                <div class="col-lg-8">
 
-                </div>
+                    <div class="panel profile-panel">
 
-            </section>
+                        <div class="profile-content">
 
-            <!-- HISTORIAL -->
-            <section class="card history-card">
+                            <img
+                                src="{{fotoPerfil}}"
+                                class="avatar"
+                                alt="perfil">
 
-                <div class="card-header bg-dark text-white">
-                    Partidas jugadas
-                </div>
+                            <div>
 
-                <div class="card-body p-0">
+                                <div class="profile-name">
+                                    {{nombreUsuario}}
+                                </div>
 
-                    <div class="list-group list-group-flush">
+                                <div class="profile-score">
 
-                        {{#historial}}
+                                    <small>Puntaje total</small>
 
-                            <div class="list-group-item match-card d-flex justify-content-between align-items-center">
-
-                                <div class="d-flex align-items-center gap-3">
-
-                                    <div class="opponent-avatar">
-                                        IMG
-                                    </div>
-
-                                    <div class="opponent-name">
-                                        {{oponente}}
-                                    </div>
+                                    <strong>
+                                        {{puntaje}}
+                                    </strong>
 
                                 </div>
 
-                                <div class="match-result">
-                                    {{resultado}}
+                                <div class="profile-stats">
+
+                                    <div class="stat-box">
+
+                                        
+                                        <i class="bi bi-bar-chart-fill"></i>
+
+                                        <div>
+
+                                            <small>Ranking</small>
+
+                                            <strong>-</strong>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="stat-box">
+
+                                        <i class="bi bi-plus-square-fill icono-plus"></i>
+
+                                        <div>
+
+                                            <small>Trampitas</small>
+
+                                            <strong>0</strong>
+
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- HISTORIAL -->
+
+                <div class="col-lg-4">
+
+                    <div class="panel history-panel">
+
+                        <h2 class="panel-title">
+                            Partidas jugadas
+                        </h2>
+
+                        {{#historial}}
+
+                        <div class="match-card">
+
+                            <div class="player-info">
+
+                                <div class="player-avatar">
+
+                                    <img
+                                        src="{{fotoPerfil}}"
+                                        alt="perfil">
+
+                                </div>
+
+                                <span>
+                                    {{oponente}}
+                                </span>
+
+                            </div>
+
+                            <div>
+
+                                {{resultado}}
+
+                                {{#gano}}
+                                    <i class="bi bi-trophy-fill icono-ranking"></i>
+                                {{/gano}}
+
+                                {{#perdio}}
+                                    <span class="result-lose">✖</span>
+                                {{/perdio}}
+
+                            </div>
+
+                        </div>
 
                         {{/historial}}
 
                         {{^historial}}
-                            <div class="p-3 text-muted">
-                                No hay partidas jugadas.
-                            </div>
+
+                        <p class="empty-text">
+                            No hay partidas jugadas.
+                        </p>
+
                         {{/historial}}
 
                     </div>
 
                 </div>
 
-            </section>
+            </div>
 
         </main>
 
     </div>
 
 </div>
+
+
 
 {{>footer}}
