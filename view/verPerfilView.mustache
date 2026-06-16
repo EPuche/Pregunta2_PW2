@@ -53,7 +53,7 @@
 
  
    <div class="text-center mt-3">
-    <a href="/usuario/verLobby" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
+    <a href="/lobby/irAlLobby" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
 
     <a href="/Pregunta2_PW2/index.php?controller=usuario&method=editarPerfil"
        class="btn btn-warning">
@@ -65,126 +65,10 @@
 
 </div>
 
-<style>
-    body {
-        background-image: url('../assets/img/imagen-fondo.png');
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        font-family: 'Quicksand', sans-serif;
-        color: #fff;
-    }
-
-    .perfil-container {
-        max-width: 900px;
-        margin: 40px auto;
-        background: rgba(0,0,0,0.6);
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 0 25px rgba(0,0,0,.5);
-    }
-
-    .perfil-header {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        border-bottom: 2px solid #FF9232;
-        padding-bottom: 20px;
-        margin-bottom: 20px;
-    }
-
-    .perfil-foto {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        border: 3px solid #FF9232;
-        object-fit: cover;
-    }
-
-    .perfil-nombre {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.8em;
-        color: #FF9232;
-        margin: 0;
-    }
-
-    .perfil-puntaje {
-        font-size: 1.2em;
-        margin: 5px 0;
-    }
-
-    .qr-box img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .perfil-datos h3,
-    .perfil-partidas h3 {
-        font-family: 'Montserrat', sans-serif;
-        color: #FF9232;
-        margin-bottom: 10px;
-    }
-
-    .perfil-datos ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 15px 0;
-    }
-
-    .perfil-datos li {
-        margin-bottom: 5px;
-    }
-
-    .map-box {
-        margin-top: 10px;
-        border: 2px solid #FF9232;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .matches-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .match-card {
-        background: rgba(255,255,255,0.1);
-        padding: 10px;
-        border-radius: 8px;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .oponente {
-        font-weight: bold;
-    }
-
-    .resultado {
-        color: #FF9232;
-    }
-
-    .volver-home {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    .btn-volver {
-        background: #FF9232;
-        color: #fff;
-        padding: 10px 25px;
-        border-radius: 8px;
-        text-decoration: none;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
-    }
-
-    .btn-volver:hover {
-        background: #e07b1f;
-    }
-</style>
 <script src="/assets/js/qr-share.js"></script>
 <script>
   initQrShare({{id}});
 </script>
+
+
 {{>footer}}
