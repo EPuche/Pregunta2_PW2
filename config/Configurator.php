@@ -10,7 +10,7 @@ class Configurator {
 
     public function getUsuarioController()
     {
-        return new UsuarioController($this->getUsuarioModel(), $this->getRenderer(), new Request());
+        return new UsuarioController($this->getUsuarioModel(),$this->getRenderer(), new Request());
     }
 
     private function getDatabase()
@@ -25,8 +25,9 @@ class Configurator {
 
     private function getRenderer()
     {
-        return new MustacheRenderer(__DIR__ . '/../view');
+        return new MustacheRenderer(__DIR__ . '/../view', $this->getUsuarioModel() );
     }
+
 
     private function getUsuarioModel()
     {
@@ -59,7 +60,7 @@ class Configurator {
     }
     public function getLobbyController()
     {
-        return new LobbyController($this->getRenderer());
+        return new LobbyController($this->getUsuarioModel(),$this->getRenderer());
     }
 
     public function getLoginController() {
