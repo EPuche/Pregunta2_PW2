@@ -16,7 +16,7 @@ function dibujarRuleta() {
     for (let i = 0; i < categorias.length; i++) {
         const angulo = anguloActual + i * anguloArc;
 
-
+        // Dibujar el sector
         ctx.beginPath();
         ctx.moveTo(centro, centro);
         ctx.arc(centro, centro, radio, angulo, angulo + anguloArc, false);
@@ -24,24 +24,33 @@ function dibujarRuleta() {
         ctx.fillStyle = colores[i];
         ctx.fill();
 
-
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
         ctx.lineWidth = 2;
         ctx.stroke();
 
-
+        // Dibujar el texto
         ctx.save();
         ctx.translate(centro, centro);
+
+        // 1. Nos paramos en el centro del sector
         ctx.rotate(angulo + anguloArc / 2);
-        ctx.textAlign = 'right';
-        ctx.fillStyle = '#000000'; // Gris oscuro para mejor contraste que el negro puro
 
+        // 2. Nos movemos hacia el borde exterior (dejando un margen, ej: el 65% del radio)
+        ctx.translate(radio * 0.65, 0);
 
+        // 3. Rotamos 90 grados para que el texto quede perpendicular (como en tu imagen)
+        ctx.rotate(Math.PI / 2);
+
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle'; // Centrado vertical perfecto
+        ctx.fillStyle = '#000000';
         ctx.font = 'bold 15px Poppins, sans-serif';
-        ctx.fillText(categorias[i], radio - 25, 6);
+
+        // Pintamos en (0,0) porque ya trasladamos el origen
+        ctx.fillText(categorias[i], 0, 0);
+
         ctx.restore();
     }
-
 }
 
 const textoResultado = document.getElementById('texto-resultado');
