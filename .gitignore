@@ -1,0 +1,11 @@
+# Credenciales y configuración sensible
+config.ini
+
+vendor/
+
+log/
+
+__MACOSX/
+.DS_Store
+
+Thumbs.db
