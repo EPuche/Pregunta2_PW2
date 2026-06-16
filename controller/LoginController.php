@@ -52,5 +52,12 @@ class LoginController{
         header("Location: /lobby/irAlLobby");
         exit;
     }
+    public function logout()
+{
+    session_destroy();
+
+    header("Location:/login/irAlLogin");
+    exit;
+}
 
 }
