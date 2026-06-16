@@ -91,3 +91,93 @@
 [19:22:50] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[20:13:40] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:14:21] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:14:47] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:14:59] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:26:17] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:31:28] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:32:15] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:34:08] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:37:56] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:39:28] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:41:00] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:46:01] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:49:03] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:51:52] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[20:53:13] [INFO] SQL: SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
