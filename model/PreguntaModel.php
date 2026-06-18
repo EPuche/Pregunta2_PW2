@@ -37,7 +37,29 @@ class PreguntaModel
 
         return $this->database->query($sql, [$preguntaId]);
     }
+    public function esCorrecta($opcion){
+        return ($opcion['es_correcta'] == 1);
+    }
+    public function esElegida($opcion, $idOpcionElegida){
+        return ($opcion['id'] == $idOpcionElegida);
+    }
+    public function esIncorrecta($elegida, $opcion){
+        return $elegida && $opcion['es_correcta'] == 0;
+    }
 
+    public function procesarOpcionesDeRonda(&$opciones, $idOpcionElegida) {
+        $idOpcionCorrecta = null;
+        foreach ($opciones as &$opcion) {
+            $opcion['es_elegida'] = $this->esElegida($opcion, $idOpcionElegida);
+            $opcion['opcion_correcta'] = $this->esCorrecta($opcion);
+            $opcion['es_incorrecta'] = $this->esIncorrecta($opcion['es_elegida'], $opcion);
+
+            if ($opcion['opcion_correcta']) {
+                $idOpcionCorrecta = $opcion['id'];
+            }
+        }
+        return $idOpcionCorrecta;
+    }
 
 
 

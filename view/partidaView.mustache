@@ -25,7 +25,7 @@
 </style>
 
 <h2>{{contenido}}</h2>
-
+<h2>{{puntaje}}</h2>
 <form action="/partida/verificarRespuesta" method="POST">
     <input type="hidden" name="id_pregunta" value="{{id}}">
     <ul>
@@ -34,18 +34,22 @@
                 <button type="submit"
                         name="opcion_elegida"
                         value="{{id}}"
-                        class="btn-opcion {{#ya_respondio}}{{#mostrar_correcta}}btn-correcta{{/mostrar_correcta}} {{#mostrar_incorrecta}}btn-incorrecta{{/mostrar_incorrecta}}{{/ya_respondio}}"
+                        class="btn-opcion
+                               {{#ya_respondio}}
+                            {{#opcion_correcta}}btn-correcta{{/opcion_correcta}}
+                            {{#es_incorrecta}}btn-incorrecta{{/es_incorrecta}}
+                        {{/ya_respondio}}"
                         {{#ya_respondio}}disabled{{/ya_respondio}}>
                     {{contenido}}
                 </button>
 
                 {{#ya_respondio}}
-                    {{#mostrar_correcta}}
+                    {{#opcion_correcta}}
                         <span class="badge badge-correcta">¡Correcta!</span>
-                    {{/mostrar_correcta}}
-                    {{#mostrar_incorrecta}}
+                    {{/opcion_correcta}}
+                    {{#es_incorrecta}}
                         <span class="badge badge-incorrecta">¡Incorrecta!</span>
-                    {{/mostrar_incorrecta}}
+                    {{/es_incorrecta}}
                 {{/ya_respondio}}
             </li>
         {{/opciones}}
@@ -53,9 +57,20 @@
 </form>
 
 {{#ya_respondio}}
-    <div style="margin-top: 20px;">
-        <a href="/partida/crearPartida">
-            <button type="button" style="padding: 10px 20px; font-weight: bold;">Siguiente pregunta</button>
-        </a>
-    </div>
+    {{#opciones}}
+        {{#es_elegida}}
+            {{#opcion_correcta}}
+                <a href="/partida/jugar" class="btn btn-success">Continuar</a>
+            {{/opcion_correcta}}
+        {{/es_elegida}}
+    {{/opciones}}
+
+    {{#opciones}}
+        {{#es_incorrecta}}
+            <div class="alert alert-danger" style="margin-top: 15px;">¡Respuesta Incorrecta! Juego Terminado.</div>
+            <p>Tu puntaje final fue: <strong>{{puntaje}}</strong></p>
+            <a href="/lobby/irAlLobby" class="btn btn-primary">Volver al Lobby</a>
+        {{/es_incorrecta}}
+    {{/opciones}}
+
 {{/ya_respondio}}

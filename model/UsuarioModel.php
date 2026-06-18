@@ -18,7 +18,7 @@ class UsuarioModel
 
     public function getUsuario($id)
     {
-        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $sql = "SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ?";
         Log::info("SQL: $sql [$id]");
         $filas = $this->database->query($sql, [$id]);
         return !empty($filas) ? $filas[0] : null;

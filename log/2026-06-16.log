@@ -91,3 +91,58 @@
 [19:22:50] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:22:51] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:03] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[19:44:03] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:03] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:03] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:08] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:08] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:09] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:12] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:12] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:12] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:14] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:14] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:15] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:16] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:19] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:20] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:21] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:22] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:44:57] [INFO] UsuarioController::procesarRegistro - Datos válidos para: perro11
+[19:44:57] [INFO] SQL: INSERT INTO usuario 
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+[19:44:58] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:27] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:28] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:29] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:29] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:30] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:30] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:36] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [culo]
+[19:46:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:46:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:47:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:47:36] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:47:37] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:02] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:02] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:02] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:16] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:16] [INFO] SQL: UPDATE usuario
+            SET nombre_completo = ?,
+                anio_nacimiento = ?,
+                sexo = ?,
+                email = ?,
+                nombre_usuario = ?,
+                foto_perfil = ?,
+                longitud = ?,
+                latitud = ?, contrasena = ? WHERE id = ?
+[19:48:16] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:16] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:17] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:20] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:20] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
+[19:48:21] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
