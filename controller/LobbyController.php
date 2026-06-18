@@ -17,11 +17,8 @@ class LobbyController
             header("Location:/login/irAlLogin");
             exit;
         }
-        /*$this->renderer->render("lobbyView");*/
-    
 
-    $usuario= $this -> usuarioModel-> getUsuario($_SESSION["id"]);
-
+    $usuario= $this->usuarioModel->getUsuario($_SESSION["id"]);
     /*$partidasActivas = $this->usuarioModel->getPartidasActivas($_SESSION["id"]);*/
     $historial = $this->usuarioModel->getHistorial($_SESSION["id"]) ?? [];
 
