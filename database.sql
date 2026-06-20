@@ -1,12 +1,14 @@
 DROP DATABASE IF EXISTS preguntados_bd;
 CREATE DATABASE IF NOT EXISTS preguntados_bd;
+
 USE preguntados_bd;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2026 a las 22:05:06
+-- Tiempo de generación: 19-06-2026 a las 02:35:23
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -23,23 +25,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `preguntados_bd`
 --
-
-CREATE TABLE `usuario` (
-                           `id` int(11) NOT NULL AUTO_INCREMENT,
-                           `nombre_completo` varchar(100) NOT NULL,
-                           `anio_nacimiento` year NOT NULL,
-                           `sexo` enum('Masculino','Femenino','Otro') NOT NULL,
-                           `email` varchar(255) NOT NULL UNIQUE,
-                           `nombre_usuario` varchar(50) NOT NULL UNIQUE,
-                           `contrasena` varchar(255) NOT NULL,
-                           `foto_perfil` varchar(255) DEFAULT NULL,
-                           `longitud` decimal(10,7) DEFAULT NULL,
-                           `latitud` decimal(10,7) DEFAULT NULL,
-                           `token_verificacion` varchar(64) DEFAULT NULL,
-                           `verificado` tinyint(1) NOT NULL DEFAULT 0,
-                           PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 
 -- --------------------------------------------------------
 
@@ -286,6 +271,28 @@ INSERT INTO `opcion` (`id`, `pregunta_id`, `contenido`, `es_correcta`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `partida`
+--
+
+CREATE TABLE `partida` (
+                           `idPartida` int(11) NOT NULL,
+                           `idUsuario` int(11) NOT NULL,
+                           `preguntasCorrectas` int(11) NOT NULL DEFAULT 0,
+                           `puntaje` int(11) NOT NULL DEFAULT 0,
+                           `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `partida`
+--
+
+INSERT INTO `partida` (`idPartida`, `idUsuario`, `preguntasCorrectas`, `puntaje`, `fecha`) VALUES
+                                                                                               (1, 1, 0, 0, '2026-06-19 00:32:25'),
+                                                                                               (2, 1, 2, 2, '2026-06-19 00:32:38');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pregunta`
 --
 
@@ -354,6 +361,35 @@ INSERT INTO `pregunta` (`id`, `categoria_id`, `contenido`, `imagen_url`, `estado
                                                                                                          (49, 5, '¿Qué novela distópica del escritor George Orwell introdujo por primera vez el concepto del \"Gran Hermano\" (Big Brother)?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (50, 5, '¿Quién compuso la icónica banda sonora de películas como \"Star Wars\", \"Tiburón\", \"Indiana Jones\" y \"Harry Potter\"?', NULL, 'aprobada', '2026-06-01 20:03:33');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+                           `id` int(11) NOT NULL,
+                           `nombre_completo` varchar(100) NOT NULL,
+                           `anio_nacimiento` year(4) NOT NULL,
+                           `sexo` enum('Masculino','Femenino','Otro') NOT NULL,
+                           `email` varchar(255) NOT NULL,
+                           `nombre_usuario` varchar(50) NOT NULL,
+                           `contrasena` varchar(255) NOT NULL,
+                           `foto_perfil` varchar(255) DEFAULT NULL,
+                           `longitud` decimal(10,7) DEFAULT NULL,
+                           `latitud` decimal(10,7) DEFAULT NULL,
+                           `token_verificacion` varchar(64) DEFAULT NULL,
+                           `verificado` tinyint(1) NOT NULL DEFAULT 0,
+                           `puntaje` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`) VALUES
+    (1, 'Esteban', '2000', 'Masculino', 'esteban_alejo12@hotmail.com', 'epuche', '$2y$10$aS3k8N7WUbZgRKL3lq/rSeXkYVaUbtSfTm3e2yxka926fWaYlT4Eu', NULL, -58.3816000, -34.6037000, '3b8556473ec528e8714a8daeea9beda1', 0, 2);
+
 --
 -- Índices para tablas volcadas
 --
@@ -363,21 +399,36 @@ INSERT INTO `pregunta` (`id`, `categoria_id`, `contenido`, `imagen_url`, `estado
 --
 ALTER TABLE `categoria`
     ADD PRIMARY KEY (`id`),
-    ADD UNIQUE KEY `nombre` (`nombre`);
+  ADD UNIQUE KEY `nombre` (`nombre`);
 
 --
 -- Indices de la tabla `opcion`
 --
 ALTER TABLE `opcion`
     ADD PRIMARY KEY (`id`),
-    ADD KEY `pregunta_id` (`pregunta_id`);
+  ADD KEY `pregunta_id` (`pregunta_id`);
+
+--
+-- Indices de la tabla `partida`
+--
+ALTER TABLE `partida`
+    ADD PRIMARY KEY (`idPartida`),
+  ADD KEY `idUsuario` (`idUsuario`);
 
 --
 -- Indices de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
     ADD PRIMARY KEY (`id`),
-    ADD KEY `categoria_id` (`categoria_id`);
+  ADD KEY `categoria_id` (`categoria_id`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+    ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -396,10 +447,22 @@ ALTER TABLE `opcion`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
 --
+-- AUTO_INCREMENT de la tabla `partida`
+--
+ALTER TABLE `partida`
+    MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `pregunta`
 --
 ALTER TABLE `pregunta`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -410,6 +473,12 @@ ALTER TABLE `pregunta`
 --
 ALTER TABLE `opcion`
     ADD CONSTRAINT `opcion_ibfk_1` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `partida`
+--
+ALTER TABLE `partida`
+    ADD CONSTRAINT `partida_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `pregunta`

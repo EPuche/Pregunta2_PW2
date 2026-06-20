@@ -12,7 +12,10 @@ class Configurator {
     {
         return new UsuarioController($this->getUsuarioModel(),$this->getRenderer(), new Request());
     }
-
+    public function getRankingController()
+    {
+        return new RankingController($this->getUsuarioModel(),$this->getRankingModel(),$this->getRenderer(), new Request());
+    }
     private function getDatabase()
     {
         return new MyDatabase(
@@ -38,11 +41,18 @@ class Configurator {
     {
         return new PreguntaModel($this->getDatabase());
     }
+    private function getRankingModel()
+    {
+        return new RankingModel($this->getDatabase());
+    }
+    private function getPartidaModel()
+    {
+        return new PartidaModel($this->getDatabase());
+    }
 
     public function getRouter()
     {
         return new Router($this, 'home', 'irAlHome');
-        //return new Router($this, 'vikingo', 'ver');
     }
 
     public function getOrDefault($controllerName, $defaultControllerName)
@@ -67,7 +77,7 @@ class Configurator {
         return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
     }
     public function getPartidaController() {
-        return new PartidaController($this->getPreguntaModel(), $this->getRenderer(), new Request());
+        return new PartidaController($this->getPreguntaModel(),$this->getPartidaModel() ,$this->getRenderer(), new Request());
     }
 
 

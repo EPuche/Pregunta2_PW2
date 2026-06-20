@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking de Usuarios - Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .ranking-table {
+            width: 100%;
+            max-width: 600px;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .ranking-table th, .ranking-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .ranking-table th {
+            background-color: #34495e;
+            color: #fff;
+            font-weight: bold;
+        }
+        .ranking-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .ranking-table tr:hover {
+            background-color: #f1f3f5;
+        }
+        .pos {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #7f8c8d;
+            text-align: center;
+            width: 50px;
+        }
+        /* Resaltar el podio de forma simple */
+        tr:nth-child(1) .pos { color: #f1c40f; } /* Oro */
+        tr:nth-child(2) .pos { color: #95a5a6; } /* Plata */
+        tr:nth-child(3) .pos { color: #d35400; } /* Bronce */
+
+        .avatar-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #e0e0e0; /* Por si falla la carga */
+        }
+        .username {
+            font-weight: 500;
+        }
+        .score {
+            text-align: right;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🏆 Ranking de Usuarios</h1>
+
+<table class="ranking-table">
+    <thead>
+    <tr>
+        <th style="text-align: center;">Pos</th>
+        <th>Usuario</th>
+        <th style="text-align: right;">Puntaje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iteramos sobre la lista de usuarios con Mustache -->
+    {{#usuarios}}
+        <tr>
+            <td class="pos">#{{posicion}}</td>
+            <td>
+                <div class="avatar-container">
+                    <img class="avatar" src="{{foto_perfil}}" alt="Foto de {{nombre_usuario}}">
+                    <span class="username">{{nombre_usuario}}</span>
+                </div>
+            </td>
+            <td class="score">{{puntaje}} pts</td>
+        </tr>
+    {{/usuarios}}
+
+    <!-- Bloque opcional por si la lista viene vacía -->
+    {{^usuarios}}
+        <tr>
+            <td colspan="3" style="text-align: center; color: #7f8c8d; padding: 20px;">
+                No hay usuarios registrados en el ranking aún.
+            </td>
+        </tr>
+    {{/usuarios}}
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -2,19 +2,37 @@
 
 class PartidaController
 {
-    private $model;
+    private $preguntaModel;
+    private $partidaModel;
     private $renderer;
     private $request;
 
-    public function __construct($model, $renderer, $request)
+    public function __construct($preguntaModel, $partidaModel ,$renderer, $request)
     {
-        $this->model    = $model;
+        $this->preguntaModel = $preguntaModel;
+        $this->partidaModel = $partidaModel;
         $this->renderer = $renderer;
         $this->request  = $request;
     }
 
     public function crearPartida()
     {
+        $this->limpiarDatosDePartidaDeLaSession();
+
+        $idUsuario = $_SESSION["id"];
+        $partida = $this->partidaModel->crearPartida($idUsuario);
+        $_SESSION["partida"] = $partida;
+        $this->renderer->render("ruletaView");
+
+    }
+
+    public function jugar()
+    {
+        if (!isset($_SESSION["partida"]) || $this->partidaModel->finalizoPartida($_SESSION["partida"])) {
+            header("Location: /lobby/irAlLobby");
+            exit;
+        }
+
         $this->renderer->render("ruletaView");
     }
     public function procesarRuleta() {
@@ -24,9 +42,9 @@ class PartidaController
                 session_start();
             }
             $categoria = $_POST['categoria'];
-            $preguntaSeleccionada = $this->model->getPreguntaAleatoriaPorCategoria($categoria);
+            $preguntaSeleccionada = $this->preguntaModel->getPreguntaAleatoriaPorCategoria($categoria);
             $idPregunta = $preguntaSeleccionada['id'];
-            $opciones = $this->model->getOpcionesPorPregunta($idPregunta);
+            $opciones = $this->preguntaModel->getOpcionesPorPregunta($idPregunta);
 
             $_SESSION['pregunta_actual'] = $preguntaSeleccionada;
             $_SESSION['opciones_actuales'] = $opciones;
@@ -48,40 +66,49 @@ class PartidaController
         $this->renderer->render("partidaView", $data);
     }
 
-
     public function verificarRespuesta() {
-        if (isset($_POST['opcion_elegida'])) {
-            $idOpcionElegida = $_POST['opcion_elegida'];
-            $opciones = $_SESSION['opciones_actuales'];
-            $pregunta = $_SESSION['pregunta_actual'];
-
-            foreach ($opciones as &$opcion) {
-                $opcion['es_elegida'] = ($opcion['id'] == $idOpcionElegida);
-
-                $opcion['mostrar_correcta'] = ($opcion['es_correcta'] == 1);
-                $opcion['mostrar_incorrecta'] = ($opcion['es_elegida'] && $opcion['es_correcta'] == 0);
-            }
-
-            $data = [
-                "id" => $pregunta['id'],
-                "contenido" => $pregunta['contenido'],
-                "opciones"  => $opciones,
-                "color" => $pregunta['color'],
-                "ya_respondio" => true
-            ];
-
-            unset($_SESSION['pregunta_actual']);
-            unset($_SESSION['opciones_actuales']);
-            $this->renderer->render("partidaView", $data);
-        } else {
+        if (!isset($_POST['opcion_elegida'])) {
             header("Location: /partida/crearPartida");
             exit;
         }
+        $idOpcionElegida = $_POST['opcion_elegida'];
+        $opciones = $_SESSION['opciones_actuales'];
+        $pregunta = $_SESSION['pregunta_actual'];
+        $partida = $_SESSION['partida'];
+
+        $idOpcionCorrecta = $this->preguntaModel->procesarOpcionesDeRonda($opciones, $idOpcionElegida);
+
+        $this->partidaModel->respondeCorrectamente($idOpcionElegida, $idOpcionCorrecta, $partida);
+        $data = [
+            "id"           => $pregunta['id'],
+            "contenido"    => $pregunta['contenido'],
+            "opciones"     => $opciones,
+            "ya_respondio" => true,
+            "puntaje"      => $partida->getPuntaje()
+        ];
+
+        $this->limpiarPreguntaYOpcionesDeLaSession();
+        $this->renderer->render("partidaView", $data);
     }
 
+    /**
+     * @return void
+     */
+    public function limpiarDatosDePartidaDeLaSession(): void
+    {
+        unset($_SESSION["partida"]);
+        unset($_SESSION["pregunta_actual"]);
+        unset($_SESSION["opciones_actuales"]);
+    }
 
-
-
+    /**
+     * @return void
+     */
+    public function limpiarPreguntaYOpcionesDeLaSession(): void
+    {
+        unset($_SESSION['pregunta_actual']);
+        unset($_SESSION['opciones_actuales']);
+    }
 
 
 }
