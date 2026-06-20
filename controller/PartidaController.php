@@ -83,6 +83,7 @@ class PartidaController
             "id"           => $pregunta['id'],
             "contenido"    => $pregunta['contenido'],
             "opciones"     => $opciones,
+            "color" => $pregunta['color'],
             "ya_respondio" => true,
             "puntaje"      => $partida->getPuntaje()
         ];
