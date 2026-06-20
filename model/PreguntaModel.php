@@ -17,9 +17,10 @@ class PreguntaModel
         $categoriaId = $resultadoCategoria[0]['id'];
 
 
-        $sqlPregunta = "SELECT id, contenido 
-                        FROM pregunta 
-                        WHERE categoria_id = ? 
+        $sqlPregunta = "SELECT p.id, p.contenido, c.color
+                        FROM pregunta p
+                        JOIN categoria c ON p.categoria_id = c.id
+                        WHERE p.categoria_id = ? 
                         ORDER BY RAND() 
                         LIMIT 1";
 

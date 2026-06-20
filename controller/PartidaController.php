@@ -60,6 +60,7 @@ class PartidaController
         $data = [
             "id" => $pregunta['id'],
             "contenido" => $pregunta['contenido'],
+            "color" => $pregunta['color'],
             "opciones"  => $opciones
         ];
         $this->renderer->render("partidaView", $data);
@@ -82,6 +83,7 @@ class PartidaController
             "id"           => $pregunta['id'],
             "contenido"    => $pregunta['contenido'],
             "opciones"     => $opciones,
+            "color" => $pregunta['color'],
             "ya_respondio" => true,
             "puntaje"      => $partida->getPuntaje()
         ];

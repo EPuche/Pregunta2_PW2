@@ -110,7 +110,7 @@
 [19:44:21] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:44:22] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
 [19:44:57] [INFO] UsuarioController::procesarRegistro - Datos válidos para: perro11
-[19:44:57] [INFO] SQL: INSERT INTO usuario 
+[19:44:57] [INFO] SQL: INSERT INTO usuario
             (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 [19:44:58] [INFO] SQL: SELECT * FROM usuario WHERE id = ? [12]
