@@ -1,0 +1,44 @@
+[17:38:40] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [epuche]
+[17:38:41] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:41] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:41] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:44] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:44] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:51] [INFO] SQL: SELECT id, contenido 
+                        FROM pregunta 
+                        WHERE categoria_id = ? 
+                        ORDER BY RAND() 
+                        LIMIT 1
+[17:38:51] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:51] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:52] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:52] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:54] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:54] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:54] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:57] [INFO] SQL Ranking: SELECT nombre_usuario, foto_perfil as fotoPerfil, puntaje 
+            FROM usuario 
+            ORDER BY puntaje DESC, nombre_usuario ASC
+[17:38:57] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:38:57] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:00] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:00] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:00] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:01] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:01] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:39:01] [INFO] SQL: SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ? [1]
+[17:43:40] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[17:43:40] [INFO] SQL Ranking: SELECT id, nombre_usuario, foto_perfil, puntaje 
+            FROM usuario 
+            ORDER BY puntaje DESC, nombre_usuario ASC
+[17:43:40] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[17:43:40] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
