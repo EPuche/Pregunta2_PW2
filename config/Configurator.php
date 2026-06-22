@@ -70,7 +70,7 @@ class Configurator {
     }
     public function getLobbyController()
     {
-        return new LobbyController($this->getUsuarioModel(),$this->getRenderer());
+        return new LobbyController($this->getUsuarioModel(),$this->getRenderer(),$this->getRankingModel());
     }
 
     public function getLoginController() {
@@ -79,6 +79,7 @@ class Configurator {
     public function getPartidaController() {
         return new PartidaController($this->getPreguntaModel(),$this->getPartidaModel() ,$this->getRenderer(), new Request());
     }
+    
 
 
 }

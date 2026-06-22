@@ -127,8 +127,13 @@ class UsuarioController
 
 public function verPerfil()
 {
-    $id = $_SESSION["id"];
+    $id =$this->request->get("id") ?? $_SESSION["id"];
     $usuario = $this->model->getUsuario($id);
+     if (!$usuario) {
+        $this->renderer->render("verPerfilView", ["error" => "Usuario no encontrado"]);
+        return;
+    }
+    $historial = $this->model->getHistorial($id);
 
     $data = [
         "nombreUsuario"   => $usuario["nombre_usuario"], 
@@ -142,7 +147,8 @@ public function verPerfil()
         "latitud"         => $usuario["latitud"],
         "longitud"        => $usuario["longitud"],
         "id"              => $usuario["id"],
-        "historial"       => $usuario["historial"] ?? []
+        "historial"       => $historial
+      
     ];
 
     $this->renderer->render("verPerfilView", $data);
