@@ -11,30 +11,36 @@ class Mail
 
     public function __construct()
     {
+        $config = parse_ini_file(__DIR__ . '/../config/config.ini', true);
         $this->mailer = new PHPMailer(true);
-
+      $this->mailer->SMTPDebug = 2; 
+      $this->mailer->Debugoutput = function($str, $level) {
+    echo "DEBUG: $str<br>";
+};
         try {
             // Configuración SMTP
             $this->mailer->isSMTP();
-            $this->mailer->Host       = 'smtp.office365.com'; // Cambia por tu servidor SMTP
+            $this->mailer->Host       = $config['mail']['host'];
             $this->mailer->SMTPAuth   = true;
-            $this->mailer->Username   = 'esteban_alejo23@outlook.com'; // Tu correo
-            $this->mailer->Password   = 'Cualquiera01_';      // Contraseña o App Password
+            $this->mailer->Username   = $config['mail']['username'];
+            $this->mailer->Password   = $config['mail']['password'];
             $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $this->mailer->Port       = 587;
+            $this->mailer->Port       = $config['mail']['port'];
 
-            $this->mailer->setFrom('esteban_alejo23@outlook.com', 'Pregunta2');
+            $this->mailer->setFrom($config['mail']['from'], $config['mail']['from_name']);
         } catch (Exception $e) {
-            echo "Error en la configuración del mail: {$e->getMessage()}";
-        }
+    echo "No se pudo enviar el correo: {$e->getMessage()} - {$this->mailer->ErrorInfo}";
+    return false;
+}
     }
 
     public function enviarConfirmacion($email, $token)
     {
         try {
             $link = "http://localhost/Pregunta2_PW2/index.php?controller=usuario&method=confirmarCuenta&token=$token";
-
-            $this->mailer->addAddress($email);
+           /* $link = "https://pregunta2pw2.freehosting.dev/index.php?controller=usuario&method=confirmarCuenta&token=$token"*/;
+          
+           $this->mailer->addAddress($email);
             $this->mailer->isHTML(true);
             $this->mailer->Subject = 'Confirma tu cuenta en Pregunta2';
             $this->mailer->Body = "
@@ -49,4 +55,5 @@ class Mail
             return false;
         }
     }
+
 }
