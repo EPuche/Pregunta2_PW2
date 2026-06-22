@@ -18,7 +18,10 @@ class UsuarioModel
 
     public function getUsuario($id)
     {
-        $sql = "SELECT id, nombre_usuario, foto_perfil, puntaje AS puntaje FROM usuario WHERE id = ?";
+        $sql = "SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ?";
         Log::info("SQL: $sql [$id]");
         $filas = $this->database->query($sql, [$id]);
         return !empty($filas) ? $filas[0] : null;
@@ -193,13 +196,49 @@ class UsuarioModel
     ];
 }*/
 
+public function getPuntajeTotal($usuarioId)
+{
+    $sql = "SELECT SUM(puntaje) AS total 
+            FROM partida 
+            WHERE idUsuario = ?";
+    $filas = $this->database->query($sql, [$usuarioId]);
+    return !empty($filas) ? ($filas[0]['total'] ?? 0) : 0;
+}
+
+
+
+public function guardarPartidaContraBot($usuarioId, $preguntasCorrectas, $puntaje) {
+    $sql = "INSERT INTO partida (idUsuario, preguntasCorrectas, puntaje, fecha)
+            VALUES (?, ?, ?, NOW())";
+    return $this->database->execute($sql, [$usuarioId, $preguntasCorrectas, $puntaje]);
+}
+
 public function getHistorial($usuarioId)
 {
-    /*Prueba de como se veria */
+
+ $sql = "SELECT preguntasCorrectas, puntaje, fecha
+            FROM partida
+            WHERE idUsuario = ?
+            ORDER BY fecha DESC";
+
+    $filas = $this->database->query($sql, [$usuarioId]);
+
+    $historial = [];
+    foreach ($filas as $fila) {
+        $historial[] = [
+            'oponente'  => 'BOT', // siempre el bot
+            'resultado' => $fila['preguntasCorrectas'].' correctas, '.$fila['puntaje'].' pts',
+            'fecha'     => $fila['fecha'],
+            'foto_oponente' => '/assets/imgPerfiles/bot-preguntados.png'
+        ];
+    }
+
+    return $historial;
+    /*Prueba de como se veria 
     return [
         ["oponente" => "Pedro", "resultado" => "2-4","perdio" => true],
         ["oponente" => "Lucía", "resultado" => "5-1","gano"=>true]
-    ];
+    ];*/
 }
 
 }

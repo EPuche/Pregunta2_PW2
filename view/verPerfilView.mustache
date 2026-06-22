@@ -41,19 +41,23 @@
         <div class="matches-list">
             {{#historial}}
                 <div class="match-card">
-                    <span class="oponente">{{oponente}}</span>
-                    <span class="resultado">{{resultado}}</span>
+                 <div class="match-card-hijo">
+                <div class="player-avatar">
+                    <img class="avatar-bot" src="{{foto_oponente}}" alt="Avatar de {{oponente}}" >
                 </div>
+                    <span class="oponente">{{oponente}}</span>
+                    
+                 </div>
+                 <span class="resultado">{{resultado}}</span>
+                  </div>
             {{/historial}}
-            {{^historial}}
-                <p>No hay partidas finalizadas.</p>
-            {{/historial}}
+
         </div>
     </section>
 
  
    <div class="text-center mt-3">
-    <a href="/lobby/irAlLobby" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
+    <a href="/lobby/irAlLobby" class="link-white" text-decoration-none">← Volver al inicio</a>
 
     <a href="/Pregunta2_PW2/index.php?controller=usuario&method=editarPerfil"
        class="btn btn-warning">
