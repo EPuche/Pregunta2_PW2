@@ -54,11 +54,12 @@ body{
 }
 
 
-.profile-content{
+.profile-content {
     display:flex;
-    align-items:center;
-    gap:20px;
+    align-items:flex-start; 
+    gap:15px; 
 }
+
 
 .avatar{
     width:110px;
@@ -69,10 +70,10 @@ body{
     background:#555;
 }
 
-.profile-name{
-    font-size:2rem;
-    font-weight:800;
-    line-height:1;
+
+.profile-name {
+    margin:0;
+    line-height:1.2; 
 }
 
 .profile-score{
@@ -130,10 +131,9 @@ body{
     border-radius:10px;
     padding:12px;
     margin-bottom:12px;
-
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    justify-content:start;
+   
 }
 
 .player-info{
