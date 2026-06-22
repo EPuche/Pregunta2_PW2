@@ -42,7 +42,8 @@ class PartidaController
                 session_start();
             }
             $categoria = $_POST['categoria'];
-            $preguntaSeleccionada = $this->preguntaModel->getPreguntaAleatoriaPorCategoria($categoria);
+            $usuarioId = $_SESSION['id'];
+            $preguntaSeleccionada = $this->preguntaModel->getPreguntaAleatoriaPorCategoria($categoria, $usuarioId);
             $idPregunta = $preguntaSeleccionada['id'];
             $opciones = $this->preguntaModel->getOpcionesPorPregunta($idPregunta);
 
@@ -88,6 +89,7 @@ class PartidaController
             "puntaje"      => $partida->getPuntaje()
         ];
 
+        $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id']);
         $this->limpiarPreguntaYOpcionesDeLaSession();
         $this->renderer->render("partidaView", $data);
     }

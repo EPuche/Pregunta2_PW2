@@ -383,6 +383,9 @@ CREATE TABLE `usuario` (
                            `puntaje` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
+
 --
 -- Volcado de datos para la tabla `usuario`
 --
@@ -487,6 +490,14 @@ ALTER TABLE `pregunta`
     ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`);
 COMMIT;
 
+
+CREATE TABLE `usuario_pregunta` (
+                                    `usuario_id` int(11) NOT NULL,
+                                    `pregunta_id` int(11) NOT NULL,
+                                    PRIMARY KEY (`usuario_id`, `pregunta_id`),
+                                    CONSTRAINT `fk_up_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario`(`id`) ON DELETE CASCADE,
+                                    CONSTRAINT `fk_up_pregunta` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

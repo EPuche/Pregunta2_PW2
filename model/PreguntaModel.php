@@ -8,26 +8,41 @@ class PreguntaModel
         $this->database = $database;
     }
 
-    public function getPreguntaAleatoriaPorCategoria($categoria)
+    public function getPreguntaAleatoriaPorCategoria($categoria, $usuarioId)
     {
-        //consulto la categoria
         $sqlCategoria = "SELECT id FROM categoria WHERE nombre = ? LIMIT 1";
         $resultadoCategoria = $this->database->query($sqlCategoria, [$categoria]);
-
         $categoriaId = $resultadoCategoria[0]['id'];
 
-
         $sqlPregunta = "SELECT p.id, p.contenido, c.color
+                    FROM pregunta p
+                    JOIN categoria c ON p.categoria_id = c.id
+                    WHERE p.categoria_id = ?
+                    AND p.estado = 'aprobada'
+                    AND p.id NOT IN (
+                        SELECT pregunta_id FROM usuario_pregunta WHERE usuario_id = ?
+                    )
+                    ORDER BY RAND() LIMIT 1";
+
+        $resultado = $this->database->query($sqlPregunta, [$categoriaId, $usuarioId]);
+
+        if (empty($resultado)) {
+            $sqlPregunta = "SELECT p.id, p.contenido, c.color
                         FROM pregunta p
                         JOIN categoria c ON p.categoria_id = c.id
-                        WHERE p.categoria_id = ? 
-                        ORDER BY RAND() 
-                        LIMIT 1";
+                        WHERE p.categoria_id = ?
+                        AND p.estado = 'aprobada'
+                        ORDER BY RAND() LIMIT 1";
+            $resultado = $this->database->query($sqlPregunta, [$categoriaId]);
+        }
 
-        $resultadoPregunta = $this->database->query($sqlPregunta, [$categoriaId]);
+        return $resultado[0] ?? null;
+    }
 
-        Log::info("SQL: $sqlPregunta");
-        return $resultadoPregunta[0];
+    public function registrarPreguntaVista($usuarioId, $preguntaId)
+    {
+        $sql = "INSERT IGNORE INTO usuario_pregunta (usuario_id, pregunta_id) VALUES (?, ?)";
+        $this->database->execute($sql, [$usuarioId, $preguntaId]);
     }
 
     public function getOpcionesPorPregunta($preguntaId) {
