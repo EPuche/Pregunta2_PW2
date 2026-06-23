@@ -76,8 +76,10 @@ class UsuarioModel
 
     public function confirmarCuenta($token)
     {
-        $usuario = $this->database->query("SELECT id_usuario FROM usuario 
-                  WHERE token_verificacion = ? AND verificado = 0", [$token]
+        $usuario = $this->database->query("SELECT id/*id_usuario*/ 
+        FROM usuario 
+        WHERE token_verificacion = ? AND verificado = 0",
+         [$token]
         );
 
         if (empty($usuario)) {
@@ -85,8 +87,11 @@ class UsuarioModel
         }
 
         return $this->database->execute(
-            "UPDATE usuario SET verificado = 1,token_verificacion = NULL 
-               WHERE token_verificacion = ?", [$token]
+            "UPDATE usuario
+             SET verificado = 1,
+             token_verificacion = NULL 
+             WHERE token_verificacion = ?",
+              [$token]
         );
     }
     public function actualizarFoto($nombreUsuario, $rutaFoto)

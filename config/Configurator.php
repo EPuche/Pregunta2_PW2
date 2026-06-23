@@ -5,7 +5,9 @@ class Configurator {
 
     public function __construct()
     {
-        $this->config = parse_ini_file("config/config.ini");
+       /* $this->config = parse_ini_file("config/config.ini");*/
+       $this->config = parse_ini_file(__DIR__ . "/config.ini", true);
+
     }
 
     public function getUsuarioController()
@@ -18,11 +20,12 @@ class Configurator {
     }
     private function getDatabase()
     {
+        $dbConfig = $this->config['database'];
         return new MyDatabase(
-            $this->config['hostname'],
-            $this->config['username'],
-            $this->config['password'],
-            $this->config['database']
+            $dbConfig['hostname'],
+            $dbConfig['username'],
+            $dbConfig['password'],
+            $dbConfig['database']
         );
     }
 

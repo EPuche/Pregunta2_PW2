@@ -1,4 +1,11 @@
 
+    :root {
+    --azul-pastel: #ADD9E6;
+    --amarillo-crema: #FEFACD;
+    --verde-pastel: #C2E1C1;
+    --rosa-pastel: #FFB5B2;
+    --naranja: #FF9233;
+}
     body {
         background-image: url('../../img/imagen-fondo.png');
         background-size: cover;
