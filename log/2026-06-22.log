@@ -161,3 +161,106 @@
                    anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
             FROM usuario 
             WHERE id = ? [1]
+[22:14:31] [INFO] SQL: SELECT * FROM usuario WHERE nombre_usuario = ? [epuche]
+[22:14:32] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:32] [INFO] SQL Ranking: SELECT id, nombre_usuario, foto_perfil, puntaje 
+            FROM usuario 
+            ORDER BY puntaje DESC, nombre_usuario ASC
+[22:14:32] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:32] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:35] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:35] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:42] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:42] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:53] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:53] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:54] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:14:54] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:01] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:01] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:07] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:07] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:08] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:08] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:15] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:15] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:31] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:31] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:34] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:34] [INFO] SQL Ranking: SELECT id, nombre_usuario, foto_perfil, puntaje 
+            FROM usuario 
+            ORDER BY puntaje DESC, nombre_usuario ASC
+[22:15:34] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
+[22:15:34] [INFO] SQL: SELECT id, nombre_usuario, nombre_completo, puntaje, 
+                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
+            FROM usuario 
+            WHERE id = ? [1]
