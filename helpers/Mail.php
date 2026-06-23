@@ -37,10 +37,10 @@ class Mail
     public function enviarConfirmacion($email, $token)
     {
         try {
-            $link = "http://localhost/Pregunta2_PW2/index.php?controller=usuario&method=confirmarCuenta&token=$token";
-           /* $link = "https://pregunta2pw2.freehosting.dev/index.php?controller=usuario&method=confirmarCuenta&token=$token"*/;
-          
-           $this->mailer->addAddress($email);
+            $config = parse_ini_file(__DIR__ . '/../config/config.ini', true);;
+            $link = $config['url']['base_url'] . "/usuario/confirmarCuenta?token=$token";
+
+            $this->mailer->addAddress($email);
             $this->mailer->isHTML(true);
             $this->mailer->Subject = 'Confirma tu cuenta en Pregunta2';
             $this->mailer->Body = "
