@@ -40,7 +40,7 @@ class PartidaModel
         return false;
     }
 
-    private function finalizarPartida($partida)
+    public function finalizarPartida($partida)
     {
         $idPartida = $partida->getIdPartida();
         $puntaje = $partida->getPuntaje();
@@ -59,7 +59,13 @@ class PartidaModel
 
     }
 
+    public function asignarUnTiempoDeFinalizacionALaRonda(){
+        $tiempoLimite = time() + 15;
+        return $tiempoLimite;
 
+    }
 
-
+    public function calcularSegundosRestantes($tiempoLimite){
+        return  $tiempoLimite - time();
+    }
 }
