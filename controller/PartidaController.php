@@ -18,7 +18,7 @@ class PartidaController
     public function crearPartida()
     {
         $this->limpiarDatosDePartidaDeLaSession();
-
+        $this->limpiarDatosDeRondaDeLaSession();
         $idUsuario = $_SESSION["id"];
         $partida = $this->partidaModel->crearPartida($idUsuario);
         $_SESSION["partida"] = $partida;
@@ -58,39 +58,52 @@ class PartidaController
     public function verPregunta() {
         $pregunta = $_SESSION['pregunta_actual'];
         $opciones = $_SESSION['opciones_actuales'];
+        $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id']);
+        if(!isset($_SESSION['tiempo_limite'])){
+          $_SESSION['tiempo_limite'] = $this->partidaModel->asignarUnTiempoDeFinalizacionALaRonda();
+        }
+        $segundos_restantes = $this->partidaModel->calcularSegundosRestantes($_SESSION['tiempo_limite']);
         $data = [
             "id" => $pregunta['id'],
             "contenido" => $pregunta['contenido'],
             "color" => $pregunta['color'],
-            "opciones"  => $opciones
+            "opciones"  => $opciones,
+            "tiempo_restante" => $segundos_restantes // Lo mandamos a la vista
         ];
         $this->renderer->render("partidaView", $data);
     }
 
+
     public function verificarRespuesta() {
-        if (!isset($_POST['opcion_elegida'])) {
-            header("Location: /partida/crearPartida");
-            exit;
-        }
-        $idOpcionElegida = $_POST['opcion_elegida'];
-        $opciones = $_SESSION['opciones_actuales'];
         $pregunta = $_SESSION['pregunta_actual'];
         $partida = $_SESSION['partida'];
 
-        $idOpcionCorrecta = $this->preguntaModel->procesarOpcionesDeRonda($opciones, $idOpcionElegida);
+        $idOpcionElegida = $_POST['opcion_elegida'];
+        $opciones = $_SESSION['opciones_actuales'];
 
+        $idOpcionCorrecta = $this->preguntaModel->procesarOpcionesDeRonda($opciones, $idOpcionElegida);
         $this->partidaModel->respondeCorrectamente($idOpcionElegida, $idOpcionCorrecta, $partida);
+
         $data = [
             "id"           => $pregunta['id'],
             "contenido"    => $pregunta['contenido'],
             "opciones"     => $opciones,
-            "color" => $pregunta['color'],
+            "color"        => $pregunta['color'],
             "ya_respondio" => true,
             "puntaje"      => $partida->getPuntaje()
         ];
 
-        $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id']);
-        $this->limpiarPreguntaYOpcionesDeLaSession();
+        $this->limpiarDatosDeRondaDeLaSession();
+        $this->renderer->render("partidaView", $data);
+    }
+    public function tiempoExpirado(){
+        $partida = $_SESSION['partida'];
+        $data = [
+            "puntaje" => $partida->getPuntaje(),
+            "tiempo_expirado" => true
+        ];
+        $this->limpiarDatosDeRondaDeLaSession();
+        $this->partidaModel->finalizarPartida($partida);
         $this->renderer->render("partidaView", $data);
     }
 
@@ -100,17 +113,16 @@ class PartidaController
     public function limpiarDatosDePartidaDeLaSession(): void
     {
         unset($_SESSION["partida"]);
-        unset($_SESSION["pregunta_actual"]);
-        unset($_SESSION["opciones_actuales"]);
     }
 
     /**
      * @return void
      */
-    public function limpiarPreguntaYOpcionesDeLaSession(): void
+    public function limpiarDatosDeRondaDeLaSession(): void
     {
         unset($_SESSION['pregunta_actual']);
         unset($_SESSION['opciones_actuales']);
+        unset($_SESSION['tiempo_limite']);
     }
 
 

@@ -1,66 +1,82 @@
 {{>header}}
 <body>
 <div class="quiz-container">
+    {{^tiempo_expirado}}
+      <form id="form-pregunta" action="/partida/verificarRespuesta" method="POST" style="background-color:{{color}};">
+        <div id="timer-container" style="font-size: 24px; font-weight: bold; color: red;">
+            Tiempo restante: <span id="contador">{{#ya_respondio}}0{{/ya_respondio}}{{^ya_respondio}}{{tiempo_restante}}{{/ya_respondio}}</span>s
+        </div>
+          <button type="button" class="btn btn-reportar" data-bs-toggle="modal" data-bs-target="#modalReporte">
+                <i class="bi-exclamation-triangle"></i>
+            </button>
+            <h2 class="pregunta">{{contenido}}</h2>
 
-<form action="/partida/verificarRespuesta" method="POST" style="background-color:{{color}};">
+            <input type="hidden" name="id_pregunta" value="{{id}}">
 
-    <button type="button" class="btn btn-reportar" data-bs-toggle="modal" data-bs-target="#modalReporte">
-        <i class="bi-exclamation-triangle"></i>
-    </button>
-    <h2 class="pregunta">{{contenido}}</h2>
-    <h2>{{puntaje}}</h2>
-    <input type="hidden" name="id_pregunta" value="{{id}}">
-
-    <div class="d-grid gap-3 opciones">
-        {{#opciones}}
-                <button type="submit"
-                        name="opcion_elegida"
-                        value="{{id}}"
-                        class="btn btn-lg opcion-btn
+            <div class="d-grid gap-3 opciones">
+                {{#opciones}}
+                    <button type="submit"
+                            name="opcion_elegida"
+                            value="{{id}}"
+                            class="btn btn-lg opcion-btn
                         {{#ya_respondio}}
-                            {{#opcion_correcta}}btn-correcta{{/opcion_correcta}}
-                            {{#es_incorrecta}}btn-incorrecta{{/es_incorrecta}}
-                        {{/ya_respondio}}"
-                        {{#ya_respondio}}disabled{{/ya_respondio}}>
-                    {{contenido}}
-                </button>
+                                {{#opcion_correcta}}btn-correcta{{/opcion_correcta}}
+                                {{#es_incorrecta}}btn-incorrecta{{/es_incorrecta}}
+                            {{/ya_respondio}}"
+                            {{#ya_respondio}}disabled{{/ya_respondio}}>
+                        {{contenido}}
+                    </button>
 
-                {{#ya_respondio}}
-                    {{#opcion_correcta}}
-                        <span class="badge badge-correcta">¡Correcta!</span>
-                    {{/opcion_correcta}}
+                    {{#ya_respondio}}
+                        {{#opcion_correcta}}
+                            <span class="badge badge-correcta">¡Correcta!</span>
+                        {{/opcion_correcta}}
+                        {{#es_incorrecta}}
+                            <span class="badge badge-incorrecta">¡Incorrecta!</span>
+                        {{/es_incorrecta}}
+                    {{/ya_respondio}}
+                {{/opciones}}
+            </div>
+
+            {{#ya_respondio}}
+                {{#opciones}}
+                    {{#es_elegida}}
+                        {{#opcion_correcta}}
+                            <div style="margin-top: 20px;">
+                                <a href="/partida/jugar">
+                                    <button type="button" class="btn-continuarPartida" style="padding: 10px 20px; font-weight: bold;">Siguiente pregunta</button>
+                                </a>
+                            </div>
+                        {{/opcion_correcta}}
+                    {{/es_elegida}}
+                {{/opciones}}
+
+                {{#opciones}}
                     {{#es_incorrecta}}
-                        <span class="badge badge-incorrecta">¡Incorrecta!</span>
+                        <div class="alert alert-danger" style="margin-top: 15px;">¡Respuesta Incorrecta! Juego Terminado.</div>
+                        <p>Tu puntaje final fue: <strong>{{puntaje}}</strong></p>
+                        <a href="/lobby/irAlLobby" class="btn btn-primary">Volver al Lobby</a>
                     {{/es_incorrecta}}
-                {{/ya_respondio}}
+                {{/opciones}}
+            {{/ya_respondio}}
+        </form>
+    {{/tiempo_expirado}}
 
-        {{/opciones}}
+    {{#tiempo_expirado}}
+        <div class="alert alert-danger" style="margin-top: 15px; text-align: center;">
+            <h2>¡Se te acabó el tiempo!</h2>
+            <p>Juego Terminado.</p>
+            <p>Tu puntaje final fue: <strong>{{puntaje}}</strong></p>
+            <a href="/lobby/irAlLobby" class="btn btn-primary">Volver al Lobby</a>
         </div>
-    {{#ya_respondio}}
-        {{#opciones}}
-            {{#es_elegida}}
-                {{#opcion_correcta}}
-        <div style="margin-top: 20px;">
-            <a href="/partida/jugar">
-                <button type="button" class="btn-continuarPartida" style="padding: 10px 20px; font-weight: bold;">Siguiente pregunta</button>
-            </a>
-        </div>
-                {{/opcion_correcta}}
-            {{/es_elegida}}
-        {{/opciones}}
-        {{#opciones}}
-            {{#es_incorrecta}}
-                <div class="alert alert-danger" style="margin-top: 15px;">¡Respuesta Incorrecta! Juego Terminado.</div>
-                <p>Tu puntaje final fue: <strong>{{puntaje}}</strong></p>
-                <a href="/lobby/irAlLobby" class="btn btn-primary">Volver al Lobby</a>
-            {{/es_incorrecta}}
-        {{/opciones}}
-    {{/ya_respondio}}
-
-</form>
-
+    {{/tiempo_expirado}}
 </div>
-<!--modal-->
+<form id="form-tiempo-expirado" action="/partida/tiempoExpirado" method="POST" style="display:none;"></form>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/partida/partida.js"></script>
+
 </body>
+
+
 </html>
