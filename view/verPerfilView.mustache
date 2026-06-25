@@ -7,19 +7,22 @@
         <div class="perfil-info">
             <h2 class="perfil-nombre">{{nombre_completo}} ({{nombre_usuario}})</h2>
             <p class="perfil-puntaje">Puntaje: {{puntaje}}</p>
+            
+        </div>
         <div class="qr-box">
          <h4 class="mt-4 mb-3">Mi QR</h4>
          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http%3A%2F%2Flocalhost%2FPregunta2_PW2%2Findex.php%3Fcontroller%3Dusuario%26method%3DverPerfil%26id%3D{{id}}" 
        alt="QR de mi perfil">
+            {{#esPropio}}
+                <button id="compartirQR" class="btn btn-principal mt-3">Compartir mi QR</button>
+             {{/esPropio}}
        </div>
-       <button id="compartirQR" class="btn btn-warning mt-3">Compartir mi QR</button>
-
-        </div>
+       
     </section>
 
     <!-- DATOS PERSONALES -->
     <section class="perfil-datos">
-        <h3>Datos personales</h3>
+        <h3 class="panel-title">Datos personales</h3>
         <ul>
             <li>Año de nacimiento: {{anio_nacimiento}}</li>
             <li>Sexo: {{sexo}}</li>
@@ -37,10 +40,10 @@
 
     <!-- PARTIDAS -->
     <section class="perfil-partidas">
-        <h3>Partidas realizadas</h3>
-        <div class="matches-list">
+        <h3 class="panel-title">Partidas realizadas</h3>
+        <div class="matches-list profile-panel-partidas-realizadas">
             {{#historial}}
-                <div class="match-card">
+                <div class="match-card ">
                  <div class="match-card-hijo">
                 <div class="player-avatar">
                     <img class="avatar-bot" src="{{foto_oponente}}" alt="Avatar de {{oponente}}" >
@@ -58,11 +61,12 @@
  
    <div class="text-center mt-3">
     <a href="/lobby/irAlLobby" class="link-white" text-decoration-none">← Volver al inicio</a>
-
+    {{#esPropio}}
     <a href="/Pregunta2_PW2/index.php?controller=usuario&method=editarPerfil"
-       class="btn btn-warning">
+       class="btn btn-principal">
         Editar datos
     </a>
+    {{/esPropio}}
 
     </div>
     

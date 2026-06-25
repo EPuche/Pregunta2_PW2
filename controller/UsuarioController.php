@@ -129,11 +129,13 @@ public function verPerfil()
 {
     $id =$this->request->get("id") ?? $_SESSION["id"];
     $usuario = $this->model->getUsuario($id);
+    $fotoPerfil = $usuario["foto_perfil"] ?: "/assets/imgPerfiles/default-user.png";
      if (!$usuario) {
         $this->renderer->render("verPerfilView", ["error" => "Usuario no encontrado"]);
         return;
     }
     $historial = $this->model->getHistorial($id);
+        $esPropio = ($id == $_SESSION["id"]);
 
     $data = [
         "nombreUsuario"   => $usuario["nombre_usuario"], 
@@ -143,11 +145,12 @@ public function verPerfil()
         "anio_nacimiento" => $usuario["anio_nacimiento"],
         "sexo"            => $usuario["sexo"],
         "email"           => $usuario["email"],
-        "foto_perfil"     => $usuario["foto_perfil"],
+        "foto_perfil"     => $fotoPerfil,
         "latitud"         => $usuario["latitud"],
         "longitud"        => $usuario["longitud"],
         "id"              => $usuario["id"],
-        "historial"       => $historial
+        "historial"       => $historial,
+        "esPropio"        => $esPropio
       
     ];
 
