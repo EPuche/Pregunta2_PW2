@@ -492,11 +492,13 @@ COMMIT;
 
 
 CREATE TABLE `usuario_pregunta` (
+                                    `id` int(11) NOT NULL AUTO_INCREMENT,
                                     `usuario_id` int(11) NOT NULL,
                                     `pregunta_id` int(11) NOT NULL,
-                                    PRIMARY KEY (`usuario_id`, `pregunta_id`),
-                                    CONSTRAINT `fk_up_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario`(`id`) ON DELETE CASCADE,
-                                    CONSTRAINT `fk_up_pregunta` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
+                                    `respondida_correctamente` tinyint(1) NOT NULL DEFAULT 0,
+                                    PRIMARY KEY (`id`),
+                                    FOREIGN KEY (`usuario_id`) REFERENCES `usuario`(`id`) ON DELETE CASCADE,
+                                    FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

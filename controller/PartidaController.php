@@ -58,7 +58,7 @@ class PartidaController
     public function verPregunta() {
         $pregunta = $_SESSION['pregunta_actual'];
         $opciones = $_SESSION['opciones_actuales'];
-        $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id']);
+
         if(!isset($_SESSION['tiempo_limite'])){
           $_SESSION['tiempo_limite'] = $this->partidaModel->asignarUnTiempoDeFinalizacionALaRonda();
         }
@@ -82,7 +82,9 @@ class PartidaController
         $opciones = $_SESSION['opciones_actuales'];
 
         $idOpcionCorrecta = $this->preguntaModel->procesarOpcionesDeRonda($opciones, $idOpcionElegida);
-        $this->partidaModel->respondeCorrectamente($idOpcionElegida, $idOpcionCorrecta, $partida);
+        $esCorrecta = $this->partidaModel->respondeCorrectamente($idOpcionElegida, $idOpcionCorrecta, $partida);
+
+        $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id'], $esCorrecta);
 
         $data = [
             "id"           => $pregunta['id'],
