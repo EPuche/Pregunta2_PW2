@@ -118,6 +118,54 @@ class PreguntaModel
         return $idOpcionCorrecta;
     }
 
+    public function crearNuevaPregunta(PreguntaDTO $dto){
+        $pregunta = $dto->pregunta;
+        $categoria = $dto->categoria;
+        $opciones = $dto->opciones;
+        $opcionCorrecta = $dto->opcionCorrecta;
+
+        $idPregunta = $this->addNuevaPregunta($pregunta, $categoria);
+        $this->agregarOpciones($idPregunta, $opciones, $opcionCorrecta);
+
+    }
+
+    private function buscarIdCategoriaPorNombre(string $categoriaNombre)
+    {
+        $sql = "SELECT id
+                FROM categoria
+                WHERE nombre = ?";
+
+        $resultado = $this->database->query($sql, [$categoriaNombre]);
+        if (!empty($resultado)) {
+            return $resultado[0]['id'];
+        }
+        return null;
+    }
+
+    private function addNuevaPregunta(mixed $pregunta, mixed $categoria)
+    {
+        $idCategoria = $this->buscarIdCategoriaPorNombre($categoria);
+        if(!is_null($idCategoria)){
+            $sql = "INSERT INTO pregunta (categoria_id, contenido, estado) 
+                    VALUES (?, ?, 'PENDIENTE')";
+            $this->database->execute($sql, [$idCategoria, $pregunta]);
+            return $this->database->getLastId();
+        }
+        return null;
+    }
+
+    private function agregarOpciones($idPregunta, array $opciones, mixed $opcionCorrecta)
+    {
+        if(!is_null($idPregunta)){
+            $sql = "INSERT INTO opcion (pregunta_id, contenido, es_correcta) 
+                VALUES (?, ?, ?)";
+            foreach ($opciones as $posicion => $contenido) {
+                $esCorrecta = ($posicion == $opcionCorrecta) ? 1 : 0;
+                $this->database->execute($sql, [$idPregunta, $contenido, $esCorrecta]);
+            }
+        }
+    }
+
 
 
 }

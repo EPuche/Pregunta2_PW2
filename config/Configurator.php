@@ -75,7 +75,10 @@ class Configurator {
     {
         return new LobbyController($this->getUsuarioModel(),$this->getRenderer(),$this->getRankingModel());
     }
-
+    public function getPreguntaController()
+    {
+        return new PreguntaController($this->getPreguntaModel(),$this->getRenderer());
+    }
     public function getLoginController() {
         return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
     }
