@@ -14,17 +14,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#usuarios}}
+              {{#usuarios}}
                     <tr>
                         <td class="pos text-start px-4">#{{posicion}}</td>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                {{#foto_perfil}}
-                                    <img class="avatar rounded-circle" src="{{foto_perfil}}" alt="Foto de {{nombre_usuario}}">
-                                {{/foto_perfil}}
-                                {{^foto_perfil}}
-                                    <img class="avatar rounded-circle" src="../assets/img/person-circle.svg" alt="Foto por defecto">
-                                {{/foto_perfil}}
+                                <img class="avatar rounded-circle"
+                                 src="{{foto_perfil}}" 
+                                 alt="Foto de {{nombre_usuario}}">
+
                                 <a href="/usuario/verPerfil?id={{id}}">{{nombre_usuario}}</a>
                             </div>
                         </td>

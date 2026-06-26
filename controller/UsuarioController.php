@@ -129,11 +129,13 @@ public function verPerfil()
 {
     $id =$this->request->get("id") ?? $_SESSION["id"];
     $usuario = $this->model->getUsuario($id);
-    $fotoPerfil = $usuario["foto_perfil"] ?: "/assets/imgPerfiles/default-user.png";
-     if (!$usuario) {
-        $this->renderer->render("verPerfilView", ["error" => "Usuario no encontrado"]);
-        return;
-    }
+    $fotoPerfil = $usuario["foto_perfil"];
+    if (
+    empty($fotoPerfil) ||
+    !file_exists($_SERVER["DOCUMENT_ROOT"] . $fotoPerfil)
+) {
+    $fotoPerfil = "/assets/imgPerfiles/default-user.png";
+}
     $historial = $this->model->getHistorial($id);
         $esPropio = ($id == $_SESSION["id"]);
 
