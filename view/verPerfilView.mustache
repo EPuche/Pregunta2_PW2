@@ -3,7 +3,8 @@
 
     <!-- HEADER PERFIL -->
     <section class="perfil-header">
-        <img src="{{foto_perfil}}" alt="Foto de perfil" class="perfil-foto">
+        <img src="{{foto_perfil}}" alt="Foto de perfil" class="perfil-foto"
+             >
         <div class="perfil-info">
             <h2 class="perfil-nombre">{{nombre_completo}} ({{nombre_usuario}})</h2>
             <p class="perfil-puntaje">Puntaje: {{puntaje}}</p>
@@ -38,25 +39,45 @@
         </div>
     </section>
 
+
     <!-- PARTIDAS -->
-    <section class="perfil-partidas">
-        <h3 class="panel-title">Partidas realizadas</h3>
-        <div class="matches-list profile-panel-partidas-realizadas">
-            {{#historial}}
-                <div class="match-card ">
-                 <div class="match-card-hijo">
+<section class="perfil-partidas">
+    <h3 class="panel-title">Partidas realizadas</h3>
+    <div class="matches-list profile-panel-partidas-realizadas">
+
+        {{#historial}}
+        <div class="match-card">
+
+            <div class="player-info">
                 <div class="player-avatar">
-                    <img class="avatar-bot" src="{{foto_oponente}}" alt="Avatar de {{oponente}}" >
+                    <img src="{{foto_oponente}}" alt="Avatar de {{oponente}}" 
+                     onerror="this.src='/assets/imgPerfiles/default-user.png'">>
                 </div>
-                    <span class="oponente">{{oponente}}</span>
-                    
-                 </div>
-                 <span class="resultado">{{resultado}}</span>
-                  </div>
-            {{/historial}}
+                <span>{{oponente}}</span>
+            </div>
+
+            <div class="resultado">
+                {{resultado}}
+
+                {{#gano}}
+                    <i class="bi bi-trophy-fill icono-ranking"></i>
+                {{/gano}}
+
+                {{#perdio}}
+                    <span class="result-lose">✖</span>
+                {{/perdio}}
+            </div>
 
         </div>
-    </section>
+        {{/historial}}
+
+        {{^historial}}
+        <p class="empty-text">No hay partidas jugadas.</p>
+        {{/historial}}
+
+    </div>
+</section>
+
 
  
    <div class="text-center mt-3">

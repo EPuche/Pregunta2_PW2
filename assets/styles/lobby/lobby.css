@@ -167,21 +167,108 @@ body{
 }
 
 
-@media(max-width:992px){
+/* Tablets */
+@media (max-width: 768px) {
 
-    .sidebar{
-        min-height:auto;
-        padding-bottom:20px;
+    .sidebar {
+        min-height: auto;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 2px solid #2d2d2d;
     }
 
-    .profile-content{
-        flex-direction:column;
-        align-items:flex-start;
+    .lobby-btn {
+        padding: 14px;
+        font-size: 1rem;
     }
 
-    .profile-stats{
-        flex-wrap:wrap;
-        gap:20px;
+    .panel {
+        padding: 18px;
     }
 
+    .profile-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-stats {
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .panel-title {
+        font-size: 1.7rem;
+    }
+}
+
+/* Celulares */
+@media (max-width: 576px) {
+
+    main {
+        padding: 1rem !important;
+    }
+
+    .sidebar {
+        padding: 15px;
+    }
+
+    .sidebar .d-flex {
+        gap: 12px !important;
+    }
+
+    .lobby-btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .profile-name {
+        font-size: 1.5rem;
+    }
+
+    .profile-score strong {
+        font-size: 1.5rem;
+    }
+
+    .profile-stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .stat-box {
+        justify-content: center;
+    }
+
+    .panel-title {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+
+    .match-card {
+        flex-direction:row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .player-info {
+        /*width: 100%;*/
+         display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        flex: 1;
+    }
+      .player-info span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
