@@ -67,3 +67,7 @@ tbody tr:nth-child(3) .pos { color: #d35400; } /* Bronce */
     font-weight: bold;
     color: #C1E1C1 !important;
 }
+.boton-backto{
+    border-color: #FF9232;
+    color:#FF9232;
+}

@@ -9,9 +9,9 @@
 
 /* Contenedor tipo Tarjeta (Achicado y centrado) */
 .card-registro {
-    background-color: #d1ecf1; /* Celeste anterior/institucional del juego */
+    background-color: #d1ecf1;
     border-radius: 16px;
-    max-width: 900px; /* Evita que se desparrame en pantallas gigantes */
+    max-width: 900px; /*
     width: 100%;
     font-family: inherit; /* Mantiene tu fuente anterior */
 }
