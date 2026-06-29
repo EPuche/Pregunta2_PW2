@@ -6,7 +6,7 @@
         <div id="timer-container" style="font-size: 24px; font-weight: bold; color: red;">
             Tiempo restante: <span id="contador">{{#ya_respondio}}0{{/ya_respondio}}{{^ya_respondio}}{{tiempo_restante}}{{/ya_respondio}}</span>s
         </div>
-          <button type="button" class="btn btn-reportar" data-bs-toggle="modal" data-bs-target="#modalReporte">
+          <button type="button" class="btn btn-reportar" data-bs-toggle="modal" data-bs-target="#modalReporte" data-id="{{id}}">
                 <i class="bi-exclamation-triangle"></i>
             </button>
             <h2 class="pregunta">{{contenido}}</h2>
@@ -76,6 +76,42 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../assets/js/partida/partida.js"></script>
 
+<div class="modal fade" id="modalReporte" tabindex="-1" aria-labelledby="modalReporteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content modal-custom-dark">
+
+            <div class="modal-header border-bottom-custom">
+                <h5 class="modal-title" id="modalReporteLabel">Reportar Pregunta</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="/pregunta/reportarPregunta" method="POST">
+                <div class="modal-body">
+                    <p class="modal-instruction-text">¿Por qué querés reportar esta pregunta?</p>
+
+                    <input type="hidden" name="id_pregunta" id="reportar-id-pregunta" value="">
+
+                    <textarea class="form-control custom-textarea" name="motivo" rows="4" placeholder="Motivo del reporte (ej: está mal formulada, tiene faltas de ortografía...)" required></textarea>
+                </div>
+
+                <div class="modal-footer border-top-custom">
+                    <button type="button" class="btn btn-secondary-custom" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-action-report">Enviar Reporte</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('modalReporte').addEventListener('show.bs.modal', function(event){
+        var button = event.relatedTarget;
+        var idPregunta = button.getAttribute('data-id');
+        var modalInputId = document.getElementById('reportar-id-pregunta');
+        modalInputId.value= idPregunta;
+    } );
+</script>
 </body>
 
 

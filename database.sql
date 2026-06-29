@@ -500,6 +500,30 @@ CREATE TABLE `usuario_pregunta` (
                                     FOREIGN KEY (`usuario_id`) REFERENCES `usuario`(`id`) ON DELETE CASCADE,
                                     FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--columna rol en usuario
+ALTER TABLE usuario
+    ADD COLUMN rol ENUM('jugador', 'editor', 'admin') NOT NULL DEFAULT 'jugador';
+
+--
+-- Tabla `reportes`
+--
+CREATE TABLE IF NOT EXISTS `reporte` (
+                                          `id` INT NOT NULL AUTO_INCREMENT,
+                                          `id_pregunta` INT NOT NULL,
+                                          `motivo` TEXT NOT NULL,
+                                          `fecha_reporte` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                          PRIMARY KEY (`id`),
+    CONSTRAINT `fk_reportes_preguntas`
+    FOREIGN KEY (`id_pregunta`)
+    REFERENCES `pregunta` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+---columna estado en pregunta
+---
+ALTER TABLE pregunta MODIFY COLUMN estado ENUM('aprobada', 'pendiente', 'reportada', 'rechazada','eliminada') NOT NULL DEFAULT 'aprobada';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

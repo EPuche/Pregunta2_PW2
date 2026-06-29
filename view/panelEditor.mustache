@@ -1,0 +1,180 @@
+{{>header}}
+
+<div class="container-fluid lobby-container">
+
+    <div class="row">
+
+        <aside class="col-lg-2 sidebar">
+
+            <div class="d-flex flex-column gap-3 px-3">
+
+                <a href="/usuario/verPerfil" class="btn lobby-btn">
+                    Ver perfil
+                </a>
+
+            </div>
+
+        </aside>
+        <main class="col-lg-10 p-4">
+            <div class="row g-4">
+
+                <div class="col-md-6">
+                    <div class="panel-editor-box">
+                        <h2 class="panel-title">PREGUNTAS SUGERIDAS</h2>
+
+                        <div class="panel-lista-container">
+                            {{#sugeridas}}
+                                <div class="panel-item d-flex justify-content-between align-items-center" style="margin-bottom: 15px; padding: 15px;">
+                                    <div>
+                                        <h5 class="item-main-text" style="color: white; margin: 0 0 8px 0;">{{contenido}}</h5>
+
+                                        <ul style="list-style: none; padding: 0; margin: 0 0 10px 0; font-size: 14px;">
+                                            {{#opciones}}
+                                                <li style="margin-bottom: 2px;">
+                                                    {{#es_correcta}}
+                                                        <span style="color: #28a745; font-weight: bold;">✓ {{contenido}}</span>
+                                                    {{/es_correcta}}
+                                                    {{^es_correcta}}
+                                                        <span style="color: #bbb;">• {{contenido}}</span>
+                                                    {{/es_correcta}}
+                                                </li>
+                                            {{/opciones}}
+                                        </ul>
+
+                                        <small class="item-sub-text" style="color: #aaa; display: block;">ID Pregunta: {{id}}</small>
+                                    </div>
+
+
+                                    <div class="d-flex gap-2">
+                                        <a href="/editor/aprobarPreguntaSugerida?id={{id}}" class="btn btn-action btn-approve" title="Aprobar" style="background-color: #28a745; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none;">Aprobar</a>
+                                        <a href="/editor/rechazarPreguntaSugerida?id={{id}}" class="btn btn-reject" title="Rechazar" style="background-color: #dc3545; color: white; padding: 6px 12px; border-radius: 4px; text-decoration: none;">Rechazar</a>
+                                    </div>
+                                </div>
+                            {{/sugeridas}}
+
+                            {{^sugeridas}}
+                                <div class="panel-vacio text-center">
+                                    No hay preguntas sugeridas
+                                </div>
+                            {{/sugeridas}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel-editor-box">
+                        <h2 class="panel-title">REPORTES</h2>
+
+                        <div class="panel-lista-container">
+                            {{#reportadas}}
+                                <div class="panel-item d-flex justify-content-between align-items-center" style="margin-bottom: 10px;">
+                                    <div>
+                                        <h5 class="item-main-text" style="color: white; margin: 0;">{{contenido}}</h5>
+                                        <small class="item-sub-text" style="color: #ff4d4d; display: block; margin-top: 4px;">
+                                            <strong>Motivo:</strong> {{motivo}}
+                                        </small>
+                                    </div>
+
+                                    <div class="d-flex gap-2">
+                                        <button type="button"
+                                                class="btn btn-action-text btn-modify btn-editar-pregunta"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalModificar"
+                                                data-id="{{id}}"
+                                                data-contenido="{{contenido}}">
+                                            Modificar
+                                            {{#opciones}}
+                                                <input type="hidden" class="opt-data" data-id="{{id}}" data-contenido="{{contenido}}" data-correcta="{{es_correcta}}">
+                                            {{/opciones}}
+                                        </button>
+                                        <a href="/editor/ignorarReporte?id={{id}}" class="btn btn-action-text btn-modify">Ignorar</a>
+                                    </div>
+                                </div>
+                            {{/reportadas}}
+
+                            {{^reportadas}}
+                                <div class="panel-vacio text-center">
+                                    No hay reportes nuevos
+                                </div>
+                            {{/reportadas}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="modalModificar" tabindex="-1" aria-labelledby="modalModificarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content modal-custom-dark" style="background-color: #212529; color: white;">
+
+            <div class="modal-header" style="border-bottom: 1px solid #343a40;">
+                <h5 class="modal-title" id="modalModificarLabel">Modificar Pregunta y Respuestas</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="editor/modificarPregunta" method="POST">
+                <div class="modal-body">
+                    <input type="hidden" name="id_pregunta" id="modificar-id-pregunta" value="">
+
+                    <div class="mb-3">
+                        <label for="modificar-contenido" class="form-label">Texto de la pregunta:</label>
+                        <textarea class="form-control" name="contenido" id="modificar-contenido" rows="2" required></textarea>
+                    </div>
+
+                    <h6 class="mb-3 mt-4 text-warning">Opciones(Selecciona la opcion correcta)</h6>
+
+                    <div id="contenedor-opciones-editar">
+                    </div>
+                </div>
+
+                <div class="modal-footer" style="border-top: 1px solid #343a40;">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('modalModificar').addEventListener('show.bs.modal', function(event){
+        var button = event.relatedTarget;
+
+        var idPregunta = button.getAttribute('data-id');
+        var contenidoPregunta = button.getAttribute('data-contenido');
+
+        document.getElementById('modificar-id-pregunta').value = idPregunta;
+        document.getElementById('modificar-contenido').value = contenidoPregunta;
+
+
+        var opcionesOcultas = button.querySelectorAll('.opt-data');
+        var contenedor = document.getElementById('contenedor-opciones-editar');
+        contenedor.innerHTML = '';
+
+        opcionesOcultas.forEach(function(opt, index) {
+            var idOpt = opt.getAttribute('data-id');
+            var txtOpt = opt.getAttribute('data-contenido');
+            var esCorrecta = opt.getAttribute('data-correcta');
+
+            var checked = (esCorrecta == 1 || esCorrecta == '1' || esCorrecta == true) ? 'checked' : '';
+
+            var htmlOpcion = `
+                <div class="input-group mb-2">
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0" type="radio" name="opcion_correcta_id" value="${idOpt}" ${checked} required>
+                    </div>
+                    <input type="hidden" name="opciones_ids[]" value="${idOpt}">
+                    <input type="text" class="form-control" name="opciones_textos[]" value="${txtOpt}" required>
+                </div>
+            `;
+            contenedor.insertAdjacentHTML('beforeend', htmlOpcion);
+        });
+    });
+</script>
+
+{{>footer}}

@@ -147,7 +147,7 @@ class PreguntaModel
         $idCategoria = $this->buscarIdCategoriaPorNombre($categoria);
         if(!is_null($idCategoria)){
             $sql = "INSERT INTO pregunta (categoria_id, contenido, estado) 
-                    VALUES (?, ?, 'PENDIENTE')";
+                    VALUES (?, ?, 'pendiente')";
             $this->database->execute($sql, [$idCategoria, $pregunta]);
             return $this->database->getLastId();
         }
@@ -166,6 +166,66 @@ class PreguntaModel
         }
     }
 
+    public function guardarReporte($id_pregunta, $motivo)
+    {
+        $sql = "INSERT INTO reporte (id_pregunta,motivo) 
+                 VALUES (?, ?)";
+        $this->database->execute($sql,[$id_pregunta,$motivo]);
 
+        $sqlUpdate= "UPDATE pregunta SET estado = 'reportada' WHERE id= ?";
+        $this->database->execute($sqlUpdate,[$id_pregunta]);
+    }
+    public function getPreguntasSugeridas()
+    {
+        $resultado=$this->database->query("SELECT * FROM pregunta WHERE estado= 'pendiente'");
+        return $resultado;
+    }
+    public function getPreguntasReportadas()
+    {
+      $sql = "SELECT p.id, p.contenido, r.motivo
+              FROM pregunta p 
+              INNER JOIN reporte r ON p.id=r.id_pregunta
+              WHERE p.estado = 'reportada'";
+
+      return $this->database->query($sql);
+    }
+    public function aprobarPreguntaSugerida($idPregunta)
+    {
+      $sql = "UPDATE pregunta SET estado ='aprobada' WHERE id=?";
+      return $this->database->execute($sql, [$idPregunta]);
+    }
+    public function editarPregunta($idPregunta,$nuevoContenido)
+    {
+        $sql = "UPDATE pregunta SET contenido = ? WHERE id= ?";
+        return $this->database->execute($sql,[$nuevoContenido, $idPregunta]);
+
+    }
+    public function rechazarPreguntaSugerida($idPregunta)
+    {
+        $sql = "UPDATE pregunta SET estado ='rechazada' WHERE id=?";
+        return $this->database->execute($sql, [$idPregunta]);
+
+    }
+    public function editarOpcion($idOpcion, $nuevoContenido, $esCorrecta)
+    {
+        $sql = "UPDATE opcion SET contenido = ?, es_correcta = ? WHERE id = ?";
+        return $this->database->execute($sql, [$nuevoContenido, $esCorrecta, $idOpcion]);
+    }
+    public function limpiarPregunta($id_pregunta)
+    {
+
+        $sql= "UPDATE pregunta SET estado= 'aprobada' WHERE id= ? AND estado= 'reportada'";
+        $this->database->execute($sql,[$id_pregunta]);
+
+    }
+    //sacar este metood de mas!!
+    public function ignorarReporte($idPregunta)
+    {
+        $sqlDelete= "DELETE FROM reporte WHERE id_pregunta= ?";
+        $this->database->execute($sqlDelete,[$idPregunta]);
+
+        $sql= "UPDATE pregunta SET estado='aprobada' WHERE id= ? AND estado= 'reportada'";
+        return $this ->database->execute($sql,[$idPregunta]);
+    }
 
 }

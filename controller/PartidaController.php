@@ -85,7 +85,6 @@ class PartidaController
         $esCorrecta = $this->partidaModel->respondeCorrectamente($idOpcionElegida, $idOpcionCorrecta, $partida);
 
         $this->preguntaModel->registrarPreguntaVista($_SESSION['id'], $pregunta['id'], $esCorrecta);
-
         $data = [
             "id"           => $pregunta['id'],
             "contenido"    => $pregunta['contenido'],
