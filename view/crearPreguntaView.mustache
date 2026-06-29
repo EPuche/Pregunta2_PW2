@@ -1,38 +1,21 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Pregunta - Prueba</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .card {
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-</head>
-<body>
-
+{{>header}}
 <div class="container my-5">
+    <div class="container d-flex justify-content-start">
+        <div class="mb-3">
+            <a href="/lobby/irAlLobby" class="btn btn-outline-secondary btn-sm boton-backto">&larr; Volver al Lobby</a>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <div class="mb-3">
-                <a href="/lobby/irAlLobby" class="btn btn-outline-secondary btn-sm">&larr; Volver al Lobby</a>
-            </div>
-
             <div class="card p-4">
-                <h2 class="text-center mb-4 text-primary">Crear Nueva Pregunta</h2>
-                <p class="text-muted text-center small">Completá los campos y marcá el círculo de la opción que sea la correcta.</p>
+                <h2 class="text-center mt-3 mb-4 subtitulo">Crear Nueva Pregunta</h2>
+                <p class="text-muted text-center small texto">Completá los campos y marcá el círculo de la opción que sea la correcta.</p>
 
                 <form action="/pregunta/enviarARevision" method="POST">
 
                     <div class="mb-4">
-                        <label for="categoria" class="form-label fw-bold">Categoría</label>
-                        <select class="form-select" id="categoria" name="categoria" required>
+                        <label for="categoria" class="form-label fw-bold texto">Categoría</label>
+                        <select class="form-select texto" id="categoria" name="categoria" required>
                             <option value="" disabled selected>Seleccioná una categoría...</option>
                             <option value="Arte">Arte</option>
                             <option value="Ciencia">Ciencia</option>
@@ -43,34 +26,34 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="pregunta" class="form-label fw-bold">Enunciado de la pregunta</label>
-                        <textarea class="form-control" id="pregunta" name="pregunta" rows="3" placeholder="¿Ej: Cuántos minutos tiene una hora?" required></textarea>
+                        <label for="pregunta" class="form-label fw-bold texto">Enunciado de la pregunta</label>
+                        <textarea class="form-control texto" id="pregunta" name="pregunta" rows="3" placeholder="¿Ej: Cuántos minutos tiene una hora?" required></textarea>
                     </div>
 
                     <label class="form-label fw-bold mb-2">Opciones de respuesta</label>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 texto">
                         <div class="input-group-text">
-                            <input class="form-check-input mt-0" type="radio" name="opcionCorrecta" value="1" aria-label="Marcar opción 1 como correcta" checked required>
+                            <input class="form-check-input mt-0 " type="radio" name="opcionCorrecta" value="1" aria-label="Marcar opción 1 como correcta" checked required>
                         </div>
-                        <input type="text" class="form-control" name="opcion1" placeholder="Opción 1" required>
+                        <input type="text" class="form-control " name="opcion1" placeholder="Opción 1" required>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-text">
-                            <input class="form-check-input mt-0" type="radio" name="opcionCorrecta" value="2" aria-label="Marcar opción 2 como correcta">
+                    <div class="input-group mb-3 texto">
+                        <div class="input-group-text ">
+                            <input class="form-check-input mt-0 " type="radio" name="opcionCorrecta" value="2" aria-label="Marcar opción 2 como correcta">
                         </div>
-                        <input type="text" class="form-control" name="opcion2" placeholder="Opción 2" required>
+                        <input type="text" class="form-control " name="opcion2" placeholder="Opción 2" required>
                     </div>
 
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 texto">
                         <div class="input-group-text">
                             <input class="form-check-input mt-0" type="radio" name="opcionCorrecta" value="3" aria-label="Marcar opción 3 como correcta">
                         </div>
                         <input type="text" class="form-control" name="opcion3" placeholder="Opción 3" required>
                     </div>
 
-                    <div class="input-group mb-4">
+                    <div class="input-group mb-4 texto">
                         <div class="input-group-text">
                             <input class="form-check-input mt-0" type="radio" name="opcionCorrecta" value="4" aria-label="Marcar opción 4 como correcta">
                         </div>
@@ -78,7 +61,7 @@
                     </div>
 
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary btn-lg">Enviar a revisión</button>
+                        <button type="submit" class="btn btn-primary btn-lg boton">Enviar a revisión</button>
                     </div>
 
                 </form>

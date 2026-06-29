@@ -1,0 +1,30 @@
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: #d1ecf1;
+}
+.subtitulo{
+    color: black;
+    font-family: 'Montserrat';
+
+}
+
+.texto{
+    font-family: 'Poppins';
+}
+.boton{
+    font-family: 'Poppins';
+    background-color: #FF9232;
+    border:none;
+    font-size: 1em;
+    color: #000000;
+}
+.boton:hover{
+    background-color: #333434;
+    color: #ffffff;
+}
+
+.boton-backto{
+    border-color: #FF9232;
+    color:#FF9232;
+}

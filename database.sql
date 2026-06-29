@@ -501,7 +501,7 @@ CREATE TABLE `usuario_pregunta` (
                                     FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---columna rol en usuario
+-- columna rol en usuario
 ALTER TABLE usuario
     ADD COLUMN rol ENUM('jugador', 'editor', 'admin') NOT NULL DEFAULT 'jugador';
 
@@ -521,8 +521,8 @@ CREATE TABLE IF NOT EXISTS `reporte` (
     ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
----columna estado en pregunta
----
+-- columna estado en pregunta
+--
 ALTER TABLE pregunta MODIFY COLUMN estado ENUM('aprobada', 'pendiente', 'reportada', 'rechazada','eliminada') NOT NULL DEFAULT 'aprobada';
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
