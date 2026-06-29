@@ -24,6 +24,16 @@ class PreguntaController
         $this->preguntaModel->crearNuevaPregunta($datosPregunta);
         header("Location: /lobby/irAlLobby");
     }
+    public function reportarPregunta()
+    {
+        $idPregunta = $_POST['id_pregunta'];
+        $motivo= $_POST['motivo'];
 
+        if (!empty($idPregunta) && !empty($motivo)){
+            $this->preguntaModel->guardarReporte($idPregunta,$motivo);
+        }
+        header("Location: /lobby/irAlLobby");
+        exit();
+    }
 
 }
