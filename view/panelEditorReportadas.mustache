@@ -1,0 +1,76 @@
+{{>header}}
+
+<div class="container-fluid lobby-container">
+
+    <div class="row">
+
+        <aside class="col-lg-2 sidebar">
+
+            <div class="d-flex flex-column gap-3 px-3">
+
+                <a href="/editor/mostrarPreguntasSugeridas" class="btn lobby-btn">Sugeridas</a>
+                <a href="/editor/mostrarPreguntasReportadas" class="btn lobby-btn active">Reportadas</a>
+                <a href="/editor/irAPanelEditor" class="btn lobby-btn">Preguntas</a>
+
+            </div>
+
+        </aside>
+        <main class="col-lg-10 p-4">
+            <div class="panel-editor-box">
+                <h2 class="panel-title">REPORTES PENDIENTES</h2>
+
+                <div class="table-responsive mt-3">
+                    <table class="table table-dark table-hover align-middle custom-table-editor">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 5%;">ID</th>
+                            <th scope="col" style="width: 45%;">Pregunta</th>
+                            <th scope="col" style="width: 30%;">Motivo del Reporte</th>
+                            <th scope="col" class="text-center" style="width: 20%;">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#reportadas}}
+                            <tr>
+                                <th scope="row" class="text-warning">{{id}}</th>
+
+                                <td class="fw-bold text-wrap">{{contenido}}</td>
+
+                                <td>
+                                    <span class="badge bg-danger-subtle text-danger fw-bold text-wrap p-2 border border-danger-subtle">
+                                        ⚠ {{motivo}}
+                                    </span>
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a href="/editor/mostrarFormularioModificar?id={{id}}&origen=reportadas" class="btn btn-sm btn-warning fw-bold px-3">Editar</a>
+                                        <a href="/editor/ignorarReporte?id={{id}}"
+                                        class="btn btn-sm btn-danger fw-bold px-3">
+                                        Ignorar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {{/reportadas}}
+
+                        {{^reportadas}}
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-5">
+                                    <div class="panel-vacio">No hay reportes nuevos</div>
+                                </td>
+                            </tr>
+                        {{/reportadas}}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</div>
+
+
+{{>footer}}

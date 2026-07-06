@@ -175,6 +175,15 @@ class PreguntaModel
         $sqlUpdate= "UPDATE pregunta SET estado = 'reportada' WHERE id= ?";
         $this->database->execute($sqlUpdate,[$id_pregunta]);
     }
+    public function getPreguntas()
+    {
+     $sql= "SELECT p.id, p.contenido, c.nombre AS categoria, p.estado
+            FROM pregunta p 
+            JOIN categoria c ON p.categoria_id= c.id
+            WHERE estado != 'eliminada'
+            ORDER BY p.id ASC";
+     return $this->database->query($sql);
+    }
     public function getPreguntasSugeridas()
     {
         $resultado=$this->database->query("SELECT * FROM pregunta WHERE estado= 'pendiente'");
@@ -197,7 +206,7 @@ class PreguntaModel
     public function editarPregunta($idPregunta,$nuevoContenido)
     {
         $sql = "UPDATE pregunta SET contenido = ? WHERE id= ?";
-        return $this->database->execute($sql,[$nuevoContenido, $idPregunta]);
+        return $this->database->execute($sql,[$nuevoContenido,$idPregunta]);
 
     }
     public function rechazarPreguntaSugerida($idPregunta)
@@ -218,14 +227,30 @@ class PreguntaModel
         $this->database->execute($sql,[$id_pregunta]);
 
     }
-    //sacar este metood de mas!!
     public function ignorarReporte($idPregunta)
     {
         $sqlDelete= "DELETE FROM reporte WHERE id_pregunta= ?";
         $this->database->execute($sqlDelete,[$idPregunta]);
 
-        $sql= "UPDATE pregunta SET estado='aprobada' WHERE id= ? AND estado= 'reportada'";
-        return $this ->database->execute($sql,[$idPregunta]);
+     //   $sql= "UPDATE pregunta SET estado='aprobada' WHERE id= ? AND estado= 'reportada'";
+        return $this->limpiarPregunta($idPregunta);
+    }
+    public function darDeBajaPregunta($id_pregunta)
+    {
+        $sql = "UPDATE pregunta SET estado='eliminada' WHERE id= ? ";
+        return $this->database->execute($sql,[$id_pregunta]);
+
+    }
+    public function getPreguntaPorId($preguntaId) {
+        $sql = "SELECT id, contenido FROM pregunta WHERE id = ?";
+        return $this->database->query($sql, [$preguntaId]);
+    }
+
+    public function agregarCategoria($nombreCategoria, $colorCategoria)
+    {
+        $sql = "INSERT INTO categoria (nombre,color) VALUES (?,?)";
+
+        return $this->database->execute($sql,[$nombreCategoria,$colorCategoria]);
     }
 
 }
