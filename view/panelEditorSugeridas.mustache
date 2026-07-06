@@ -1,0 +1,75 @@
+{{>header}}
+
+<div class="container-fluid lobby-container">
+
+    <div class="row">
+
+        <aside class="col-lg-2 sidebar">
+
+            <div class="d-flex flex-column gap-3 px-3">
+
+                <a href="/editor/mostrarPreguntasSugeridas" class="btn lobby-btn active">Sugeridas</a>
+                <a href="/editor/mostrarPreguntasReportadas" class="btn lobby-btn">Reportadas</a>
+                <a href="/editor/irAPanelEditor" class="btn lobby-btn">Preguntas</a>
+
+            </div>
+
+        </aside>
+        <main class="col-lg-10 p-4">
+            <div class="panel-editor-box">
+                <h2 class="panel-title">PREGUNTAS SUGERIDAS</h2>
+
+                <div class="panel-lista-container mt-3">
+                    {{#sugeridas}}
+                        <div class="panel-item d-flex justify-content-between align-items-center mb-3 p-3">
+
+                            <div class="flex-grow-1 pe-4">
+                                <h5 class="item-main-text mb-3" style="color: white; font-weight: 700;">{{contenido}}</h5>
+
+                                <div class="d-flex flex-wrap gap-2 mb-2">
+                                    {{#opciones}}
+                                        {{#es_correcta}}
+                                            <span class="badge p-2" style="background-color: rgba(40, 167, 69, 0.2); border: 1px solid #28a745; color: #28a745; font-size: 0.9rem;">
+                                                ✓ {{contenido}}
+                                            </span>
+                                        {{/es_correcta}}
+                                        {{^es_correcta}}
+                                            <span class="badge p-2" style="background-color: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); color: #bbb; font-size: 0.9rem;">
+                                                • {{contenido}}
+                                            </span>
+                                        {{/es_correcta}}
+                                    {{/opciones}}
+                                </div>
+
+                                <small class="item-sub-text" style="color: #aaa; display: block; margin-top: 8px;">ID Pregunta: {{id}}</small>
+                            </div>
+
+                            <div class="d-flex gap-2 flex-shrink-0">
+                                <a href="/editor/aprobarPreguntaSugerida?id={{id}}"
+                                class="btn fw-bold px-3 py-2"
+                                style="background-color: #28a745; color: white; border-radius: 6px; text-decoration: none; min-width: 100px; text-center: center;">
+                                Aprobar
+                                </a>
+                                <a href="/editor/rechazarPreguntaSugerida?id={{id}}"
+                                class="btn fw-bold px-3 py-2"
+                                style="background-color: #dc3545; color: white; border-radius: 6px; text-decoration: none; min-width: 100px; text-center: center;">
+                                Rechazar
+                                </a>
+                            </div>
+
+                        </div>
+                    {{/sugeridas}}
+
+                    {{^sugeridas}}
+                        <div class="panel-vacio text-center py-5">
+                            No hay preguntas sugeridas por revisar
+                        </div>
+                    {{/sugeridas}}
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</div>
+{{>footer}}

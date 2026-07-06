@@ -12,22 +12,41 @@ class EditorController{
         $this->request = $request;
     }
     public function irAPanelEditor(){
+        $preguntas=$this->model->getPreguntas();
+
+        foreach ($preguntas as &$p) {
+            $p['es_activa']    = ($p['estado'] == 'aprobada');
+            $p['es_rechazada'] = ($p['estado'] == 'rechazada');
+            $p['es_reportada'] = ($p['estado'] == 'reportada');
+            $p['es_sugerida']  = ($p['estado'] == 'pendiente');
+        }
+        unset($p);
+
+        $data["preguntas"]=$preguntas;
+        $this->renderer->render('panelEditorView', $data);
+    }
+    public function mostrarPreguntasReportadas()
+    {
+        $reportadas= $this->model->getPreguntasReportadas();
+
+        foreach ($reportadas as &$reporte){
+            $reporte['opciones']=$this->model->getOpcionesPorPregunta($reporte['id']);
+        }
+        unset($reporte);
+        $data['reportadas']=$reportadas;
+        $this->renderer->render('panelEditorReportadas', $data);
+    }
+    public function mostrarPreguntasSugeridas()
+    {
         $sugeridas= $this->model->getPreguntasSugeridas();
         foreach ($sugeridas as &$sugerida) {
             $sugerida['opciones'] = $this->model->getOpcionesPorPregunta($sugerida['id']);
         }
         unset($sugerida);
 
-         $reportadas= $this->model->getPreguntasReportadas();
-
-        foreach ($reportadas as &$reporte){
-            $reporte['opciones']=$this->model->getOpcionesPorPregunta($reporte['id']);
-        }
-        unset($reporte);
-
         $data['sugeridas']=$sugeridas;
-        $data['reportadas']=$reportadas;
-        $this->renderer->render('panelEditor', $data);
+        $this->renderer->render('panelEditorSugeridas', $data);
+
     }
     public function aprobarPreguntaSugerida()
     {
@@ -37,7 +56,7 @@ class EditorController{
             $this->model->aprobarPreguntaSugerida($idPregunta);
         }
 
-        header("Location: /editor/irAPanelEditor");
+        header("Location: /editor/mostrarPreguntasSugeridas");
         exit();
     }
     public function rechazarPreguntaSugerida()
@@ -49,14 +68,31 @@ class EditorController{
             $this->model->rechazarPreguntaSugerida($idPregunta);
         }
 
-        header("Location: /editor/irAPanelEditor");
+        header("Location: /editor/mostrarPreguntasSugeridas");
         exit();
+    }
+    public function mostrarFormularioModificar()
+    {
+        $data['origen'] = $_GET['origen'] ?? 'catalogo';
+        $id_pregunta = isset($_GET['id']) ? $_GET['id'] : null;
+
+        if(!$id_pregunta){
+            header("Location: /editor/irAPanelEditor");
+            exit();
+        }
+        $resultadoPregunta = $this->model->getPreguntaPorId($id_pregunta);
+
+        $data['pregunta'] = isset($resultadoPregunta[0]) ? $resultadoPregunta[0] : $resultadoPregunta;
+        $data['opciones'] = $this->model->getOpcionesPorPregunta($id_pregunta);
+
+        $this->renderer->render('modificarPreguntaView', $data);
     }
 
     public function modificarPregunta()
     {
         $idPregunta = $_POST['id_pregunta'] ?? null;
         $nuevoContenido= $_POST['contenido'] ?? null;
+        $origen = $_POST['origen'] ?? 'catalogo';
 
         $opcionesIds = $_POST['opciones_ids'] ?? [];
         $opcionesTextos = $_POST['opciones_textos'] ?? [];
@@ -72,7 +108,11 @@ class EditorController{
                 }
             $this->model->limpiarPregunta($idPregunta);
         }
-        header("Location: /editor/irAPanelEditor");
+        if($origen === 'reportadas'){
+            header("Location: /editor/mostrarPreguntasReportadas");
+        }else{
+            header("Location: /editor/irAPanelEditor");
+        }
         exit();
 
     }
@@ -83,8 +123,34 @@ class EditorController{
         if($idPregunta){
             $this->model->ignorarReporte($idPregunta);
         }
+        header("Location: /editor/mostrarPreguntasReportadas");
+        exit();
+    }
+    public function darDeBajaPregunta()
+    {
+        $idPregunta = $this->request->get('id');
+
+        if($idPregunta){
+            $this->model->darDeBajaPregunta($idPregunta);
+        }
         header("Location: /editor/irAPanelEditor");
         exit();
     }
+    public function irACrearCategoria()
+    {
+        $this->renderer->render('crearCategoriaView');
 
+    }
+    public function agregarCategoria()
+    {
+        $nuevaCategoria = $_POST['nombre_categoria'] ?? null;
+        $colorCategoria = $_POST['color_categoria'] ?? null;
+
+        if($nuevaCategoria) {
+            $this->model->agregarCategoria($nuevaCategoria, $colorCategoria);
+        }
+        header("Location: /editor/irAPanelEditor");
+        exit();
+
+    }
 }

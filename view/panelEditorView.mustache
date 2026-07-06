@@ -1,0 +1,103 @@
+{{>header}}
+
+<div class="container-fluid lobby-container">
+
+    <div class="row">
+
+        <aside class="col-lg-2 sidebar">
+
+            <div class="d-flex flex-column gap-3 px-3">
+
+                <a href="/editor/mostrarPreguntasReportadas" class="btn lobby-btn">Sugeridas</a>
+                <a href="/editor/mostrarPreguntasReportadas" class="btn lobby-btn">Reportadas</a>
+                <a href="/editor/irAPanelEditor" class="btn lobby-btn active">Preguntas</a>
+
+            </div>
+
+        </aside>
+        <main class="col-lg-10 p-4">
+            <div class="panel-editor-box">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+                    <h2 class="panel-title m-0">PREGUNTAS</h2>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <a href="/editor/irACrearCategoria" class="btn btn-sm fw-bold px-3 d-flex align-items-center gap-1" style="background-color: #6c757d; color: white; border-radius: 6px; height: 31px;">
+                            <span>+</span> Agregar Categoría
+                        </a>
+
+                        <a href="/pregunta/irACrearPregunta" class="btn btn-sm fw-bold px-3 d-flex align-items-center gap-1" style="background-color: #ea9939; color: white; border-radius: 6px; height: 31px;">
+                            <span>+</span> Agregar Pregunta
+                        </a>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+                    <table class="table table-dark table-hover align-middle custom-table-editor">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 8%;">ID</th>
+                            <th scope="col" style="width: 45%;">Contenido</th>
+                            <th scope="col" style="width: 15%;">Categoría</th>
+                            <th scope="col" style="width: 12%;">Estado</th>
+                            <th scope="col" scope="col" class="text-center" style="width: 20%;">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#preguntas}}
+                            <tr>
+                                <th scope="row" class="text-warning">{{id}}</th>
+
+                                <td class="fw-bold">{{contenido}}</td>
+
+                                <td>
+                                    <span class="badge bg-outline-custom">{{categoria}}</span>
+                                </td>
+
+                                <td>
+                                    {{#es_activa}}
+                                        <span class="badge bg-success">Activa</span>
+                                    {{/es_activa}}
+
+                                    {{#es_rechazada}}
+                                        <span class="badge bg-danger">Rechazada</span>
+                                    {{/es_rechazada}}
+
+                                    {{#es_reportada}}
+                                        <span class="badge bg-warning text-dark">Reportada</span>
+                                    {{/es_reportada}}
+
+                                    {{#es_sugerida}}
+                                        <span class="badge bg-info text-dark">Sugerida</span>
+                                    {{/es_sugerida}}
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+
+                                        <a href="/editor/mostrarFormularioModificar?id={{id}}&origen=catalogo"
+                                        class="btn btn-sm btn-warning fw-bold px-3 btn-editar-pregunta">Editar</a>
+
+                                        <a href="/editor/darDeBajaPregunta?id={{id}}"
+                                        class="btn btn-sm btn-danger fw-bold px-3"
+                                        onclick="return confirm('¿Seguro que deseas dar de baja esta pregunta?')">
+                                        Eliminar
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                    {{/preguntas}}
+                    {{^preguntas}}
+                        <div class="panel-vacio text-center">No hay preguntas en el juego</div>
+                    {{/preguntas}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+    </div>
+
+</div>
+
+
+{{>footer}}

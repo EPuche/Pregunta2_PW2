@@ -1,0 +1,67 @@
+{{>header}}
+
+<div class="container-fluid lobby-container">
+    <div class="row">
+
+        <aside class="col-lg-2 sidebar">
+            <div class="d-flex flex-column gap-3 px-3 mt-4">
+                <a href="editor/mostrarPreguntasSugeridas" class="btn lobby-btn">Sugeridas</a>
+                <a href="editor/mostrarPreguntasReportadas" class="btn lobby-btn">Reportadas</a>
+                <a href="editor/irAPanelEditor" class="btn lobby-btn">Preguntas</a>
+            </div>
+        </aside>
+
+        <main class="col-lg-10 p-4">
+            <div class="panel-editor-box p-4" style="background-color: #212529; border: 1px solid rgba(224, 169, 109, 0.3); border-radius: 12px; color: white;">
+
+                <h2 class="panel-title mb-4" style="color: #e0a96d;">MODIFICAR PREGUNTA Y RESPUESTAS</h2>
+
+                  <form action="/editor/modificarPregunta" method="POST">
+
+                    <input type="hidden" name="id_pregunta" value="{{pregunta.id}}">
+
+                    <div class="mb-4">
+                        <label for="contenido" class="form-label fw-bold" style="color: #bbb;">Texto de la pregunta:</label>
+                        <textarea class="form-control" name="contenido" id="contenido" rows="3" style="background-color: rgba(0,0,0,0.2); color: white; border: 1px solid #444;" required>{{pregunta.contenido}}</textarea>
+                    </div>
+
+                    <h6 class="mb-3 mt-4 text-warning fw-bold">Opciones (Selecciona el botón circular de la opción correcta)</h6>
+
+                    <div id="contenedor-opciones">
+                        {{#opciones}}
+                            <div class="input-group mb-3">
+                                <div class="input-group-text" style="background-color: #343a40; border: 1px solid #444;">
+                                    <input class="form-check-input mt-0"
+                                           type="radio"
+                                           name="opcion_correcta_id"
+                                           value="{{id}}"
+                                           {{#es_correcta}}checked{{/es_correcta}}
+                                           required>
+                                </div>
+
+                                <input type="hidden" name="opciones_ids[]" value="{{id}}">
+
+                                <input type="text"
+                                       class="form-control"
+                                       name="opciones_textos[]"
+                                       value="{{contenido}}"
+                                       style="background-color: rgba(0,0,0,0.1); color: white; border: 1px solid #444;"
+                                       required>
+                            </div>
+                        {{/opciones}}
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4 pt-3" style="border-top: 1px solid #343a40;">
+                        <a href="/editor/irAPanelEditor" class="btn btn-secondary px-4">Cancelar</a>
+                        <button type="submit" class="btn btn-primary px-4" style="background-color: #e0a96d; border: none; color: black; font-weight: bold;">Guardar Cambios</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </main>
+
+    </div>
+</div>
+
+{{>footer}}
