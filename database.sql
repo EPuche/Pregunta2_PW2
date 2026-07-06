@@ -501,7 +501,7 @@ CREATE TABLE `usuario_pregunta` (
                                     FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- columna rol en usuario
+
 ALTER TABLE usuario
     ADD COLUMN rol ENUM('jugador', 'editor', 'admin') NOT NULL DEFAULT 'jugador';
 
@@ -521,9 +521,15 @@ CREATE TABLE IF NOT EXISTS `reporte` (
     ON UPDATE CASCADE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- columna estado en pregunta
---
+
 ALTER TABLE pregunta MODIFY COLUMN estado ENUM('aprobada', 'pendiente', 'reportada', 'rechazada','eliminada') NOT NULL DEFAULT 'aprobada';
+
+--
+-- Volcado de datos para la tabla `usuario` (Rol: Editor)
+--
+
+INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`) VALUES
+    (2, 'Test Editor', '2000', 'Masculino', 'editor@hotmail.com', 'editor123', '$2y$10$Mswmp76b2mjCmQMIV0JGLu9fs03J5JU/oIqZODtG/aeDYw0KZ9Fja', NULL, -58.3816000, -34.6037000, '4c9667584fd639f9825b9ebfff0cfeb2', 1, 0, 'editor');
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
