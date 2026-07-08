@@ -26,6 +26,7 @@ class UsuarioModel
         $filas = $this->database->query($sql, [$id]);
         return !empty($filas) ? $filas[0] : null;
     }
+
     public function getUsuarioByName($nombre_usuario)
     {
         $sql = "SELECT * FROM usuario WHERE nombre_usuario = ?";
@@ -42,15 +43,16 @@ class UsuarioModel
         $nombreUsuario,
         $contrasena,
         $fotoPerfil = null,
+        $latitud,
         $longitud,
-        $latitud
-        
-    ) {
+        $pais
+    )
+    {
         $token = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
 
         $sql = "INSERT INTO usuario 
-            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, token_verificacion, verificado)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+            (nombre_completo, anio_nacimiento, sexo, email, nombre_usuario, contrasena, foto_perfil, longitud, latitud, pais,token_verificacion, verificado)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
 
         Log::info("SQL: $sql");
 
@@ -64,6 +66,7 @@ class UsuarioModel
             $fotoPerfil,
             $longitud,
             $latitud,
+            $pais,
             $token
         ]);
 
@@ -79,7 +82,7 @@ class UsuarioModel
         $usuario = $this->database->query("SELECT id/*id_usuario*/ 
         FROM usuario 
         WHERE token_verificacion = ? AND verificado = 0",
-         [$token]
+            [$token]
         );
 
         if (empty($usuario)) {
@@ -91,9 +94,10 @@ class UsuarioModel
              SET verificado = 1,
              token_verificacion = NULL 
              WHERE token_verificacion = ?",
-              [$token]
+            [$token]
         );
     }
+
     public function actualizarFoto($nombreUsuario, $rutaFoto)
     {
         $sql = "UPDATE usuario
@@ -106,19 +110,21 @@ class UsuarioModel
         ]);
     }
 
-  public function editar(
-    $id,
-    $nombreCompleto,
-    $anioNacimiento,
-    $sexo,
-    $email,
-    $nombreUsuario,
-    $fotoPerfil = null,
-    $longitud,
-    $latitud,
-    $contrasena = null 
-) {
-    $sql = "UPDATE usuario
+    public function editar(
+        $id,
+        $nombreCompleto,
+        $anioNacimiento,
+        $sexo,
+        $email,
+        $nombreUsuario,
+        $fotoPerfil = null,
+        $longitud,
+        $latitud,
+        $pais,
+        $contrasena = null
+    )
+    {
+        $sql = "UPDATE usuario
             SET nombre_completo = ?,
                 anio_nacimiento = ?,
                 sexo = ?,
@@ -126,31 +132,35 @@ class UsuarioModel
                 nombre_usuario = ?,
                 foto_perfil = ?,
                 longitud = ?,
-                latitud = ?";
+                latitud = ?,
+                pais = ?";
 
 
-    if ($contrasena) {
-        $sql .= ", contrasena = ?";
+        if ($contrasena) {
+            $sql .= ", contrasena = ?";
+        }
+
+
+        $sql .= " WHERE id = ?";
+
+
+        Log::info("SQL: $sql");
+
+
+        $this->database->execute($sql, [
+            $nombreCompleto,
+            $anioNacimiento,
+            $sexo,
+            $email,
+            $nombreUsuario,
+            $fotoPerfil,
+            $longitud,
+            $latitud,
+            $pais,
+            ...($contrasena ? [$contrasena] : []),
+            $id
+        ]);
     }
-
-    $sql .= " WHERE id = ?";
-
-    Log::info("SQL: $sql");
-
-    
-    $this->database->execute($sql, [
-        $nombreCompleto,
-        $anioNacimiento,
-        $sexo,
-        $email,
-        $nombreUsuario,
-        $fotoPerfil,
-        $longitud,
-        $latitud,
-        ...($contrasena ? [$contrasena] : []),
-        $id
-    ]);
-}
 
     public function eliminar($id)
     {
@@ -185,6 +195,7 @@ class UsuarioModel
         }
         return true;
     }
+
     private function existeCampo($columna, $valor): bool
     {
         $sql = "SELECT id FROM usuario WHERE $columna = ?";
@@ -192,83 +203,87 @@ class UsuarioModel
         return !empty($resultado);
     }
 
-  /*  public function getPartidasActivas($usuarioId)
-{
-    
-    return [
-        ["oponente" => "Juan", "resultado" => "4-0"],
-        ["oponente" => "María", "resultado" => "3-2"]
-    ];
-}*/
+    /*  public function getPartidasActivas($usuarioId)
+  {
 
-public function getPuntajeTotal($usuarioId)
-{
-    $sql = "SELECT SUM(puntaje) AS total 
+      return [
+          ["oponente" => "Juan", "resultado" => "4-0"],
+          ["oponente" => "María", "resultado" => "3-2"]
+      ];
+  }*/
+
+    public function getPuntajeTotal($usuarioId)
+    {
+        $sql = "SELECT SUM(puntaje) AS total 
             FROM partida 
             WHERE idUsuario = ?";
-    $filas = $this->database->query($sql, [$usuarioId]);
-    return !empty($filas) ? ($filas[0]['total'] ?? 0) : 0;
-}
+        $filas = $this->database->query($sql, [$usuarioId]);
+        return !empty($filas) ? ($filas[0]['total'] ?? 0) : 0;
+    }
 
 
-
-public function guardarPartidaContraBot($usuarioId, $preguntasCorrectas, $puntaje) {
-    $sql = "INSERT INTO partida (idUsuario, preguntasCorrectas, puntaje, fecha)
+    public function guardarPartidaContraBot($usuarioId, $preguntasCorrectas, $puntaje)
+    {
+        $sql = "INSERT INTO partida (idUsuario, preguntasCorrectas, puntaje, fecha)
             VALUES (?, ?, ?, NOW())";
-    return $this->database->execute($sql, [$usuarioId, $preguntasCorrectas, $puntaje]);
-}
+        return $this->database->execute($sql, [$usuarioId, $preguntasCorrectas, $puntaje]);
+    }
 
-public function getHistorial($usuarioId)
-{
+    public function getHistorial($usuarioId)
+    {
 
- $sql = "SELECT preguntasCorrectas, puntaje, fecha
+        $sql = "SELECT preguntasCorrectas, puntaje, fecha
             FROM partida
             WHERE idUsuario = ?
             ORDER BY fecha DESC";
 
-    $filas = $this->database->query($sql, [$usuarioId]);
+        $filas = $this->database->query($sql, [$usuarioId]);
 
-    $historial = [];
-    foreach ($filas as $fila) {
-        $historial[] = [
-            'oponente'  => 'BOT', // siempre el bot
-            'resultado' => $fila['preguntasCorrectas'].' correctas, '.$fila['puntaje'].' pts',
-            'fecha'     => $fila['fecha'],
-            'foto_oponente' => '/assets/imgPerfiles/bot-preguntados.png'
-        ];
+        $historial = [];
+        foreach ($filas as $fila) {
+            $historial[] = [
+                'oponente' => 'BOT', // siempre el bot
+                'resultado' => $fila['preguntasCorrectas'] . ' correctas, ' . $fila['puntaje'] . ' pts',
+                'fecha' => $fila['fecha'],
+                'foto_oponente' => '/assets/imgPerfiles/bot-preguntados.png'
+            ];
+        }
+
+        return $historial;
+
     }
 
-    return $historial;
-    
-}
 
+    public function contarUsuarios()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM usuario";
+        Log::info("SQL: $sql");
+        $filas = $this->database->query($sql);
+        return !empty($filas) ? $filas[0]['total'] : 0;
+    }
 
-public function contarUsuarios() {
-    $sql = "SELECT COUNT(*) AS total FROM usuario";
-    Log::info("SQL: $sql");
-    $filas = $this->database->query($sql);
-    return !empty($filas) ? $filas[0]['total'] : 0;
-}
-
-public function contarUsuariosNuevos($intervalo = "30 DAY") {
-    $sql = "SELECT COUNT(*) AS total 
+    public function contarUsuariosNuevos($intervalo = "30 DAY")
+    {
+        $sql = "SELECT COUNT(*) AS total 
             FROM usuario 
-            WHERE fecha_registro >= NOW() - INTERVAL $intervalo";
-    Log::info("SQL: $sql");
-    $filas = $this->database->query($sql);
-    return !empty($filas) ? $filas[0]['total'] : 0;
-}
+            WHERE fecha_registro >= DATE_SUB(NOW(), INTERVAL $intervalo)";
+        Log::info("SQL: $sql");
+        $filas = $this->database->query($sql);
+        return !empty($filas) ? $filas[0]['total'] : 0;
+    }
 
-public function usuariosPorSexo($intervalo = "30 DAY") {
-    $sql = "SELECT sexo, COUNT(*) AS cantidad
+    public function usuariosPorSexo($intervalo)
+    {
+        $sql = "SELECT sexo, COUNT(*) AS cantidad
             FROM usuario
-            WHERE fecha_registro >= NOW() - INTERVAL $intervalo
+            WHERE fecha_registro >= DATE_SUB(NOW(), INTERVAL $intervalo)
             GROUP BY sexo";
-    return $this->database->query($sql);
-}
+        return $this->database->query($sql);
+    }
 
-public function usuariosPorEdad($intervalo = "30 DAY") {
-    $sql = "SELECT 
+    public function usuariosPorEdad($intervalo)
+    {
+        $sql = "SELECT 
                 CASE 
                     WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) < 18 THEN 'Menores de 18'
                     WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) BETWEEN 18 AND 30 THEN '18-30'
@@ -277,24 +292,40 @@ public function usuariosPorEdad($intervalo = "30 DAY") {
                 END AS grupo,
                 COUNT(*) AS cantidad
             FROM usuario
-            WHERE fecha_registro >= NOW() - INTERVAL $intervalo
+            WHERE fecha_registro >= DATE_SUB(NOW(), INTERVAL $intervalo)
             GROUP BY grupo";
-    return $this->database->query($sql);
-}
+        return $this->database->query($sql);
+    }
 
-public function getAll() {
-    $sql = "SELECT id, nombre_usuario, email, puntaje FROM usuario";
-    return $this->database->query($sql);
-}
+    public function usuariosPorPais($intervalo)
+    {
+        $sql = "
+        SELECT 
+            pais,
+            COUNT(*) AS cantidad
+        FROM usuario
+        WHERE fecha_registro >= DATE_SUB(NOW(), INTERVAL $intervalo)
+        AND pais IS NOT NULL
+        GROUP BY pais
+        ORDER BY cantidad DESC";
 
-public function buscarUsuarios($q) {
-    $sql = "SELECT * FROM usuario 
+        return $this->database->query($sql);
+    }
+
+    public function getAll()
+    {
+        $sql = "SELECT id, nombre_usuario, email, puntaje FROM usuario";
+        return $this->database->query($sql);
+    }
+
+    public function buscarUsuarios($q)
+    {
+        $sql = "SELECT * FROM usuario 
             WHERE nombre_usuario LIKE ? 
                OR email LIKE ?";
-    $param = "%$q%";
-    return $this->database->query($sql, [$param, $param]);
-}
-
+        $param = "%$q%";
+        return $this->database->query($sql, [$param, $param]);
+    }
 
 
 }

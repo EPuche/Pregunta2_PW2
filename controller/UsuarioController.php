@@ -39,6 +39,7 @@ class UsuarioController
         $repetirContrasena = $this->request->post('repetir_contrasena');
         $latitud = $_POST['latitud'] ?? null;
         $longitud = $_POST['longitud'] ?? null;
+        $pais = $_POST['pais'] ?? null;
         $imagenPerfil = null;
         $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
 
@@ -64,7 +65,8 @@ class UsuarioController
             $hashContrasena,
             $imagenPerfil,
             $longitud,
-            $latitud
+            $latitud,
+            $pais
         );
 
         if ($registro) {
@@ -152,10 +154,10 @@ class UsuarioController
             "foto_perfil"     => $fotoPerfil,
             "latitud"         => $usuario["latitud"],
             "longitud"        => $usuario["longitud"],
+            "pais"            => $usuario["pais"],
             "id"              => $usuario["id"],
             "historial"       => $historial,
             "esPropio"        => $esPropio
-
         ];
         $data['logoHref'] = $_SESSION['logoHref'];
 
@@ -228,7 +230,9 @@ class UsuarioController
             $fotoPerfil,
             $_POST["longitud"],
             $_POST["latitud"],
+            $_POST["pais"] ?? null,
             $hashContrasena
+
 
         );
 
