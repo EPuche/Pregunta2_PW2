@@ -1,0 +1,61 @@
+@media print {
+
+    body * {
+        visibility: hidden;
+    }
+
+    #reporte-imprimible,
+    #reporte-imprimible * {
+        visibility: visible;
+    }
+
+    #reporte-imprimible {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+
+    /* Evitar cortes dentro de paneles */
+    .panel,
+    .stat-panel,
+    .chart-panel {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+
+    /* Evitar que filas de Bootstrap se separen */
+    .row {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+
+    /* Cada gráfico completo debe mantenerse junto */
+    canvas {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+
+    .no-print {
+        display: none !important;
+    }
+
+    .row {
+        display: block !important;
+    }
+
+    .col-md-4 {
+        width: 100% !important;
+        margin-bottom: 20px;
+    }
+
+    .stat-panel {
+        min-height: 100px;
+        margin-bottom: 15px;
+    }
+
+}
