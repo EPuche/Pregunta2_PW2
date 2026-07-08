@@ -90,6 +90,14 @@ class Configurator {
         return new EditorController($this->getPreguntaModel(),$this->getRenderer(), new Request());
 
     }
+    public function getAdminController() {
 
+    return new AdminController( $this->getUsuarioModel(),$this->getPartidaModel(), $this->getPreguntaModel(), $this->getRenderer(), new Request());
 
+    }
 }
+
+
+
+
+

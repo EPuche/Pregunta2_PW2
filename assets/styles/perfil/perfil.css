@@ -201,6 +201,21 @@ body {
     object-fit: cover;
     border: 2px solid var(--naranja);
 }
+
+
+/*ADMIN*/
+/* Select filtro */
+.filtro-select {
+  background-color:var(--naranja);  
+  color: #fff;                
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-weight: 600;
+}
+
+
+
 /* Tablets */
 @media (max-width: 768px) {
 

@@ -239,11 +239,53 @@ public function getHistorial($usuarioId)
     }
 
     return $historial;
-    /*Prueba de como se veria 
-    return [
-        ["oponente" => "Pedro", "resultado" => "2-4","perdio" => true],
-        ["oponente" => "Lucía", "resultado" => "5-1","gano"=>true]
-    ];*/
+    
 }
+
+
+public function contarUsuarios() {
+    $sql = "SELECT COUNT(*) AS total FROM usuario";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+
+public function contarUsuariosNuevos($intervalo = "30 DAY") {
+    $sql = "SELECT COUNT(*) AS total 
+            FROM usuario 
+            WHERE fecha_registro >= NOW() - INTERVAL $intervalo";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+
+public function usuariosPorSexo() {
+    $sql = "SELECT sexo, COUNT(*) AS cantidad 
+            FROM usuario 
+            GROUP BY sexo";
+    Log::info("SQL: $sql");
+    return $this->database->query($sql);
+}
+
+public function usuariosPorEdad() {
+    $sql = "SELECT 
+                CASE 
+                    WHEN YEAR(CURDATE()) - anio_nacimiento < 18 THEN 'menores'
+                    WHEN YEAR(CURDATE()) - anio_nacimiento >= 65 THEN 'jubilados'
+                    ELSE 'medio'
+                END AS grupo,
+                COUNT(*) AS cantidad
+            FROM usuario
+            GROUP BY grupo";
+    Log::info("SQL: $sql");
+    return $this->database->query($sql);
+}
+
+public function getAll() {
+    $sql = "SELECT id, nombre_usuario, email, puntaje FROM usuario";
+    return $this->database->query($sql);
+}
+
+
 
 }

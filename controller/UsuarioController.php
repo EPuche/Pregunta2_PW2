@@ -125,39 +125,39 @@ class UsuarioController
 
 
 
-public function verPerfil()
-{
-    $id =$this->request->get("id") ?? $_SESSION["id"];
-    $usuario = $this->model->getUsuario($id);
-    $fotoPerfil = $usuario["foto_perfil"];
-    if (
-    empty($fotoPerfil) ||
-    !file_exists($_SERVER["DOCUMENT_ROOT"] . $fotoPerfil)
-) {
-    $fotoPerfil = "/assets/imgPerfiles/default-user.png";
-}
-    $historial = $this->model->getHistorial($id);
+    public function verPerfil()
+    {
+        $id = $this->request->get("id") ?? $_SESSION["id"];
+        $usuario = $this->model->getUsuario($id);
+        $fotoPerfil = $usuario["foto_perfil"];
+        if (
+            empty($fotoPerfil) ||
+            !file_exists($_SERVER["DOCUMENT_ROOT"] . $fotoPerfil)
+        ) {
+            $fotoPerfil = "/assets/imgPerfiles/default-user.png";
+        }
+        $historial = $this->model->getHistorial($id);
         $esPropio = ($id == $_SESSION["id"]);
 
-    $data = [
-        "nombreUsuario"   => $usuario["nombre_usuario"], 
-        "nombre_completo" => $usuario["nombre_completo"],
-        "nombre_usuario"  => $usuario["nombre_usuario"],
-        "puntaje"         => $usuario["puntaje"] ?? 0,
-        "anio_nacimiento" => $usuario["anio_nacimiento"],
-        "sexo"            => $usuario["sexo"],
-        "email"           => $usuario["email"],
-        "foto_perfil"     => $fotoPerfil,
-        "latitud"         => $usuario["latitud"],
-        "longitud"        => $usuario["longitud"],
-        "id"              => $usuario["id"],
-        "historial"       => $historial,
-        "esPropio"        => $esPropio
-      
-    ];
+        $data = [
+            "nombreUsuario"   => $usuario["nombre_usuario"],
+            "nombre_completo" => $usuario["nombre_completo"],
+            "nombre_usuario"  => $usuario["nombre_usuario"],
+            "puntaje"         => $usuario["puntaje"] ?? 0,
+            "anio_nacimiento" => $usuario["anio_nacimiento"],
+            "sexo"            => $usuario["sexo"],
+            "email"           => $usuario["email"],
+            "foto_perfil"     => $fotoPerfil,
+            "latitud"         => $usuario["latitud"],
+            "longitud"        => $usuario["longitud"],
+            "id"              => $usuario["id"],
+            "historial"       => $historial,
+            "esPropio"        => $esPropio
 
-    $this->renderer->render("verPerfilView", $data);
-}
+        ];
+
+        $this->renderer->render("verPerfilView", $data);
+    }
 
     public function editarPerfil()
     {
@@ -229,7 +229,7 @@ public function verPerfil()
 
         );
 
-        header("Location: /Pregunta2_PW2/index.php?controller=usuario&method=verPerfil");
+        header("Location: /usuario/verPerfil");
         exit;
     }
 
@@ -253,7 +253,7 @@ public function verPerfil()
         exit;
     }
 
-  /*  public function verLobby()
+    /*  public function verLobby()
     {
         if (!isset($_SESSION["id"])) {
             header("Location: /login/irAlLogin");
@@ -271,5 +271,4 @@ public function verPerfil()
 
         $this->renderer->render("lobbyView", $data);
     }*/
-
 }

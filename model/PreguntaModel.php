@@ -172,6 +172,8 @@ class PreguntaModel
                  VALUES (?, ?)";
         $this->database->execute($sql,[$id_pregunta,$motivo]);
 
+
+
         $sqlUpdate= "UPDATE pregunta SET estado = 'reportada' WHERE id= ?";
         $this->database->execute($sqlUpdate,[$id_pregunta]);
     }
@@ -252,5 +254,33 @@ class PreguntaModel
 
         return $this->database->execute($sql,[$nombreCategoria,$colorCategoria]);
     }
+
+    // Cantidad total de preguntas en el juego
+public function contarPreguntas() {
+    $sql = "SELECT COUNT(*) AS total FROM pregunta";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+
+// Cantidad de preguntas creadas (estado = 'PENDIENTE' o 'CREADA')
+public function contarPreguntasCreadas() {
+    $sql = "SELECT COUNT(*) AS total 
+            FROM pregunta 
+            WHERE estado = 'PENDIENTE' OR estado = 'CREADA'";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+
+// Cantidad de preguntas filtradas por intervalo (día, semana, mes, año)
+public function contarPreguntasPorIntervalo($intervalo = "30 DAY") {
+    $sql = "SELECT COUNT(*) AS total 
+            FROM pregunta 
+            WHERE fecha_creacion >= NOW() - INTERVAL $intervalo";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
 
 }

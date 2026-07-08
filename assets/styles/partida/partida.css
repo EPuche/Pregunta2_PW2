@@ -46,6 +46,8 @@ body {
     position: absolute;
     top: 15px;
     right: 15px;
+    padding: 8px 12px;
+    font-size: 14px;
 }
 .btn-reportar:hover{
     background-color:#ff9232;

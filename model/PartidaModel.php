@@ -68,4 +68,31 @@ class PartidaModel
     public function calcularSegundosRestantes($tiempoLimite){
         return  $tiempoLimite - time();
     }
+
+
+    public function contarPartidas() {
+    $sql = "SELECT COUNT(*) AS total FROM partida";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+
+public function contarPartidasPorIntervalo($intervalo = "30 DAY") {
+    $sql = "SELECT COUNT(*) AS total 
+            FROM partida 
+            WHERE fecha >= NOW() - INTERVAL $intervalo";
+    Log::info("SQL: $sql");
+    $filas = $this->database->query($sql);
+    return !empty($filas) ? $filas[0]['total'] : 0;
+}
+public function porcentajeCorrectasPorUsuario($intervalo) {
+    $sql = "SELECT usuario_id,
+                   ROUND((SUM(respondida_correctamente) / COUNT(*)) * 100, 2) AS porcentaje
+            FROM usuario_pregunta
+            WHERE fecha >= NOW() - INTERVAL $intervalo
+            GROUP BY usuario_id";
+    return $this->database->query($sql);
+}
+
+
 }
