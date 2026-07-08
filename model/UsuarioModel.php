@@ -19,9 +19,9 @@ class UsuarioModel
     public function getUsuario($id)
     {
         $sql = "SELECT id, nombre_usuario, nombre_completo, puntaje, 
-                   anio_nacimiento, sexo, email, foto_perfil, latitud, longitud
-            FROM usuario 
-            WHERE id = ?";
+                    anio_nacimiento, sexo, email, foto_perfil, latitud, longitud, pais
+                FROM usuario
+                WHERE id = ?";
         Log::info("SQL: $sql [$id]");
         $filas = $this->database->query($sql, [$id]);
         return !empty($filas) ? $filas[0] : null;
@@ -42,10 +42,10 @@ class UsuarioModel
         $email,
         $nombreUsuario,
         $contrasena,
-        $fotoPerfil = null,
-        $latitud,
         $longitud,
-        $pais
+        $latitud,
+        $pais,
+        $fotoPerfil = null
     )
     {
         $token = bin2hex(random_bytes(16)); // 32 caracteres hexadecimales
@@ -117,10 +117,10 @@ class UsuarioModel
         $sexo,
         $email,
         $nombreUsuario,
-        $fotoPerfil = null,
         $longitud,
         $latitud,
         $pais,
+        $fotoPerfil = null,
         $contrasena = null
     )
     {
@@ -130,11 +130,10 @@ class UsuarioModel
                 sexo = ?,
                 email = ?,
                 nombre_usuario = ?,
-                foto_perfil = ?,
                 longitud = ?,
                 latitud = ?,
-                pais = ?";
-
+                pais = ?,
+                foto_Perfil = ?";
 
         if ($contrasena) {
             $sql .= ", contrasena = ?";
@@ -153,10 +152,10 @@ class UsuarioModel
             $sexo,
             $email,
             $nombreUsuario,
-            $fotoPerfil,
             $longitud,
             $latitud,
             $pais,
+            $fotoPerfil,
             ...($contrasena ? [$contrasena] : []),
             $id
         ]);

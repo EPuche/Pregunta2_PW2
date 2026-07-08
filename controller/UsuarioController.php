@@ -63,10 +63,10 @@ class UsuarioController
             $email,
             $nombreUsuario,
             $hashContrasena,
-            $imagenPerfil,
             $longitud,
             $latitud,
-            $pais
+            $pais,
+            $imagenPerfil
         );
 
         if ($registro) {
