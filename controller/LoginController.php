@@ -58,6 +58,9 @@ class LoginController
         $_SESSION["rol"] = $user["rol"];
 
         switch ($user["rol"]) {
+            case "admin":
+                header("Location: /admin/verEstadisticas");
+                break;
             case "editor":
                 header("Location: /editor/irAPanelEditor");
                 break;
@@ -69,10 +72,10 @@ class LoginController
         }
 
         exit();
-//        $_SESSION["id"] = $user["id"];
-//        $_SESSION["usuario"] = $user["nombre_usuario"];
-//        header("Location: /lobby/irAlLobby");
-//        exit;
+        //        $_SESSION["id"] = $user["id"];
+        //        $_SESSION["usuario"] = $user["nombre_usuario"];
+        //        header("Location: /lobby/irAlLobby");
+        //        exit;
     }
     public function logout()
     {

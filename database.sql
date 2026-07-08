@@ -533,3 +533,23 @@ INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `emai
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+/* Actulizacion de la tabla usuario*/
+ALTER TABLE `usuario`
+ADD COLUMN `fecha_registro` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+/*Actualizacion de la tabla usuario_pregunta*/
+ALTER TABLE `usuario_pregunta`
+ADD COLUMN `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- Usuario administrador General
+
+
+INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`)
+     VALUES (3,'Administrador General', 1980,'Femenino','admin@preguntados.com','admin123','$2y$10$gJNMYBYyjF95sxzgFqkU1OMm/Ss5tSc7UCxke5WcxYULqNMYgW5qW' ,  NULL,-58.3816000,-34.6037000,'tokenadmin123', 1,0,'admin');
+
+
+
+
+
