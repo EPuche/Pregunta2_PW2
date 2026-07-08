@@ -270,9 +270,9 @@ public function usuariosPorSexo($intervalo = "30 DAY") {
 public function usuariosPorEdad($intervalo = "30 DAY") {
     $sql = "SELECT 
                 CASE 
-                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) < 18 THEN 'Menores de 18'
-                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) BETWEEN 18 AND 30 THEN '18-30'
-                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) BETWEEN 31 AND 50 THEN '31-50'
+                    WHEN (YEAR(CURDATE()) - anio_nacimiento) < 18 THEN 'Menores de 18'
+                    WHEN (YEAR(CURDATE()) - anio_nacimiento) BETWEEN 18 AND 30 THEN '18-30'
+                    WHEN (YEAR(CURDATE()) - anio_nacimiento) BETWEEN 31 AND 50 THEN '31-50'
                     ELSE '50+' 
                 END AS grupo,
                 COUNT(*) AS cantidad
