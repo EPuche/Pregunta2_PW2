@@ -15,7 +15,7 @@
         body{
             margin:0;
             min-height:100vh;
-            background-image:url('assets/img/imagen-fondo.png');
+            background-image: url('../assets/img/imagen-fondo.png');
             background-size:cover;
             background-position:center;
             background-repeat:no-repeat;
@@ -75,6 +75,15 @@
             font-weight:bold;
         }
 
+
+        .back-link {
+            color: #555;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #222323;
+        }
     </style>
 </head>
 
@@ -83,7 +92,8 @@
 <div class="contenedor-principal">
 
     <div class="contenedor-login">
-        <a href="/home" class="text-decoration-none text-secondary">HOME</a>
+        <a href="/home/irAlHome" class="back-link mt-3 text-decoration-none text-secondary">← Volver al Home</a>
+
        
         <div class="contenedor-logo ms-4 mb-4">
             <img src="/assets/logo.png" alt="Preguntados logo" class="img-fluid logo d-block mx-auto">
