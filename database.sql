@@ -1,18 +1,17 @@
 DROP DATABASE IF EXISTS preguntados_bd;
 CREATE DATABASE IF NOT EXISTS preguntados_bd;
 
-USE preguntados_bd;
-
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2026 a las 02:35:23
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: sql200.infinityfree.com
+-- Tiempo de generación: 08-07-2026 a las 16:30:36
+-- Versión del servidor: 11.4.12-MariaDB
+-- Versión de PHP: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -23,7 +22,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `preguntados_bd`
+-- Base de datos: `if0_42133152_preguntados_bd`
 --
 
 -- --------------------------------------------------------
@@ -287,8 +286,42 @@ CREATE TABLE `partida` (
 --
 
 INSERT INTO `partida` (`idPartida`, `idUsuario`, `preguntasCorrectas`, `puntaje`, `fecha`) VALUES
-                                                                                               (1, 1, 0, 0, '2026-06-19 00:32:25'),
-                                                                                               (2, 1, 2, 2, '2026-06-19 00:32:38');
+                                                                                               (3, 2, 0, 0, '2026-06-25 22:08:31'),
+                                                                                               (4, 2, 1, 1, '2026-06-25 22:14:21'),
+                                                                                               (5, 2, 0, 0, '2026-06-25 22:23:47'),
+                                                                                               (6, 2, 2, 2, '2026-06-25 22:24:06'),
+                                                                                               (9, 3, 0, 0, '2026-06-25 23:26:50'),
+                                                                                               (10, 3, 4, 4, '2026-06-25 23:27:20'),
+                                                                                               (11, 3, 2, 2, '2026-06-26 14:19:00'),
+                                                                                               (12, 3, 0, 0, '2026-06-26 14:23:54'),
+                                                                                               (13, 3, 0, 0, '2026-06-26 19:01:08'),
+                                                                                               (14, 3, 0, 0, '2026-06-26 19:01:29'),
+                                                                                               (15, 4, 0, 0, '2026-06-26 22:34:45'),
+                                                                                               (16, 4, 0, 0, '2026-06-26 22:35:21'),
+                                                                                               (17, 4, 0, 0, '2026-06-26 22:37:21'),
+                                                                                               (18, 3, 2, 2, '2026-06-26 22:53:28'),
+                                                                                               (19, 2, 1, 1, '2026-06-26 22:54:27'),
+                                                                                               (20, 4, 0, 0, '2026-06-29 16:20:17'),
+                                                                                               (21, 4, 2, 2, '2026-06-29 16:20:40'),
+                                                                                               (22, 3, 0, 0, '2026-06-29 19:11:06'),
+                                                                                               (23, 4, 0, 0, '2026-06-29 22:11:58'),
+                                                                                               (24, 4, 0, 0, '2026-06-29 22:36:03'),
+                                                                                               (25, 4, 0, 0, '2026-06-29 22:36:26'),
+                                                                                               (26, 4, 0, 0, '2026-06-29 22:40:59'),
+                                                                                               (27, 4, 0, 0, '2026-06-29 22:43:22'),
+                                                                                               (28, 4, 0, 0, '2026-06-29 22:48:33'),
+                                                                                               (29, 4, 0, 0, '2026-06-29 22:49:56'),
+                                                                                               (30, 4, 0, 0, '2026-06-29 22:49:57'),
+                                                                                               (31, 4, 0, 0, '2026-06-29 22:51:30'),
+                                                                                               (32, 5, 0, 0, '2026-06-29 23:24:44'),
+                                                                                               (33, 5, 0, 0, '2026-07-02 14:57:51'),
+                                                                                               (34, 5, 0, 0, '2026-07-02 15:11:42'),
+                                                                                               (35, 5, 0, 0, '2026-07-06 16:31:52'),
+                                                                                               (36, 5, 0, 0, '2026-07-06 16:42:09'),
+                                                                                               (37, 5, 0, 0, '2026-07-06 19:18:20'),
+                                                                                               (38, 5, 0, 0, '2026-07-06 19:18:23'),
+                                                                                               (39, 5, 0, 0, '2026-07-06 19:22:08'),
+                                                                                               (40, 5, 0, 0, '2026-07-06 21:04:11');
 
 -- --------------------------------------------------------
 
@@ -301,7 +334,7 @@ CREATE TABLE `pregunta` (
                             `categoria_id` int(11) NOT NULL,
                             `contenido` text NOT NULL,
                             `imagen_url` varchar(255) DEFAULT NULL,
-                            `estado` enum('sugerida','aprobada','reportada','eliminada') DEFAULT 'aprobada',
+                            `estado` enum('aprobada','pendiente','reportada','rechazada','eliminada') NOT NULL DEFAULT 'aprobada',
                             `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -346,7 +379,7 @@ INSERT INTO `pregunta` (`id`, `categoria_id`, `contenido`, `imagen_url`, `estado
                                                                                                          (34, 2, '¿Cómo se denomina al proceso biológico por el cual una célula se divide dando origen a dos células hijas genéticamente idénticas?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (35, 2, '¿Aproximadamente cuántos minutos tarda la luz del Sol en llegar a la superficie de la Tierra?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (36, 3, '¿Qué tratado de paz, firmado en 1648, puso fin a la Guerra de los Treinta Años en Europa?', NULL, 'aprobada', '2026-06-01 20:03:33'),
-                                                                                                         (37, 3, '¿Quién fue el último zar de la Rusia Imperial antes de la Revolución Bolchevique de 1917?', NULL, 'aprobada', '2026-06-01 20:03:33'),
+                                                                                                         (37, 3, '¿Quién fue el último zar de la Rusia Imperial antes de la Revolución Bolchevique de 1917?', NULL, 'reportada', '2026-06-01 20:03:33'),
                                                                                                          (38, 3, '¿En qué año se produjo la famosa Batalla de Waterloo, que marcó la derrota definitiva de Napoleón Bonaparte?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (39, 3, '¿Qué código de leyes unificado, creado en la antigua Mesopotamia, es famoso por aplicar la ley del talión (\"ojo por ojo\")?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (40, 3, '¿Qué emperador romano legalizó el cristianismo en el Imperio mediante el Edicto de Milán en el año 313 d.C.?', NULL, 'aprobada', '2026-06-01 20:03:33'),
@@ -360,6 +393,26 @@ INSERT INTO `pregunta` (`id`, `categoria_id`, `contenido`, `imagen_url`, `estado
                                                                                                          (48, 5, '¿Qué actor interpretó al icónico personaje de Michael Corleone en la trilogía cinematográfica de \"El Padrino\"?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (49, 5, '¿Qué novela distópica del escritor George Orwell introdujo por primera vez el concepto del \"Gran Hermano\" (Big Brother)?', NULL, 'aprobada', '2026-06-01 20:03:33'),
                                                                                                          (50, 5, '¿Quién compuso la icónica banda sonora de películas como \"Star Wars\", \"Tiburón\", \"Indiana Jones\" y \"Harry Potter\"?', NULL, 'aprobada', '2026-06-01 20:03:33');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reporte`
+--
+
+CREATE TABLE `reporte` (
+                           `id` int(11) NOT NULL,
+                           `id_pregunta` int(11) NOT NULL,
+                           `motivo` text NOT NULL,
+                           `fecha_reporte` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reporte`
+--
+
+INSERT INTO `reporte` (`id`, `id_pregunta`, `motivo`, `fecha_reporte`) VALUES
+    (1, 37, 'nal', '2026-07-06 21:04:23');
 
 -- --------------------------------------------------------
 
@@ -380,18 +433,74 @@ CREATE TABLE `usuario` (
                            `latitud` decimal(10,7) DEFAULT NULL,
                            `token_verificacion` varchar(64) DEFAULT NULL,
                            `verificado` tinyint(1) NOT NULL DEFAULT 0,
-                           `puntaje` int(11) NOT NULL DEFAULT 0
+                           `puntaje` int(11) NOT NULL DEFAULT 0,
+                           `rol` enum('jugador','editor','admin') NOT NULL DEFAULT 'jugador',
+                           `fecha_registro` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`) VALUES
-    (1, 'Esteban', '2000', 'Masculino', 'esteban_alejo12@hotmail.com', 'epuche', '$2y$10$aS3k8N7WUbZgRKL3lq/rSeXkYVaUbtSfTm3e2yxka926fWaYlT4Eu', NULL, -58.3816000, -34.6037000, '3b8556473ec528e8714a8daeea9beda1', 0, 2);
+INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`, `fecha_registro`) VALUES
+                                                                                                                                                                                                                                      (2, 'Esteban', 2000, 'Masculino', 'esteban_alejo12@hotmail.com', 'epuche', '$2y$10$4olqYXk1DTNo/kgdL1sG.exx9lwBOUkgQDYQ0i2sKzKt2MeuYtfi2', '/assets/imgPerfiles/epuche_1782425268.jpg', '-58.3816000', '-34.6037000', NULL, 1, 4, 'admin', '2026-07-08 15:42:48'),
+                                                                                                                                                                                                                                      (3, 'Cecilia Fernández ', 1992, 'Femenino', 'cefernandez92@gmail.com', 'Ceci', '$2y$10$W27p2d4udtbw0waTvfD5N.dLwTFdpSYrXQ3hIAjkEXwgqgXC.COe.', '/assets/imgPerfiles/Ceci_1782430261.jpg', '-58.4126707', '-34.6176318', NULL, 1, 8, 'jugador', '2026-07-08 15:42:48'),
+                                                                                                                                                                                                                                      (4, 'Valentinita', 2003, 'Femenino', 'valenvdz7@gmail.com', 'valentinita123', '$2y$10$1NtF295XNJCcL22Z0LQXXemgFJMYGhM2iXOdXE3sWadoG2.BmbFmS', '/assets/imgPerfiles/valentinita123_1782513239.jpg', '-58.3672337', '-34.5674943', NULL, 1, 2, 'jugador', '2026-07-08 15:42:48'),
+                                                                                                                                                                                                                                      (5, 'Candela Roger', 2006, 'Femenino', 'rogercandela58@gmail.com', 'Can07', '$2y$10$f1nihMY/oIQ.NKfEWCIhS.9wxErm5tUD396rZK1iKqt46DJa0hXoW', NULL, '-58.3816000', '-34.6037000', NULL, 1, 0, 'editor', '2026-07-08 15:42:48');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_pregunta`
+--
+
+CREATE TABLE `usuario_pregunta` (
+                                    `id` int(11) NOT NULL,
+                                    `usuario_id` int(11) NOT NULL,
+                                    `pregunta_id` int(11) NOT NULL,
+                                    `respondida_correctamente` tinyint(1) NOT NULL DEFAULT 0,
+                                    `fecha` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuario_pregunta`
+--
+
+INSERT INTO `usuario_pregunta` (`id`, `usuario_id`, `pregunta_id`, `respondida_correctamente`, `fecha`) VALUES
+                                                                                                            (1, 2, 45, 0, '2026-07-08 15:42:48'),
+                                                                                                            (2, 2, 48, 1, '2026-07-08 15:42:48'),
+                                                                                                            (3, 2, 39, 0, '2026-07-08 15:42:48'),
+                                                                                                            (4, 2, 43, 0, '2026-07-08 15:42:48'),
+                                                                                                            (5, 2, 3, 1, '2026-07-08 15:42:48'),
+                                                                                                            (6, 2, 24, 1, '2026-07-08 15:42:48'),
+                                                                                                            (7, 2, 35, 0, '2026-07-08 15:42:48'),
+                                                                                                            (8, 3, 36, 0, '2026-07-08 15:42:48'),
+                                                                                                            (9, 3, 2, 1, '2026-07-08 15:42:48'),
+                                                                                                            (10, 3, 15, 1, '2026-07-08 15:42:48'),
+                                                                                                            (11, 3, 8, 1, '2026-07-08 15:42:48'),
+                                                                                                            (12, 3, 9, 1, '2026-07-08 15:42:48'),
+                                                                                                            (13, 3, 28, 0, '2026-07-08 15:42:48'),
+                                                                                                            (14, 3, 17, 1, '2026-07-08 15:42:48'),
+                                                                                                            (15, 3, 4, 1, '2026-07-08 15:42:48'),
+                                                                                                            (16, 3, 29, 0, '2026-07-08 15:42:48'),
+                                                                                                            (17, 3, 42, 1, '2026-07-08 15:42:48'),
+                                                                                                            (18, 4, 43, 0, '2026-07-08 15:42:48'),
+                                                                                                            (19, 4, 5, 1, '2026-07-08 15:42:48'),
+                                                                                                            (20, 4, 32, 1, '2026-07-08 15:42:48'),
+                                                                                                            (21, 4, 8, 1, '2026-07-08 15:42:48'),
+                                                                                                            (22, 4, 50, 1, '2026-07-08 15:42:48'),
+                                                                                                            (23, 4, 40, 1, '2026-07-08 15:42:48'),
+                                                                                                            (24, 3, 47, 1, '2026-07-08 15:42:48'),
+                                                                                                            (25, 3, 31, 1, '2026-07-08 15:42:48'),
+                                                                                                            (26, 3, 26, 0, '2026-07-08 15:42:48'),
+                                                                                                            (27, 2, 32, 1, '2026-07-08 15:42:48'),
+                                                                                                            (28, 2, 27, 0, '2026-07-08 15:42:48'),
+                                                                                                            (29, 4, 41, 0, '2026-07-08 15:42:48'),
+                                                                                                            (30, 4, 22, 1, '2026-07-08 15:42:48'),
+                                                                                                            (31, 4, 34, 1, '2026-07-08 15:42:48'),
+                                                                                                            (32, 4, 45, 0, '2026-07-08 15:42:48'),
+                                                                                                            (33, 3, 22, 1, '2026-07-08 15:42:48'),
+                                                                                                            (34, 4, 1, 0, '2026-07-08 15:42:48');
 
 --
 -- Índices para tablas volcadas
@@ -426,12 +535,27 @@ ALTER TABLE `pregunta`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
+-- Indices de la tabla `reporte`
+--
+ALTER TABLE `reporte`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_reportes_preguntas` (`id_pregunta`);
+
+--
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
     ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`);
+
+--
+-- Indices de la tabla `usuario_pregunta`
+--
+ALTER TABLE `usuario_pregunta`
+    ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`),
+  ADD KEY `pregunta_id` (`pregunta_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -453,7 +577,7 @@ ALTER TABLE `opcion`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-    MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+    MODIFY `idPartida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `pregunta`
@@ -462,10 +586,22 @@ ALTER TABLE `pregunta`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
+-- AUTO_INCREMENT de la tabla `reporte`
+--
+ALTER TABLE `reporte`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario_pregunta`
+--
+ALTER TABLE `usuario_pregunta`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Restricciones para tablas volcadas
@@ -488,68 +624,21 @@ ALTER TABLE `partida`
 --
 ALTER TABLE `pregunta`
     ADD CONSTRAINT `pregunta_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`);
+
+--
+-- Filtros para la tabla `reporte`
+--
+ALTER TABLE `reporte`
+    ADD CONSTRAINT `fk_reportes_preguntas` FOREIGN KEY (`id_pregunta`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuario_pregunta`
+--
+ALTER TABLE `usuario_pregunta`
+    ADD CONSTRAINT `usuario_pregunta_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `usuario_pregunta_ibfk_2` FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta` (`id`) ON DELETE CASCADE;
 COMMIT;
 
-
-CREATE TABLE `usuario_pregunta` (
-                                    `id` int(11) NOT NULL AUTO_INCREMENT,
-                                    `usuario_id` int(11) NOT NULL,
-                                    `pregunta_id` int(11) NOT NULL,
-                                    `respondida_correctamente` tinyint(1) NOT NULL DEFAULT 0,
-                                    PRIMARY KEY (`id`),
-                                    FOREIGN KEY (`usuario_id`) REFERENCES `usuario`(`id`) ON DELETE CASCADE,
-                                    FOREIGN KEY (`pregunta_id`) REFERENCES `pregunta`(`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-
-ALTER TABLE usuario
-    ADD COLUMN rol ENUM('jugador', 'editor', 'admin') NOT NULL DEFAULT 'jugador';
-
---
--- Tabla `reportes`
---
-CREATE TABLE IF NOT EXISTS `reporte` (
-                                          `id` INT NOT NULL AUTO_INCREMENT,
-                                          `id_pregunta` INT NOT NULL,
-                                          `motivo` TEXT NOT NULL,
-                                          `fecha_reporte` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                                          PRIMARY KEY (`id`),
-    CONSTRAINT `fk_reportes_preguntas`
-    FOREIGN KEY (`id_pregunta`)
-    REFERENCES `pregunta` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-ALTER TABLE pregunta MODIFY COLUMN estado ENUM('aprobada', 'pendiente', 'reportada', 'rechazada','eliminada') NOT NULL DEFAULT 'aprobada';
-
---
--- Volcado de datos para la tabla `usuario` (Rol: Editor)
---
-
-INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`) VALUES
-    (2, 'Test Editor', '2000', 'Masculino', 'editor@hotmail.com', 'editor123', '$2y$10$Mswmp76b2mjCmQMIV0JGLu9fs03J5JU/oIqZODtG/aeDYw0KZ9Fja', NULL, -58.3816000, -34.6037000, '4c9667584fd639f9825b9ebfff0cfeb2', 1, 0, 'editor');
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-/* Actulizacion de la tabla usuario*/
-ALTER TABLE `usuario`
-ADD COLUMN `fecha_registro` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
-/*Actualizacion de la tabla usuario_pregunta*/
-ALTER TABLE `usuario_pregunta`
-ADD COLUMN `fecha` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
--- Usuario administrador General
-
-
-INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`)
-     VALUES (3,'Administrador General', 1980,'Femenino','admin@preguntados.com','admin123','$2y$10$gJNMYBYyjF95sxzgFqkU1OMm/Ss5tSc7UCxke5WcxYULqNMYgW5qW' ,  NULL,-58.3816000,-34.6037000,'tokenadmin123', 1,0,'admin');
-
-
-
-
-
