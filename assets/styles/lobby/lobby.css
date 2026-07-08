@@ -17,26 +17,49 @@ body{
     color:white;
 }
 
-
-.sidebar{
-    background:#111;
-    min-height:100vh;
-    border-right:2px solid #2d2d2d;
-    padding-top:30px;
+/* Estilos base (para celulares y tablets) */
+.sidebar {
+    background: #111;
+    min-height: auto;
+    border-bottom: 2px solid #2d2d2d;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: center;
 }
 
-.lobby-btn{
-    background:#f59a3d;
-    border:none;
-    color:black;
-    font-weight:700;
-    border-radius:10px;
-    padding:12px;
+.lobby-btn {
+    background: #f59a3d;
+    border: none;
+    color: black;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-.lobby-btn:hover{
-    background:#ffad5c;
-    color:black;
+.lobby-btn:hover {
+    background: #ffad5c;
+    color: black;
+}
+
+@media (min-width: 992px) {
+    .sidebar {
+        min-height: 100vh;
+        border-right: 2px solid #2d2d2d;
+        border-bottom: none;
+        padding-top: 30px;
+        display: block;
+    }
+
+    .lobby-btn {
+        padding: 12px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
 }
 
 .panel{
@@ -55,8 +78,8 @@ body{
 
 .profile-content {
     display:flex;
-    align-items:flex-start; 
-    gap:15px; 
+    align-items:flex-start;
+    gap:15px;
 }
 
 
@@ -65,7 +88,7 @@ body{
 
 .profile-name {
     margin:0;
-    line-height:1.2; 
+    line-height:1.2;
     font-family:'Montserrat',sans-serif;
     font-size:1.8rem;
 }

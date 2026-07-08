@@ -1,9 +1,11 @@
-{{>header}}
+<body>
+{{>headRegistro}}
+
 <div class="container my-5 d-flex justify-content-center">
     <div class="card-registro p-4 p-md-5 shadow">
-
+        <a href="/home/irAlHome" class="back-link mt-3 text-decoration-none text-secondary">← Volver al Home</a>
         <div class="text-center mb-4">
-            <img src="/assets/img/logo home.png" alt="Pregunta2" class="img-fluid mb-2" style="height: 60px; object-fit: contain;">
+            <img src="../assets/logo.png" alt="Pregunta2" class="img-fluid mb-2" style="height: 60px; object-fit: contain;">
             <h2 class="title-registro">Crea tu cuenta</h2>
         </div>
 
@@ -81,7 +83,6 @@
             <div class="row mt-4 pt-2">
                 <div class="col-12 d-flex flex-column align-items-center">
                     <button type="submit" class="btn-submit btn-lg shadow-sm w-100">Registrarme</button>
-                    <a href="/home/irAlHome" class="back-link mt-3 text-decoration-none">← Volver al inicio</a>
                 </div>
             </div>
         </form>
@@ -91,3 +92,5 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap&loading=async&libraries=marker" defer></script>
 <script src="../assets/js/mapa-registro.js" defer></script>
 <script src="../assets/js/funcion-imagen-registro.js" defer></script>
+</body>
+

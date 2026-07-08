@@ -1,19 +1,18 @@
+body{
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('../../img/imagen-fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Quicksand', sans-serif;
+    color: #fff;
+}
 
-/*:root{*/
-/*    --dark:#222323;*/
-/*    --orange:#FF9232;*/
-/*    --blue:#ADD8E6;*/
-/*    --white:#FFFFFF;*/
-/*}*/
 
-
-/* Contenedor tipo Tarjeta (Achicado y centrado) */
+/* Tarjeta */
 .card-registro {
     background-color: #d1ecf1;
     border-radius: 16px;
-    max-width: 900px; /*
-    width: 100%;
-    font-family: inherit; /* Mantiene tu fuente anterior */
+    max-width: 900px;
 }
 
 /* Título */
@@ -116,6 +115,8 @@
     color: #555;
     font-size: 14px;
     transition: color 0.2s;
+    font-family: 'Poppins';
+    font-weight: bold;
 }
 .back-link:hover {
     color: #222323;
