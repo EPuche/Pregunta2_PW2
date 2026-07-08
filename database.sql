@@ -6,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS preguntados_bd;
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: sql200.infinityfree.com
--- Tiempo de generación: 08-07-2026 a las 16:30:36
+-- Tiempo de generación: 08-07-2026 a las 18:40:50
 -- Versión del servidor: 11.4.12-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -404,7 +404,7 @@ CREATE TABLE `reporte` (
                            `id` int(11) NOT NULL,
                            `id_pregunta` int(11) NOT NULL,
                            `motivo` text NOT NULL,
-                           `fecha_reporte` timestamp NULL DEFAULT current_timestamp()
+                           `fecha_reporte` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -435,18 +435,19 @@ CREATE TABLE `usuario` (
                            `verificado` tinyint(1) NOT NULL DEFAULT 0,
                            `puntaje` int(11) NOT NULL DEFAULT 0,
                            `rol` enum('jugador','editor','admin') NOT NULL DEFAULT 'jugador',
-                           `fecha_registro` timestamp NULL DEFAULT current_timestamp()
+                           `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
+                           `pais` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`, `fecha_registro`) VALUES
-                                                                                                                                                                                                                                      (2, 'Esteban', 2000, 'Masculino', 'esteban_alejo12@hotmail.com', 'epuche', '$2y$10$4olqYXk1DTNo/kgdL1sG.exx9lwBOUkgQDYQ0i2sKzKt2MeuYtfi2', '/assets/imgPerfiles/epuche_1782425268.jpg', '-58.3816000', '-34.6037000', NULL, 1, 4, 'admin', '2026-07-08 15:42:48'),
-                                                                                                                                                                                                                                      (3, 'Cecilia Fernández ', 1992, 'Femenino', 'cefernandez92@gmail.com', 'Ceci', '$2y$10$W27p2d4udtbw0waTvfD5N.dLwTFdpSYrXQ3hIAjkEXwgqgXC.COe.', '/assets/imgPerfiles/Ceci_1782430261.jpg', '-58.4126707', '-34.6176318', NULL, 1, 8, 'jugador', '2026-07-08 15:42:48'),
-                                                                                                                                                                                                                                      (4, 'Valentinita', 2003, 'Femenino', 'valenvdz7@gmail.com', 'valentinita123', '$2y$10$1NtF295XNJCcL22Z0LQXXemgFJMYGhM2iXOdXE3sWadoG2.BmbFmS', '/assets/imgPerfiles/valentinita123_1782513239.jpg', '-58.3672337', '-34.5674943', NULL, 1, 2, 'jugador', '2026-07-08 15:42:48'),
-                                                                                                                                                                                                                                      (5, 'Candela Roger', 2006, 'Femenino', 'rogercandela58@gmail.com', 'Can07', '$2y$10$f1nihMY/oIQ.NKfEWCIhS.9wxErm5tUD396rZK1iKqt46DJa0hXoW', NULL, '-58.3816000', '-34.6037000', NULL, 1, 0, 'editor', '2026-07-08 15:42:48');
+INSERT INTO `usuario` (`id`, `nombre_completo`, `anio_nacimiento`, `sexo`, `email`, `nombre_usuario`, `contrasena`, `foto_perfil`, `longitud`, `latitud`, `token_verificacion`, `verificado`, `puntaje`, `rol`, `fecha_registro`, `pais`) VALUES
+                                                                                                                                                                                                                                              (2, 'Esteban', 2000, 'Masculino', 'esteban_alejo12@hotmail.com', 'epuche', '$2y$10$4olqYXk1DTNo/kgdL1sG.exx9lwBOUkgQDYQ0i2sKzKt2MeuYtfi2', '/assets/imgPerfiles/epuche_1782425268.jpg', '-58.3816000', '-34.6037000', NULL, 1, 4, 'admin', '2026-07-08 15:42:48', 'Argentina'),
+                                                                                                                                                                                                                                              (3, 'Cecilia Fernández ', 1992, 'Femenino', 'cefernandez92@gmail.com', 'Ceci', '$2y$10$W27p2d4udtbw0waTvfD5N.dLwTFdpSYrXQ3hIAjkEXwgqgXC.COe.', '/assets/imgPerfiles/Ceci_1782430261.jpg', '-58.4126707', '-34.6176318', NULL, 1, 8, 'jugador', '2026-07-08 15:42:48', 'Argentina'),
+                                                                                                                                                                                                                                              (4, 'Valentinita', 2003, 'Femenino', 'valenvdz7@gmail.com', 'valentinita123', '$2y$10$1NtF295XNJCcL22Z0LQXXemgFJMYGhM2iXOdXE3sWadoG2.BmbFmS', '/assets/imgPerfiles/valentinita123_1782513239.jpg', '-58.3672337', '-34.5674943', NULL, 1, 2, 'jugador', '2026-07-08 15:42:48', 'Argentina'),
+                                                                                                                                                                                                                                              (5, 'Candela Roger', 2006, 'Femenino', 'rogercandela58@gmail.com', 'Can07', '$2y$10$f1nihMY/oIQ.NKfEWCIhS.9wxErm5tUD396rZK1iKqt46DJa0hXoW', NULL, '-58.3816000', '-34.6037000', NULL, 1, 0, 'editor', '2026-07-08 15:42:48', 'Argentina');
 
 -- --------------------------------------------------------
 
@@ -459,7 +460,7 @@ CREATE TABLE `usuario_pregunta` (
                                     `usuario_id` int(11) NOT NULL,
                                     `pregunta_id` int(11) NOT NULL,
                                     `respondida_correctamente` tinyint(1) NOT NULL DEFAULT 0,
-                                    `fecha` timestamp NULL DEFAULT current_timestamp()
+                                    `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
