@@ -23,6 +23,9 @@ class EditorController{
         unset($p);
 
         $data["preguntas"]=$preguntas;
+
+        $data['logoHref'] = $_SESSION['logoHref'];
+        
         $this->renderer->render('panelEditorView', $data);
     }
     public function mostrarPreguntasReportadas()
@@ -34,6 +37,7 @@ class EditorController{
         }
         unset($reporte);
         $data['reportadas']=$reportadas;
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render('panelEditorReportadas', $data);
     }
     public function mostrarPreguntasSugeridas()
@@ -45,6 +49,7 @@ class EditorController{
         unset($sugerida);
 
         $data['sugeridas']=$sugeridas;
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render('panelEditorSugeridas', $data);
 
     }
@@ -84,6 +89,7 @@ class EditorController{
 
         $data['pregunta'] = isset($resultadoPregunta[0]) ? $resultadoPregunta[0] : $resultadoPregunta;
         $data['opciones'] = $this->model->getOpcionesPorPregunta($id_pregunta);
+        $data['logoHref'] = $_SESSION['logoHref'];
 
         $this->renderer->render('modificarPreguntaView', $data);
     }

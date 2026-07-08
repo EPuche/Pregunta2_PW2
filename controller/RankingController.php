@@ -22,7 +22,7 @@ class RankingController
     public function irAlRanking()
     {
         $datosRanking = $this->rankingModel->rankearUsuarios();
-     
+
         foreach ($datosRanking as &$usuario) {
 
             $foto = $usuario["foto_perfil"];
@@ -41,7 +41,7 @@ class RankingController
         $data = [
             'usuarios' => $datosRanking
         ];
-
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("rankingView", $data);
     }
 }

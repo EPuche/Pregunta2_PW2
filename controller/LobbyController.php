@@ -49,7 +49,9 @@ class LobbyController
             "historial" => $historial
         ];
 
+        
 
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("lobbyView", $data);
     }
 }

@@ -85,12 +85,22 @@ public function contarPartidasPorIntervalo($intervalo = "30 DAY") {
     $filas = $this->database->query($sql);
     return !empty($filas) ? $filas[0]['total'] : 0;
 }
+/*public function porcentajeCorrectasPorUsuario($intervalo) {
+    $sql = "SELECT u.nombre AS nombre,
+                   ROUND(AVG(p.preguntasCorrectas), 2) AS promedio
+            FROM partida p
+            JOIN usuario u ON u.id = p.idUsuario
+            WHERE p.fecha >= NOW() - INTERVAL $intervalo
+            GROUP BY p.idUsuario, u.nombre";
+    return $this->database->query($sql);
+}*/
 public function porcentajeCorrectasPorUsuario($intervalo) {
-    $sql = "SELECT usuario_id,
-                   ROUND((SUM(respondida_correctamente) / COUNT(*)) * 100, 2) AS porcentaje
-            FROM usuario_pregunta
-            WHERE fecha >= NOW() - INTERVAL $intervalo
-            GROUP BY usuario_id";
+    $sql = "SELECT u.nombre_usuario AS usuario_id,
+                   ROUND(AVG(p.preguntasCorrectas), 2) AS porcentaje
+            FROM partida p
+            JOIN usuario u ON u.id = p.idUsuario
+            WHERE p.fecha >= NOW() - INTERVAL $intervalo
+            GROUP BY p.idUsuario, u.nombre_usuario";
     return $this->database->query($sql);
 }
 

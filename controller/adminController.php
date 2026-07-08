@@ -44,7 +44,7 @@ class AdminController
             "esAnio"            => $filtro === 'anio'
         ];
 
-       
+
         $data['sexoLabels'] = json_encode(array_column($data['usuariosPorSexo'], 'sexo'));
         $data['sexoDatos']  = json_encode(array_column($data['usuariosPorSexo'], 'cantidad'));
 
@@ -58,48 +58,61 @@ class AdminController
             $datos[]  = $fila['porcentaje'];
         }
 
-        /* Datos de prueba 
-        $data['correctasLabels'] = json_encode($labels ?: [1,2,3]);
-        $data['correctasDatos']  = json_encode($datos ?: [75,60,90]);*/
+        $data['correctasLabels'] = json_encode($labels);
+        $data['correctasDatos']  = json_encode($datos);
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("adminEstadisticasView.mustache", $data);
     }
 
-   
+
     public function usuarios()
-    {
-        $data = [
-            "usuarios" => $this->usuarioModel->getAll()
-        ];
-        $this->renderer->render("adminUsuariosView.mustache", $data);
+    {  $busqueda = $_GET['q'] ?? null;
+
+    if ($busqueda) {
+        // método que filtre por nombre o email
+        $usuarios = $this->usuarioModel->buscarUsuarios($busqueda);
+    } else {
+        $usuarios = $this->usuarioModel->getAll();
     }
 
-    
+    $data = [
+        "usuarios" => $usuarios,
+        "logoHref" => $_SESSION['logoHref']
+    ];
+
+    $this->renderer->render("adminUsuariosView.mustache", $data);
+    }
+
+   /*
     public function partidas()
     {
         $data = [
             "partidas" => $this->partidaModel->getAll()
         ];
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("adminPartidasView.mustache", $data);
     }
 
-  
+
     public function preguntas()
     {
         $data = [
             "preguntas" => $this->preguntaModel->getAll()
         ];
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("adminPreguntasView.mustache", $data);
-    }
+    }*/
 
-    // Trampitas / Ventas
+    /*Trampitas / Ventas
     public function trampitas()
     {
-        
+
         $data = [
-            "ventas" => [] 
+            "ventas" => []
         ];
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("adminTrampitasView.mustache", $data);
-    }
+    }*/
 
     public function irAlHome()
     {

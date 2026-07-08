@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-
   const sexoCanvas = document.getElementById("sexoChart");
   if (sexoCanvas) {
     limitarTamaño(sexoCanvas);
@@ -25,10 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       options: {
         maintainAspectRatio: false,
-        responsive: true
-      }
+        responsive: true,
+        plugins: {
+          datalabels: {
+            color: "#070606",
+            formatter: function(value, context) {
+              const label = context.chart.data.labels[context.dataIndex];
+              return label + ": " + value;
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
     });
   }
+
 
   const edadCanvas = document.getElementById("edadChart");
   if (edadCanvas) {
@@ -47,8 +57,19 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       options: {
         maintainAspectRatio: false,
-        responsive: true
-      }
+        responsive: true,
+        plugins: {
+          datalabels: {
+            anchor: 'center',
+            align: 'center',
+            color: "#111010",
+            formatter: function(value) {
+              return value; 
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
     });
   }
 
@@ -59,11 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const labels = JSON.parse(corrCanvas.dataset.labels || "[]");
     const datos = JSON.parse(corrCanvas.dataset.datos || "[]");
     new Chart(corrCanvas, {
-      type: "line",
+      type: "bar",
       data: {
         labels: labels,
         datasets: [{
-          label: "% Correctas (promedio por usuario)",
+          label: "% Respuestas Correctas  por usuario",
           data: datos,
           borderColor: "#36A2EB",
           backgroundColor:"#dc36eb",
@@ -73,8 +94,20 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       options: {
         maintainAspectRatio: false,
-        responsive: true
-      }
+        responsive: true,
+        plugins: {
+          datalabels: {
+            anchor: 'center',
+            align: 'center',
+            color: "#070707",
+            formatter: function(value) {
+              return value + "%"; 
+            }
+          }
+        }
+      },
+      plugins: [ChartDataLabels]
     });
   }
+
 });

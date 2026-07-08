@@ -23,6 +23,8 @@ class UsuarioController
             $datos['error_registro'] = $_SESSION['error_registro'];
             unset($_SESSION['error_registro']);
         }
+
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("registroView", $datos);
     }
 
@@ -155,6 +157,7 @@ class UsuarioController
             "esPropio"        => $esPropio
 
         ];
+        $data['logoHref'] = $_SESSION['logoHref'];
 
         $this->renderer->render("verPerfilView", $data);
     }

@@ -259,31 +259,40 @@ public function contarUsuariosNuevos($intervalo = "30 DAY") {
     return !empty($filas) ? $filas[0]['total'] : 0;
 }
 
-public function usuariosPorSexo() {
-    $sql = "SELECT sexo, COUNT(*) AS cantidad 
-            FROM usuario 
+public function usuariosPorSexo($intervalo = "30 DAY") {
+    $sql = "SELECT sexo, COUNT(*) AS cantidad
+            FROM usuario
+            WHERE fecha_registro >= NOW() - INTERVAL $intervalo
             GROUP BY sexo";
-    Log::info("SQL: $sql");
     return $this->database->query($sql);
 }
 
-public function usuariosPorEdad() {
+public function usuariosPorEdad($intervalo = "30 DAY") {
     $sql = "SELECT 
                 CASE 
-                    WHEN YEAR(CURDATE()) - anio_nacimiento < 18 THEN 'menores'
-                    WHEN YEAR(CURDATE()) - anio_nacimiento >= 65 THEN 'jubilados'
-                    ELSE 'medio'
+                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) < 18 THEN 'Menores de 18'
+                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) BETWEEN 18 AND 30 THEN '18-30'
+                    WHEN TIMESTAMPDIFF(YEAR, anio_nacimiento, CURDATE()) BETWEEN 31 AND 50 THEN '31-50'
+                    ELSE '50+' 
                 END AS grupo,
                 COUNT(*) AS cantidad
             FROM usuario
+            WHERE fecha_registro >= NOW() - INTERVAL $intervalo
             GROUP BY grupo";
-    Log::info("SQL: $sql");
     return $this->database->query($sql);
 }
 
 public function getAll() {
     $sql = "SELECT id, nombre_usuario, email, puntaje FROM usuario";
     return $this->database->query($sql);
+}
+
+public function buscarUsuarios($q) {
+    $sql = "SELECT * FROM usuario 
+            WHERE nombre_usuario LIKE ? 
+               OR email LIKE ?";
+    $param = "%$q%";
+    return $this->database->query($sql, [$param, $param]);
 }
 
 

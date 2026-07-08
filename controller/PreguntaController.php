@@ -11,29 +11,35 @@ class PreguntaController
         $this->renderer = $renderer;
     }
 
-    public function irACrearPregunta(){
-        $this->renderer->render("crearPreguntaView");
+    public function irACrearPregunta()
+    {
+        $data = [];
+
+        $data['logoHref'] = $_SESSION['logoHref'] ?? '/lobby/irAlLobby';
+        $this->renderer->render("crearPreguntaView", $data);
     }
 
 
-    public function enviarARevision() {
+    public function enviarARevision()
+    {
         if (empty($_POST['pregunta']) || empty($_POST['opcionCorrecta'])) {
             return;
         }
         $datosPregunta = new PreguntaDTO($_POST);
         $this->preguntaModel->crearNuevaPregunta($datosPregunta);
-        header("Location: /lobby/irAlLobby");
+        $redirect = $_SESSION['logoHref'];
+        header("Location: $redirect");
     }
     public function reportarPregunta()
     {
         $idPregunta = $_POST['id_pregunta'];
-        $motivo= $_POST['motivo'];
+        $motivo = $_POST['motivo'];
 
-        if (!empty($idPregunta) && !empty($motivo)){
-            $this->preguntaModel->guardarReporte($idPregunta,$motivo);
+        if (!empty($idPregunta) && !empty($motivo)) {
+            $this->preguntaModel->guardarReporte($idPregunta, $motivo);
         }
-        header("Location: /lobby/irAlLobby");
+        $redirect = $_SESSION['logoHref'];
+        header("Location: $redirect");
         exit();
     }
-
 }
