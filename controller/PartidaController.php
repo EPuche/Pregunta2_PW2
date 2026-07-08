@@ -21,8 +21,9 @@ class PartidaController
         $this->limpiarDatosDeRondaDeLaSession();
         $idUsuario = $_SESSION["id"];
         $partida = $this->partidaModel->crearPartida($idUsuario);
+        $data['logoHref'] = $_SESSION['logoHref'];
         $_SESSION["partida"] = $partida;
-        $this->renderer->render("ruletaView");
+        $this->renderer->render("ruletaView", $data);
 
     }
 
@@ -32,8 +33,9 @@ class PartidaController
             header("Location: /lobby/irAlLobby");
             exit;
         }
+         $data['logoHref'] = $_SESSION['logoHref'];
 
-        $this->renderer->render("ruletaView");
+        $this->renderer->render("ruletaView", $data);
     }
     public function procesarRuleta() {
 
@@ -70,6 +72,7 @@ class PartidaController
             "opciones"  => $opciones,
             "tiempo_restante" => $segundos_restantes // Lo mandamos a la vista
         ];
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("partidaView", $data);
     }
 
@@ -93,8 +96,9 @@ class PartidaController
             "ya_respondio" => true,
             "puntaje"      => $partida->getPuntaje()
         ];
-
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->limpiarDatosDeRondaDeLaSession();
+      
         $this->renderer->render("partidaView", $data);
     }
     public function tiempoExpirado(){
@@ -105,6 +109,7 @@ class PartidaController
         ];
         $this->limpiarDatosDeRondaDeLaSession();
         $this->partidaModel->finalizarPartida($partida);
+        $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("partidaView", $data);
     }
 
@@ -124,6 +129,8 @@ class PartidaController
         unset($_SESSION['pregunta_actual']);
         unset($_SESSION['opciones_actuales']);
         unset($_SESSION['tiempo_limite']);
+    
+        
     }
 
 
