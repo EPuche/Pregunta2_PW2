@@ -8,10 +8,12 @@ async function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         zoom: 12, center: ubicacionDefault,
     });
+    geocoder = new google.maps.Geocoder();
     marker = new google.maps.Marker({
         position: ubicacionDefault, map: map, draggable: true
     });
     actualizarCoordenadas(ubicacionDefault.lat, ubicacionDefault.lng);
+    obtenerPais(ubicacionDefault); 
 
     map.addListener("click", (event) => {
         const nuevaPosicion = event.latLng;
@@ -23,7 +25,7 @@ async function initMap() {
     marker.addListener("dragend", () => {
         const posicionMarcador = marker.getPosition();
         actualizarCoordenadas(posicionMarcador.lat(), posicionMarcador.lng());
-        obtenerPais(posicion);
+        obtenerPais(posicionMarcador); 
 
     });
 }
@@ -70,6 +72,8 @@ function obtenerPais(posicion) {
 
                 }
 
+            } else {
+                console.error("Geocoder fallo con status:", status);
             }
 
         });

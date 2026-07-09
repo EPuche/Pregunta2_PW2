@@ -169,7 +169,7 @@ class UsuarioController
         $id = $_SESSION["id"];
 
         $usuario = $this->model->getUsuario($id);
-
+       
         $this->renderer->render("editarPerfilView", $usuario);
     }
     public function guardarPerfil()
@@ -227,10 +227,10 @@ class UsuarioController
             $_POST["sexo"],
             $_POST["email"],
             $_POST["nombre_usuario"],
-            $fotoPerfil,
-            $_POST["longitud"],
-            $_POST["latitud"],
+            $_POST["longitud"] ?? null,
+            $_POST["latitud"] ?? null,
             $_POST["pais"] ?? null,
+            $fotoPerfil,
             $hashContrasena
 
 
