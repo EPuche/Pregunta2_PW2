@@ -24,7 +24,7 @@ class UsuarioController
             unset($_SESSION['error_registro']);
         }
 
-        $data['logoHref'] = $_SESSION['logoHref'];
+       
         $this->renderer->render("registroView", $datos);
     }
 
