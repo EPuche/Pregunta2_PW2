@@ -83,7 +83,7 @@
             <!-- Inputs ocultos para que el mapa los complete -->
             <input type="hidden" id="latitud" name="latitud" value="{{latitud}}">
             <input type="hidden" id="longitud" name="longitud" value="{{longitud}}">
-            <input type="hidden" id="pais" name="pais" value="{{pais}}">
+            <input type="hidden" id="pais" name="pais" value="{{pais}}" >
 
             <h4 class="mt-4 mb-3">Ubicación</h4>
             <div id="map" style="height:400px;border-radius:10px;"></div>
@@ -97,6 +97,7 @@
     </div>
 </div>
 
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxuzIIy75GG7EYWCPSiVBEAoXf4pvR-vk&callback=initMap&loading=async&libraries=marker" defer></script>
 <script src="/assets/js/mapa-editar.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_fPtGvmDcNqWeuqQd3whnJk1ohlM5hu8&callback=initMap&loading=async&libraries=places" defer></script>
 {{>footer}}
