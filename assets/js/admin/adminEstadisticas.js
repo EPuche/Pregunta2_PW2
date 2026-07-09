@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    function limitarTamaño(canvas, ancho = 250, alto= 250) {
+    function limitarTamaño(canvas, ancho = 250, alto = 250) {
         if (canvas) {
             canvas.style.maxWidth = ancho + "px";
             canvas.style.maxHeight = alto + "px";
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: {
                 labels: labels,
                 datasets: [{
-                    label: "% Respuestas Correctas  por usuario",
+                    label: "% Respuestas Correctas por usuario",
                     data: datos,
                     borderColor: "#36A2EB",
                     backgroundColor: "#dc36eb",
@@ -101,7 +101,19 @@ document.addEventListener("DOMContentLoaded", () => {
                         align: 'center',
                         color: "#070707",
                         formatter: function (value) {
-                            return value + "%";
+                            
+                            return (value * 100).toFixed(0) + "%";
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        min: 0,
+                        max: 1, 
+                        ticks: {
+                            callback: function (value) {
+                                return (value * 100) + "%";
+                            }
                         }
                     }
                 }
@@ -109,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
             plugins: [ChartDataLabels]
         });
     }
+
 
     const paisCanvas = document.getElementById("paisChart");
     if (paisCanvas) {
