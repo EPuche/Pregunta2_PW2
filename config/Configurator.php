@@ -48,6 +48,10 @@ class Configurator {
     {
         return new RankingModel($this->getDatabase());
     }
+    private function getTrampitasModel()
+    {
+        return new TrampitasModel($this->getDatabase());
+    }
     private function getPartidaModel()
     {
         return new PartidaModel($this->getDatabase());
@@ -81,6 +85,10 @@ class Configurator {
     }
     public function getLoginController() {
         return new LoginController($this->getUsuarioModel(), $this->getRenderer(), new Request());
+    }
+    public function getTrampitasController() {
+
+        return new TrampitasController($this->getUsuarioModel(), $this->getRenderer(), new Request(), $this->getTrampitasModel());
     }
     public function getPartidaController() {
         return new PartidaController($this->getPreguntaModel(),$this->getPartidaModel() ,$this->getRenderer(), new Request());

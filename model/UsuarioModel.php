@@ -219,6 +219,15 @@ class UsuarioModel
         $filas = $this->database->query($sql, [$usuarioId]);
         return !empty($filas) ? ($filas[0]['total'] ?? 0) : 0;
     }
+    public function getTrampitasTotal($usuarioId)
+    {
+        $sql = "SELECT trampitas  
+            FROM usuario 
+            WHERE id = ?";
+        $filas = $this->database->query($sql, [$usuarioId]);
+        return  $filas[0]['trampitas'];
+    }
+
 
 
     public function guardarPartidaContraBot($usuarioId, $preguntasCorrectas, $puntaje)
@@ -325,6 +334,13 @@ class UsuarioModel
         $param = "%$q%";
         return $this->database->query($sql, [$param, $param]);
     }
+
+
+
+
+
+
+
 
 
 }
