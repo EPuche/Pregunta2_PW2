@@ -38,7 +38,6 @@ class TrampitasController
             header("Location: " . $preference->init_point);
             exit;
         } catch (Exception $e) {
-            http_response_code(200);
             echo "<h3>Error detectado en Mercado Pago:</h3>";
             echo "<pre>" . $e->getMessage() . "</pre>";
 
