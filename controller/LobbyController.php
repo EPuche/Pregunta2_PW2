@@ -15,16 +15,19 @@ class LobbyController
 
     public function irAlLobby()
     {
+        if (session_status() === PHP_SESSION_NONE) { session_start(); }
+
         if (!isset($_SESSION["id"])) {
             header("Location:/login/irAlLogin");
             exit;
         }
 
         $usuario = $this->usuarioModel->getUsuario($_SESSION["id"]);
-        /*$partidasActivas = $this->usuarioModel->getPartidasActivas($_SESSION["id"]);*/
         $historial = $this->usuarioModel->getHistorial($_SESSION["id"]) ?? [];
         $puntajeTotal = $this->usuarioModel->getPuntajeTotal($_SESSION["id"]);
+        $trampitas = $this->usuarioModel->getTrampitasTotal($_SESSION["id"]);
         $rankingUsuarios = $this->rankingModel->rankearUsuarios();
+
         $posicion = "-";
         foreach ($rankingUsuarios as $u) {
             if ($u["id"] == $usuario["id"]) {
@@ -32,26 +35,36 @@ class LobbyController
                 break;
             }
         }
-        $fotoPerfil = $usuario["foto_perfil"];
 
-        if (
-            empty($fotoPerfil) ||
-            !file_exists($_SERVER["DOCUMENT_ROOT"] . $fotoPerfil)
-        ) {
+        $fotoPerfil = $usuario["foto_perfil"];
+        if (empty($fotoPerfil) || !file_exists($_SERVER["DOCUMENT_ROOT"] . $fotoPerfil)) {
             $fotoPerfil = "/assets/imgPerfiles/default-user.png";
         }
+
         $data = [
             "nombreUsuario" => $usuario["nombre_usuario"],
             "puntaje" => $puntajeTotal,
             "fotoPerfil" => $fotoPerfil,
             "ranking" => $posicion,
-            /*  "partidasActivas" => $partidasActivas,*/
-            "historial" => $historial
+            "trampitas" => $trampitas,
+            "historial" => $historial,
+            "logoHref" => $_SESSION['logoHref'] ?? '/'
         ];
 
-        
 
-        $data['logoHref'] = $_SESSION['logoHref'];
+        if (isset($_SESSION['compra']) && $_SESSION['compra'] === true) {
+            $data['compraExitosa'] = true;
+            $data['cantidadTrampitas'] = $_SESSION['cantidadTrampitas'];
+
+
+            unset($_SESSION['compra']);
+            unset($_SESSION['cantidadTrampitas']);
+        }
+
+        if (isset($_GET['error']) && $_GET['error'] === 'pago_fallido') {
+            $data['compraFallida'] = true;
+        }
+
         $this->renderer->render("lobbyView", $data);
     }
 }

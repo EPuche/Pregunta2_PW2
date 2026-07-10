@@ -3,13 +3,22 @@
         'name' => 'pregunta2/pw2',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7d5b158f94c1f6ea11f42ed18ed82b08923699b3',
+        'reference' => 'af265ee26b5a46286715ffc88e558ca28a978790',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'mercadopago/dx-php' => array(
+            'pretty_version' => '3.10.0',
+            'version' => '3.10.0.0',
+            'reference' => 'f398a619beccced1abe9d99586d64525f22313e3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../mercadopago/dx-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'mustache/mustache' => array(
             'pretty_version' => 'v2.14.2',
             'version' => '2.14.2.0',
@@ -31,7 +40,7 @@
         'pregunta2/pw2' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7d5b158f94c1f6ea11f42ed18ed82b08923699b3',
+            'reference' => 'af265ee26b5a46286715ffc88e558ca28a978790',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -11,6 +11,10 @@ class ComposerStaticInit89c0b3530e98104ad1a1090cd25dfbad
         array (
             'PHPMailer\\PHPMailer\\' => 20,
         ),
+        'M' =>
+        array (
+            'MercadoPago\\' => 12,
+        ),
         'A' =>
         array (
             'App\\' => 4,
@@ -21,6 +25,10 @@ class ComposerStaticInit89c0b3530e98104ad1a1090cd25dfbad
         'PHPMailer\\PHPMailer\\' =>
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'MercadoPago\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/mercadopago/dx-php/src/MercadoPago',
         ),
         'App\\' =>
         array (
