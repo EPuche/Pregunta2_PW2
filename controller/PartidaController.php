@@ -29,7 +29,9 @@ class PartidaController
 
     public function jugar()
     {
-        if (!isset($_SESSION["partida"]) || $this->partidaModel->finalizoPartida($_SESSION["partida"])) {
+        $partida = $_SESSION["partida"];
+        if (!isset($_SESSION["partida"]) || $this->partidaModel->finalizoPartida($partida)) {
+            $this->partidaModel->finalizarPartida($partida);
             header("Location: /lobby/irAlLobby");
             exit;
         }
@@ -80,7 +82,6 @@ class PartidaController
     public function verificarRespuesta() {
         $pregunta = $_SESSION['pregunta_actual'];
         $partida = $_SESSION['partida'];
-
         $idOpcionElegida = $_POST['opcion_elegida'];
         $opciones = $_SESSION['opciones_actuales'];
 
