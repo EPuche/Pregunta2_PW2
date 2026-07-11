@@ -59,6 +59,7 @@ class TrampitasController
     }
 
     public function pagoExitoso() {
+
         try {
             if (!isset($_GET['external_reference'])) {
                 header("Location: /lobby?error=pago_invalido");
