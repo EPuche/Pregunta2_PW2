@@ -55,4 +55,9 @@ return [
         'enviarARevision'  => ['jugador'],
         'reportarPregunta' => ['jugador'],
     ],
+    'trampitas' => [
+        'procesarPago' => ['jugador'],
+        'pagoExitoso'  => ['jugador'],
+    ],
+
 ];
