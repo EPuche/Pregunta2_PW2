@@ -21,7 +21,7 @@ class TrampitasModel
     }
 
     public function agregarTrampitasAlUsuario($idUsuario, $cantidad) {
-        $sql = "UPDATE Usuario 
+        $sql = "UPDATE usuario 
                  SET trampitas = trampitas + ?
                  WHERE id = ?";
 
