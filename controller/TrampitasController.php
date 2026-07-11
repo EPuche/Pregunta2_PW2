@@ -35,19 +35,26 @@ class TrampitasController
 
             $preference = $this->trampitasModel->crearPreferenciaDePago($idUsuario, $cantidad, $totalPagar);
 
-            header("Location: " . $preference->sandbox_init_point);
+            header("Location: " . $preference->init_point);
             exit;
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
+
+            file_put_contents(__DIR__ . '/../mp_error.log',
+                date('Y-m-d H:i:s') . " - " . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n\n",
+                FILE_APPEND
+            );
+
+
             echo "<h3>Error detectado en Mercado Pago:</h3>";
             echo "<pre>" . $e->getMessage() . "</pre>";
 
-            if (method_exists($e, 'getApiResponse')) {
-                $response = $e->getApiResponse();
-                echo "<pre>";
-                print_r($response->getContent());
-                echo "</pre>";
-            }
-            exit;
+//            if (method_exists($e, 'getApiResponse')) {
+//                $response = $e->getApiResponse();
+//                echo "<pre>";
+//                print_r($response->getContent());
+//                echo "</pre>";
+//            }
+//            exit;
         }
     }
 
