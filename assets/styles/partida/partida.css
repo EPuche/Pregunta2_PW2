@@ -20,6 +20,50 @@ body {
     border-radius: 15px;
     padding: 30px 20px;
 }
+.btn-trampita-bomba {
+    background-color: #ffc107;
+    border: 1px solid #2b2a2a;
+    border-radius: 4px;
+    position: absolute;
+    top: 15px;
+    right: 60px;
+    padding: 8px 12px;
+    font-size: 14px;
+    z-index: 10;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-trampita-bomba i {
+    color: #000000;
+}
+
+.btn-trampita-bomba:hover {
+    background-color: #ffca28;
+    box-shadow: 0 0 5px white;
+}
+
+.badge-trampitas-cantidad {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #b02a37;
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
 
 
 @media (min-width: 768px) {

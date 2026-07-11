@@ -43,6 +43,7 @@ return [
         'verPregunta'        => ['jugador'],
         'verificarRespuesta' => ['jugador'],
         'tiempoExpirado'     => ['jugador'],
+        'usarTrampita' => ['jugador'],
     ],
     'lobby' => [
         'irAlLobby' => ['jugador'],
