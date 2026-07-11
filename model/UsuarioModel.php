@@ -335,10 +335,18 @@ class UsuarioModel
         return $this->database->query($sql, [$param, $param]);
     }
 
+    public function restarTrampita($idUsuario)
+    {
+        $sql = "UPDATE usuario SET trampitas = trampitas - 1 WHERE id = ? AND trampitas > 0";
 
+        $filasAfectadas = $this->database->execute($sql, [$idUsuario]);
 
-
-
+        if ($filasAfectadas > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 

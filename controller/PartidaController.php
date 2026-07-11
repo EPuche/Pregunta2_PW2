@@ -4,13 +4,15 @@ class PartidaController
 {
     private $preguntaModel;
     private $partidaModel;
+    private $usuarioModel;
     private $renderer;
     private $request;
 
-    public function __construct($preguntaModel, $partidaModel ,$renderer, $request)
+    public function __construct($preguntaModel, $partidaModel,$usuarioModel ,$renderer, $request)
     {
         $this->preguntaModel = $preguntaModel;
         $this->partidaModel = $partidaModel;
+        $this->usuarioModel= $usuarioModel;
         $this->renderer = $renderer;
         $this->request  = $request;
     }
@@ -67,12 +69,17 @@ class PartidaController
           $_SESSION['tiempo_limite'] = $this->partidaModel->asignarUnTiempoDeFinalizacionALaRonda();
         }
         $segundos_restantes = $this->partidaModel->calcularSegundosRestantes($_SESSION['tiempo_limite']);
+
+        $idUsuario = $_SESSION['id'] ?? null;
+        $trampitas = $this->usuarioModel->getTrampitasTotal($idUsuario);
+
         $data = [
             "id" => $pregunta['id'],
             "contenido" => $pregunta['contenido'],
             "color" => $pregunta['color'],
             "opciones"  => $opciones,
-            "tiempo_restante" => $segundos_restantes // Lo mandamos a la vista
+            "tiempo_restante" => $segundos_restantes, // Lo mandamos a la vista
+            "trampitas" => $trampitas
         ];
         $data['logoHref'] = $_SESSION['logoHref'];
         $this->renderer->render("partidaView", $data);
@@ -132,6 +139,27 @@ class PartidaController
         unset($_SESSION['tiempo_limite']);
     
         
+    }
+    public function usarTrampita()
+    {
+        header('Content-type: application/json');
+        if(session_status()=== PHP_SESSION_NONE) { session_start(); }
+
+        $idUsuario = $_SESSION['id'] ?? null;
+
+        if (!$idUsuario) {
+            echo json_encode(['success' => false, 'error' => 'Usuario no autenticado']);
+            exit;
+        }
+
+        $seDescontoTrampita = $this->usuarioModel->restarTrampita($idUsuario);
+
+        if ($seDescontoTrampita) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'error' => 'No tenés suficientes trampitas.']);
+        }
+        exit;
     }
 
 

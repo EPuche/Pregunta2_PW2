@@ -91,7 +91,7 @@ class Configurator {
         return new TrampitasController($this->getUsuarioModel(), $this->getRenderer(), new Request(), $this->getTrampitasModel());
     }
     public function getPartidaController() {
-        return new PartidaController($this->getPreguntaModel(),$this->getPartidaModel() ,$this->getRenderer(), new Request());
+        return new PartidaController($this->getPreguntaModel(),$this->getPartidaModel(),$this->getUsuarioModel(),$this->getRenderer(), new Request());
     }
     public function getEditorController()
     {
