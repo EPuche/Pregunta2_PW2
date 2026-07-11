@@ -59,31 +59,66 @@ class TrampitasController
     }
 
     public function pagoExitoso() {
-        if (!isset($_GET['external_reference'])) {
-            header("Location: /lobby?error=pago_invalido");
+
+        try {
+            if (!isset($_GET['external_reference'])) {
+                header("Location: /lobby?error=pago_invalido");
+                exit;
+            }
+
+            $partes = explode("-", $_GET['external_reference']);
+            $idUsuario  = isset($partes[0]) ? (int)$partes[0] : null;
+            $cantidad   = isset($partes[1]) ? (int)$partes[1] : 0;
+
+            if (!$idUsuario || $cantidad <= 0) {
+                header("Location: /lobby?error=datos_corruptos");
+                exit;
+            }
+
+            $seActualizo = $this->trampitasModel->agregarTrampitasAlUsuario($idUsuario, $cantidad);
+
+            if ($seActualizo) {
+                $_SESSION["cantidadTrampitas"] = $cantidad;
+                $_SESSION["compra"] = true;
+                header("Location: /lobby/irAlLobby");
+            } else {
+                header("Location: /lobby?error=error_actualizacion");
+            }
+            exit;
+
+        } catch (\Throwable $e) {
+            file_put_contents(__DIR__ . '/../mp_error.log',
+                date('Y-m-d H:i:s') . " - pagoExitoso - " . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n\n",
+                FILE_APPEND
+            );
+            echo "Error capturado: " . htmlspecialchars($e->getMessage());
             exit;
         }
-
-        $partes = explode("-", $_GET['external_reference']);
-        $idUsuario  = isset($partes[0]) ? (int)$partes[0] : null;
-        $cantidad   = isset($partes[1]) ? (int)$partes[1] : 0;
-
-        if (!$idUsuario || $cantidad <= 0) {
-            header("Location: /lobby?error=datos_corruptos");
-            exit;
-        }
-
-
-        $seActualizo = $this->trampitasModel->agregarTrampitasAlUsuario($idUsuario, $cantidad);
-
-        if ($seActualizo) {
-            $_SESSION["cantidadTrampitas"]=$cantidad;
-            $_SESSION["compra"]=true;
-            header("Location: /lobby/irAlLobby");
-        } else {
-            header("Location: /lobby?error=error_actualizacion");
-        }
-        exit;
+//        if (!isset($_GET['external_reference'])) {
+//            header("Location: /lobby?error=pago_invalido");
+//            exit;
+//        }
+//
+//        $partes = explode("-", $_GET['external_reference']);
+//        $idUsuario  = isset($partes[0]) ? (int)$partes[0] : null;
+//        $cantidad   = isset($partes[1]) ? (int)$partes[1] : 0;
+//
+//        if (!$idUsuario || $cantidad <= 0) {
+//            header("Location: /lobby?error=datos_corruptos");
+//            exit;
+//        }
+//
+//
+//        $seActualizo = $this->trampitasModel->agregarTrampitasAlUsuario($idUsuario, $cantidad);
+//
+//        if ($seActualizo) {
+//            $_SESSION["cantidadTrampitas"]=$cantidad;
+//            $_SESSION["compra"]=true;
+//            header("Location: /lobby/irAlLobby");
+//        } else {
+//            header("Location: /lobby?error=error_actualizacion");
+//        }
+//        exit;
     }
 
 
