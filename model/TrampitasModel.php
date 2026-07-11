@@ -17,7 +17,7 @@ class TrampitasModel
       //$this->baseUrl = $config['url']['base_url'] ?? 'http://localhost';
        $this->baseUrl = $config['url']['base_url'] ?? 'https://ultra-freely-jackknife.ngrok-free.dev';
 
-       MercadoPagoConfig::setAccessToken("APP_USR-3155376676739688-070912-d79ab4242b2069c875f61f4d59e0fedc-1136358391");
+       MercadoPagoConfig::setAccessToken("APP_USR-3445563162809404-070912-df9b08b9f4d86088ed8ba29bb0ebc334-3530882052");
     }
 
     public function agregarTrampitasAlUsuario($idUsuario, $cantidad) {
