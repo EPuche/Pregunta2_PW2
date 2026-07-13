@@ -1,0 +1,54 @@
+{{#compraExitosa}}
+    <div class="modal fade" id="modalExitoCompra" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4">
+                <div class="modal-body">
+                    <div class="text-success mb-3" style="font-size: 3rem;">
+                        ✓
+                    </div>
+                    <h3 class="modal-title font-weight-bold text-success mb-2">¡Compra Exitosa!</h3>
+                    <p class="text-muted">
+                        Tu pago se procesó correctamente. Se han acreditado <strong>{{cantidadTrampitas}}</strong> trampitas a tu cuenta. ¡Úsalas con sabiduría!
+                    </p>
+                    <button type="button" class="btn btn-success px-4 mt-3" data-bs-dismiss="modal">Buenísimo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var myModal = new bootstrap.Modal(document.getElementById('modalExitoCompra'));
+            myModal.show();
+        });
+    </script>
+{{/compraExitosa}}
+
+{{#compraFallida}}
+    <div class="alert alert-danger alert-dismissible fade show text-center m-3" role="alert">
+        <strong>Hubo un problema:</strong> El pago fue rechazado o cancelado. Inténtalo de nuevo.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{{/compraFallida}}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputCantidad = document.getElementById("cantidadTrampitas");
+        const txtTotal = document.getElementById("totalPrecio");
+        const PRECIO_UNITARIO = 1;
+
+        inputCantidad.addEventListener("input", function() {
+            let cantidad = parseInt(this.value) || 0;
+
+            // Evitar que pongan números negativos manualmente
+            if (cantidad < 1) {
+                cantidad = 1;
+                this.value = 1;
+            }
+
+            // Calcular y formatear el total
+            const total = cantidad * PRECIO_UNITARIO;
+            document.getElementById("inputTotal").value = total;
+            txtTotal.textContent = `$${total.toLocaleString('es-AR')}`;
+        });
+    });
+</script>

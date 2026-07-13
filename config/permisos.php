@@ -52,7 +52,7 @@ return [
         'irAlRanking' => ['jugador', 'editor', 'admin'],
     ],
     'pregunta' => [
-        'irACrearPregunta' => ['jugador'],
+        'irACrearPregunta' => ['jugador', 'editor'],
         'enviarARevision'  => ['jugador'],
         'reportarPregunta' => ['jugador'],
     ],

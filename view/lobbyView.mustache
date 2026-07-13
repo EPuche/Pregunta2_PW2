@@ -100,39 +100,8 @@
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="modalComprarTrampitas" tabindex="-1" aria-labelledby="modalTrampitasLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modalTrampitasLabel">🛒 Comprar Trampitas</h5>
-                                                    <button type="type" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-
-                                                <form action="/trampitas/procesarPago" method="POST">
-                                                    <div class="modal-body">
-                                                        <p class="text-muted">Potencia tu juego adquiriendo trampitas para usar en tus partidas. ¡Cada una te cuesta <strong>$1.000 ARS</strong>!</p>
-
-                                                        <div class="mb-3">
-                                                            <label for="cantidadTrampitas" class="form-label">Cantidad a comprar:</label>
-                                                            <input type="number" class="form-control form-control-lg text-center" id="cantidadTrampitas" name="cantidad" min="1" max="50" value="1" required>
-                                                        </div>
-
-                                                        <div class="p-3 bg-light rounded text-center">
-                                                            <span class="d-block text-secondary small">Total a pagar</span>
-                                                            <h3 class="m-0 text-success fw-bold" id="totalPrecio">$1.000</h3>
-                                                            <input type="hidden" id="inputTotal" name="total" value="1000">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                        <button type="submit" class="btn btn-primary px-4 fw-bold">Ir a Pagar con Mercado Pago</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                   <!--trampitas modal -->
+                                    {{>modalTrampitasCompra}}
                                 </div>
 
                             </div>
@@ -208,59 +177,5 @@
     </div>
 
 </div>
-{{#compraExitosa}}
-    <div class="modal fade" id="modalExitoCompra" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center p-4">
-                <div class="modal-body">
-                    <div class="text-success mb-3" style="font-size: 3rem;">
-                        ✓
-                    </div>
-                    <h3 class="modal-title font-weight-bold text-success mb-2">¡Compra Exitosa!</h3>
-                    <p class="text-muted">
-                        Tu pago se procesó correctamente. Se han acreditado <strong>{{cantidadTrampitas}}</strong> trampitas a tu cuenta. ¡Úsalas con sabiduría!
-                    </p>
-                    <button type="button" class="btn btn-success px-4 mt-3" data-bs-dismiss="modal">Buenísimo</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var myModal = new bootstrap.Modal(document.getElementById('modalExitoCompra'));
-            myModal.show();
-        });
-    </script>
-{{/compraExitosa}}
-
-{{#compraFallida}}
-    <div class="alert alert-danger alert-dismissible fade show text-center m-3" role="alert">
-        <strong>Hubo un problema:</strong> El pago fue rechazado o cancelado. Inténtalo de nuevo.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-{{/compraFallida}}
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const inputCantidad = document.getElementById("cantidadTrampitas");
-        const txtTotal = document.getElementById("totalPrecio");
-        const PRECIO_UNITARIO = 1;
-
-        inputCantidad.addEventListener("input", function() {
-            let cantidad = parseInt(this.value) || 0;
-
-            // Evitar que pongan números negativos manualmente
-            if (cantidad < 1) {
-                cantidad = 1;
-                this.value = 1;
-            }
-
-            // Calcular y formatear el total
-            const total = cantidad * PRECIO_UNITARIO;
-            document.getElementById("inputTotal").value = total;
-            txtTotal.textContent = `$${total.toLocaleString('es-AR')}`;
-        });
-    });
-</script>
-
+{{>modalCompraFinalizada}}
 {{>footer}}

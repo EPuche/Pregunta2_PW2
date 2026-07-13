@@ -44,9 +44,7 @@ class PartidaController
     public function procesarRuleta() {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['categoria'])) {
-            if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-            }
+
             $categoria = $_POST['categoria'];
             $usuarioId = $_SESSION['id'];
             $preguntaSeleccionada = $this->preguntaModel->getPreguntaAleatoriaPorCategoria($categoria, $usuarioId);
