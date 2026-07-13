@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class TrampitasController
 {
     private $model;

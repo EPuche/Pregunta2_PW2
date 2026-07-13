@@ -22,13 +22,18 @@ class PreguntaController
 
     public function enviarARevision()
     {
-        if (empty($_POST['pregunta']) || empty($_POST['opcionCorrecta'])) {
+        $opcionCorrecta = (int)($_POST['opcionCorrecta'] ?? 0);
+        if (empty($_POST['pregunta']) || empty($_POST['opcionCorrecta']) || empty($_POST['categoria'])) {
+            return;
+        }
+        if ($opcionCorrecta < 1 || $opcionCorrecta > 4) {
             return;
         }
         $datosPregunta = new PreguntaDTO($_POST);
         $this->preguntaModel->crearNuevaPregunta($datosPregunta);
         $redirect = $_SESSION['logoHref'];
         header("Location: $redirect");
+        exit();
     }
     public function reportarPregunta()
     {
