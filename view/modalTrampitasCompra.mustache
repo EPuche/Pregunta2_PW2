@@ -1,0 +1,33 @@
+<div class="modal fade" id="modalComprarTrampitas" tabindex="-1" aria-labelledby="modalTrampitasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTrampitasLabel">🛒 Comprar Trampitas</h5>
+                <button type="type" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form action="/trampitas/procesarPago" method="POST">
+                <div class="modal-body">
+                    <p class="text-muted">Potencia tu juego adquiriendo trampitas para usar en tus partidas. ¡Cada una te cuesta <strong>$1.000 ARS</strong>!</p>
+
+                    <div class="mb-3">
+                        <label for="cantidadTrampitas" class="form-label">Cantidad a comprar:</label>
+                        <input type="number" class="form-control form-control-lg text-center" id="cantidadTrampitas" name="cantidad" min="1" max="50" value="1" required>
+                    </div>
+
+                    <div class="p-3 bg-light rounded text-center">
+                        <span class="d-block text-secondary small">Total a pagar</span>
+                        <h3 class="m-0 text-success fw-bold" id="totalPrecio">$1.000</h3>
+                        <input type="hidden" id="inputTotal" name="total" value="1000">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary px-4 fw-bold">Ir a Pagar con Mercado Pago</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

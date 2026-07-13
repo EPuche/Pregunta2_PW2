@@ -20,41 +20,26 @@ class TrampitasController
     }
 
     public function procesarPago() {
-        if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
         $idUsuario = $_SESSION['id'] ?? null;
         $cantidad = isset($_POST['cantidad']) ? intval($_POST['cantidad']) : 0;
         $totalPagar = isset($_POST['total']) ? floatval($_POST['total']) : 0.0;
 
         if (!$idUsuario || $cantidad < 1 || $totalPagar <= 0) {
-            header("Location: /lobby?error=datos_invalidos");
+            header("Location: /lobby/irAlLobby");
             exit;
         }
 
         try {
 
             $preference = $this->trampitasModel->crearPreferenciaDePago($idUsuario, $cantidad, $totalPagar);
-
             header("Location: " . $preference->init_point);
             exit;
         } catch (\Throwable $e) {
 
-            file_put_contents(__DIR__ . '/../mp_error.log',
-                date('Y-m-d H:i:s') . " - " . $e->getMessage() . "\n" . $e->getTraceAsString() . "\n\n",
-                FILE_APPEND
-            );
-
-
             echo "<h3>Error detectado en Mercado Pago:</h3>";
             echo "<pre>" . $e->getMessage() . "</pre>";
 
-//            if (method_exists($e, 'getApiResponse')) {
-//                $response = $e->getApiResponse();
-//                echo "<pre>";
-//                print_r($response->getContent());
-//                echo "</pre>";
-//            }
-//            exit;
         }
     }
 
@@ -94,31 +79,7 @@ class TrampitasController
             echo "Error capturado: " . htmlspecialchars($e->getMessage());
             exit;
         }
-//        if (!isset($_GET['external_reference'])) {
-//            header("Location: /lobby?error=pago_invalido");
-//            exit;
-//        }
 //
-//        $partes = explode("-", $_GET['external_reference']);
-//        $idUsuario  = isset($partes[0]) ? (int)$partes[0] : null;
-//        $cantidad   = isset($partes[1]) ? (int)$partes[1] : 0;
-//
-//        if (!$idUsuario || $cantidad <= 0) {
-//            header("Location: /lobby?error=datos_corruptos");
-//            exit;
-//        }
-//
-//
-//        $seActualizo = $this->trampitasModel->agregarTrampitasAlUsuario($idUsuario, $cantidad);
-//
-//        if ($seActualizo) {
-//            $_SESSION["cantidadTrampitas"]=$cantidad;
-//            $_SESSION["compra"]=true;
-//            header("Location: /lobby/irAlLobby");
-//        } else {
-//            header("Location: /lobby?error=error_actualizacion");
-//        }
-//        exit;
     }
 
 

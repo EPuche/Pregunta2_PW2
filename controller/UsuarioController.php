@@ -15,16 +15,13 @@ class UsuarioController
 
     public function irAlRegistro()
     {
-        // 1. Iniciamos un array de datos vacío para la plantilla
         $datos = [];
 
-        // 2. Si existe un error en la sesión, se lo pasamos a Mustache
         if (isset($_SESSION['error_registro'])) {
             $datos['error_registro'] = $_SESSION['error_registro'];
             unset($_SESSION['error_registro']);
         }
 
-       
         $this->renderer->render("registroView", $datos);
     }
 
