@@ -29,7 +29,7 @@ if ($methodNombre === '') {
     $methodNombre = 'irAlHome';
 }
 
-VerificadorPermisos::verificar($controllerNombre, $methodNombre);
+verificarPermisos($controllerNombre, $methodNombre);
 
 $config = new Configurator();
 $router = $config->getRouter();
