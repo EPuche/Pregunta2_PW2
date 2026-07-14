@@ -1,58 +1,162 @@
 {{>header}}
 
 <div class="container-fluid lobby-container">
-  <div class="row">
 
-    <aside class="col-lg-2 sidebar">
-      <div class="d-flex flex-column gap-3 px-3">
-        <a href="/admin/verEstadisticas" class="btn lobby-btn">Dashboard</a>
-        <a href="/admin/usuarios" class="btn lobby-btn active">Usuarios</a>
-       <!--<a href="/admin/partidas" class="btn lobby-btn">Partidas</a>
-        <a href="/admin/preguntas" class="btn lobby-btn">Preguntas</a>
-        <a href="/admin/trampitas" class="btn lobby-btn">Trampitas / Ventas</a>-->
-        <a href="/logout" class="btn lobby-btn">Salir</a>
-      </div>
-    </aside>
-     
+    <div class="row">
 
-    <main class="col-lg-10 p-4">
-      <h2 class="panel-title mb-4">Usuarios</h2>
 
-    
-      <form method="GET" class="mb-3 d-flex gap-2">
-        <input type="text" name="q" class="form-control" placeholder="Buscar usuario...">
-        <button type="submit" class="btn lobby-btn">Buscar</button>
-      </form>
+        <!-- SIDEBAR -->
 
-   
-      <div class="panel profile-panel">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Puntaje</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#usuarios}}
-              <tr>
-                <td>{{id}}</td>
-                <td>{{nombre_usuario}}</td>
-                <td>{{email}}</td>
-                <td>{{puntaje}}</td>
-                <td>
-                  <a href="/usuario/verPerfil?id={{id}}" class="btn btn-principal">Ver perfil</a>
-                </td>
-              </tr>
-            {{/usuarios}}
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
+        <aside class="col-12 col-lg-2 sidebar">
+
+            <div class="row g-2 px-2 w-100 m-0 justify-content-center">
+
+                <div class="col-6 col-sm-4 col-lg-12">
+                    <a href="/admin/verEstadisticas"
+                       class="btn lobby-btn w-100 text-center">
+                        Dashboard
+                    </a>
+                </div>
+
+
+                <div class="col-6 col-sm-4 col-lg-12">
+                    <a href="/admin/usuarios"
+                       class="btn lobby-btn active w-100 text-center">
+                        Usuarios
+                    </a>
+                </div>
+
+
+                <div class="col-6 col-sm-4 col-lg-12">
+                    <a href="/logout"
+                       class="btn lobby-btn w-100 text-center">
+                        Salir
+                    </a>
+                </div>
+
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- CONTENIDO -->
+
+        <main class="col-12 col-lg-10 p-3 p-lg-4">
+
+
+            <h2 class="panel-title mb-4 text-center text-lg-start">
+                Usuarios
+            </h2>
+
+
+
+            <!-- BUSCADOR -->
+
+            <form method="GET"
+                  class="mb-4 d-flex flex-column flex-md-row gap-2">
+
+                <input
+                        type="text"
+                        name="q"
+                        class="form-control"
+                        placeholder="Buscar usuario...">
+
+
+                <button type="submit"
+                        class="btn lobby-btn">
+                    Buscar
+                </button>
+
+            </form>
+
+
+
+
+            <!-- TABLA -->
+
+            <div class="panel profile-panel">
+
+
+                <div class="table-responsive">
+
+                    <table class="table table-striped align-middle mb-0">
+
+
+                        <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Puntaje</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                        </thead>
+
+
+
+                        <tbody>
+
+
+                        {{#usuarios}}
+
+                            <tr>
+
+                                <td>{{id}}</td>
+
+                                <td>
+                                    {{nombre_usuario}}
+                                </td>
+
+
+                                <td>
+                                    {{email}}
+                                </td>
+
+
+                                <td>
+                                    {{puntaje}}
+                                </td>
+
+
+                                <td>
+
+                                    <a href="/usuario/verPerfil?id={{id}}"
+                                    class="btn btn-principal btn-sm">
+                                    Ver perfil
+                                    </a>
+
+                                </td>
+
+
+                            </tr>
+
+
+                        {{/usuarios}}
+
+
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </main>
+
+
+    </div>
+
+
 </div>
+
 
 {{>footer}}

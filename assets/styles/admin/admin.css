@@ -1,0 +1,74 @@
+.table-responsive {
+    border-radius: 12px;
+}
+
+
+.table {
+    margin-bottom: 0;
+}
+
+
+.table th {
+    white-space: nowrap;
+}
+
+
+.table td {
+    vertical-align: middle;
+}
+
+
+
+@media(max-width:768px){
+
+    .table {
+        font-size: .9rem;
+    }
+
+
+    .table .btn {
+        font-size: .8rem;
+        white-space: nowrap;
+    }
+
+}
+
+.chart-panel {
+    min-height: 350px;
+    padding: 20px;
+}
+
+
+.chart-panel canvas {
+    width: 100% !important;
+    max-height: 300px;
+}
+
+
+.stat-panel {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+
+@media(max-width:768px){
+
+    .panel-title{
+        text-align:center;
+        font-size:1.5rem;
+    }
+
+
+    .chart-panel{
+        min-height:300px;
+    }
+
+
+    .stat-panel h2{
+        font-size:2rem;
+    }
+
+}
