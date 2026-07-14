@@ -10,10 +10,16 @@ class Configurator {
 
     }
 
+    public function getBaseUrl()
+    {
+        return $this->config['url']['base_url'] ?? '';
+    }
+
     public function getUsuarioController()
     {
-        return new UsuarioController($this->getUsuarioModel(),$this->getRenderer(), new Request());
+        return new UsuarioController($this->getUsuarioModel(), $this->getRenderer(), new Request(), $this);
     }
+
     public function getRankingController()
     {
         return new RankingController($this->getUsuarioModel(),$this->getRankingModel(),$this->getRenderer(), new Request());

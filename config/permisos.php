@@ -14,7 +14,7 @@ return [
         'irAlRegistro'     => [PUBLICO],
         'procesarRegistro' => [PUBLICO],
         'confirmarCuenta'  => [PUBLICO],
-        'verPerfil'        => ['jugador', 'editor', 'admin'],
+        'verPerfil'        => [PUBLICO],
         'editarPerfil'     => ['jugador', 'editor', 'admin'],
         'guardarPerfil'    => ['jugador', 'editor', 'admin'],
     ],

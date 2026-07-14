@@ -34,23 +34,25 @@
             <img src="../assets/logo.png" alt="logo preguntados" class="img-fluid logo-img">
         </a>
 
-        <div class="dropdown">
-            <button
-                    class="btn dropdown-toggle user-menu d-flex align-items-center"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                {{nombreUsuario}}
-            </button>
+        {{#nombreUsuario}}
+            <div class="dropdown">
+                <button class="btn dropdown-toggle user-menu d-flex align-items-center"
+                        type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{nombreUsuario}}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li>
+                        <a class="dropdown-item lobby-btn" href="/login/logout">
+                            Cerrar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {{/nombreUsuario}}
 
-            <ul class="dropdown-menu dropdown-menu-end shadow">
-                <li>
-                    <a class="dropdown-item lobby-btn" href="/login/logout">
-                        Cerrar sesión
-                    </a>
-                </li>
-            </ul>
-        </div>
+        {{^nombreUsuario}}
+            <a href="/login/irAlLogin" class="btn user-menu">Iniciar sesión</a>
+        {{/nombreUsuario}}
 
     </div>
 </nav>

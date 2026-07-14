@@ -1,9 +1,10 @@
-
-function initQrShare(userId) {
+function initQrShare() {
   const boton = document.getElementById("compartirQR");
   if (!boton) return;
 
-  const urlPerfil = `http://localhost/Pregunta2_PW2/index.php?controller=usuario&method=verPerfil&id=${userId}`;
+  const baseUrl = boton.dataset.baseUrl;
+  const userId = boton.dataset.userId;
+  const urlPerfil = `${baseUrl}/index.php?controller=usuario&method=verPerfil&id=${encodeURIComponent(userId)}`;
 
   boton.addEventListener("click", async () => {
     if (navigator.share) {

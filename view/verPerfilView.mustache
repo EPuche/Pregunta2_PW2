@@ -12,34 +12,33 @@
         </div>
         <div class="qr-box">
          <h4 class="mt-4 mb-3">Mi QR</h4>
-         <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http%3A%2F%2Flocalhost%2FPregunta2_PW2%2Findex.php%3Fcontroller%3Dusuario%26method%3DverPerfil%26id%3D{{id}}" 
-       alt="QR de mi perfil">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data={{qrTargetUrlEncoded}}"
+            alt="QR de mi perfil">
             {{#esPropio}}
-                <button id="compartirQR" class="btn btn-principal mt-3">Compartir mi QR</button>
-             {{/esPropio}}
+                <button id="compartirQR" class="btn btn-principal mt-3" data-base-url="{{baseUrl}}" data-user-id="{{id}}">Compartir mi QR</button>
+            {{/esPropio}}
        </div>
        
     </section>
 
     <!-- DATOS PERSONALES -->
-    <section class="perfil-datos">
-        <h3 class="panel-title">Datos personales</h3>
-        <ul>
-            <li>Año de nacimiento: {{anio_nacimiento}}</li>
-            <li>Sexo: {{sexo}}</li>
-            <li>Email: {{email}}</li>
-            <li>País: {{pais}}</li>
-           
-            
-        </ul>
-       <!--<div class="map-box">
-           
-            <iframe 
-                src="https://maps.google.com/maps?q={{latitud}},{{longitud}}&z=15&output=embed"
-                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
-            </iframe>
-        </div>-->
-    </section>
+    {{#esPropio}}
+        <section class="perfil-datos">
+            <h3 class="panel-title">Datos personales</h3>
+            <ul>
+                <li>Año de nacimiento: {{anio_nacimiento}}</li>
+                <li>Sexo: {{sexo}}</li>
+                <li>Email: {{email}}</li>
+                <li>País: {{pais}}</li>
+            </ul>
+            <!--<div class="map-box">
+        <iframe
+            src="https://maps.google.com/maps?q={{latitud}},{{longitud}}&z=15&output=embed"
+            width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>-->
+        </section>
+    {{/esPropio}}
 
 
     <!-- PARTIDAS -->
@@ -52,8 +51,8 @@
 
             <div class="player-info">
                 <div class="player-avatar">
-                    <img src="{{foto_oponente}}" alt="Avatar de {{oponente}}" 
-                     onerror="this.src='/assets/imgPerfiles/default-user.png'">>
+                    <img src="{{foto_oponente}}" alt="Avatar de {{oponente}}"
+                     onerror="this.src='/assets/imgPerfiles/default-user.png'">
                 </div>
                 <span>{{oponente}}</span>
             </div>
@@ -83,7 +82,7 @@
 
  
    <div class="text-center mt-3">
-    <a href="{{logoHref}}" class="link-white" text-decoration-none">← Volver al inicio</a>
+       <a href="{{logoHref}}" class="link-white text-decoration-none">← Volver al inicio</a>
     {{#esPropio}}
     <a href="/Pregunta2_PW2/index.php?controller=usuario&method=editarPerfil"
        class="btn btn-principal">
@@ -97,9 +96,5 @@
 </div>
 
 <script src="/assets/js/qr-share.js"></script>
-<script>
-  initQrShare({{id}});
-</script>
-
 
 {{>footer}}

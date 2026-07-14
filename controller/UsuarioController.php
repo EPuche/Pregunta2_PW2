@@ -5,12 +5,14 @@ class UsuarioController
     private $renderer;
     private $model;
     private $request;
+    private $config;
 
-    public function __construct($model, $renderer, $request)
+    public function __construct($model, $renderer, $request, $config)
     {
         $this->model = $model;
         $this->renderer = $renderer;
         $this->request = $request;
+        $this->config = $config;
     }
 
     public function irAlRegistro()
@@ -128,8 +130,20 @@ class UsuarioController
 
     public function verPerfil()
     {
-        $id = $this->request->get("id") ?? $_SESSION["id"];
+        $id = $this->request->get("id") ?? ($_SESSION["id"] ?? null);
+
+        if ($id === null) {
+            http_response_code(400);
+            die('Perfil no especificado');
+        }
+
         $usuario = $this->model->getUsuario($id);
+
+        if (!$usuario) {
+            http_response_code(404);
+            die('Perfil no encontrado');
+        }
+
         $fotoPerfil = $usuario["foto_perfil"];
         if (
             empty($fotoPerfil) ||
@@ -138,25 +152,32 @@ class UsuarioController
             $fotoPerfil = "/assets/imgPerfiles/default-user.png";
         }
         $historial = $this->model->getHistorial($id);
-        $esPropio = ($id == $_SESSION["id"]);
+        $esPropio = isset($_SESSION["id"]) && ($id == $_SESSION["id"]);
 
         $data = [
-            "nombreUsuario"   => $usuario["nombre_usuario"],
             "nombre_completo" => $usuario["nombre_completo"],
             "nombre_usuario"  => $usuario["nombre_usuario"],
             "puntaje"         => $usuario["puntaje"] ?? 0,
-            "anio_nacimiento" => $usuario["anio_nacimiento"],
-            "sexo"            => $usuario["sexo"],
-            "email"           => $usuario["email"],
             "foto_perfil"     => $fotoPerfil,
-            "latitud"         => $usuario["latitud"],
-            "longitud"        => $usuario["longitud"],
             "pais"            => $usuario["pais"],
             "id"              => $usuario["id"],
             "historial"       => $historial,
-            "esPropio"        => $esPropio
+            "esPropio"        => $esPropio,
+            "baseUrl"         => $this->config->getBaseUrl(),
         ];
-        $data['logoHref'] = $_SESSION['logoHref'];
+
+        if ($esPropio) {
+            $data["email"]           = $usuario["email"];
+            $data["anio_nacimiento"] = $usuario["anio_nacimiento"];
+            $data["sexo"]            = $usuario["sexo"];
+            $data["latitud"]         = $usuario["latitud"];
+            $data["longitud"]        = $usuario["longitud"];
+        }
+
+        $data["qrTargetUrl"] = $data["baseUrl"] . "/index.php?controller=usuario&method=verPerfil&id=" . $usuario["id"];
+        $data["qrTargetUrlEncoded"] = urlencode($data["qrTargetUrl"]);
+
+        $data['logoHref'] = $_SESSION['logoHref'] ?? '/lobby/irAlLobby';
 
         $this->renderer->render("verPerfilView", $data);
     }
@@ -171,39 +192,29 @@ class UsuarioController
     }
     public function guardarPerfil()
     {
-        $fotoPerfil = null;
+        $id = $_SESSION["id"]; // nunca confiar en $_POST["id"] para saber DE QUIÉN es el perfil
 
-        $usuarioActual = $this->model->getUsuario($_POST["id"]);
+        $fotoPerfil = null;
+        $usuarioActual = $this->model->getUsuario($id);
 
         if (
             isset($_FILES['foto_perfil']) &&
             $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK
         ) {
-
             $carpetaDestino = __DIR__ . '/../assets/imgPerfiles/';
 
             if (!file_exists($carpetaDestino)) {
                 mkdir($carpetaDestino, 0777, true);
             }
 
-            $extension = pathinfo(
-                $_FILES['foto_perfil']['name'],
-                PATHINFO_EXTENSION
-            );
-
-            $nombreArchivo =
-                $_POST["nombre_usuario"] . "_" . time() . "." . $extension;
-
+            $extension = pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION);
+            $nombreArchivo = $_POST["nombre_usuario"] . "_" . time() . "." . $extension;
             $rutaCompleta = $carpetaDestino . $nombreArchivo;
 
-            move_uploaded_file(
-                $_FILES['foto_perfil']['tmp_name'],
-                $rutaCompleta
-            );
+            move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaCompleta);
 
             $fotoPerfil = '/assets/imgPerfiles/' . $nombreArchivo;
         } else {
-
             $fotoPerfil = $usuarioActual["foto_perfil"];
         }
 
@@ -217,8 +228,7 @@ class UsuarioController
         }
 
         $this->model->editar(
-
-            $_POST["id"],
+            $id, // <- el de sesión, no el del POST
             $_POST["nombre_completo"],
             $_POST["anio_nacimiento"],
             $_POST["sexo"],
@@ -229,8 +239,6 @@ class UsuarioController
             $_POST["pais"] ?? null,
             $fotoPerfil,
             $hashContrasena
-
-
         );
 
         header("Location: /usuario/verPerfil");
