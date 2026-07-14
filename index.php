@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/helpers/Autoloader.php';
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/helpers/verificarPermisos.php';
+require_once __DIR__ . '/helpers/VerificarPermisos.php';
 
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Pragma: no-cache");
